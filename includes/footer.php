@@ -15,4 +15,10 @@
             copyrightFooter();
         </script>
     </body>
+    <?php
+        require "../hotreloader.php";
+        $reloader = new HotReloader();
+        $reloader->init();
+    ?>
+
 </html>
