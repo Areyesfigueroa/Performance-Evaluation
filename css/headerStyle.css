@@ -1,0 +1,137 @@
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/*Variables*/
+:root {
+    /*Color Pallete*/
+    --primary-color: rgb(59, 59, 59);
+    --secondary-color: #BFBDBE;
+    --secondary-color-light: rgb(240, 240, 240);
+    --secondary-color-dark: #000000; 
+    --accent-color: #9B8228;
+
+
+    /*References*/
+    --header-imgs-w: 48px;
+    --header-imgs-h: 48px;
+}
+
+/*Global*/
+li {
+    white-space: nowrap;
+    list-style: none;
+    text-align: center;
+    overflow-wrap: hidden;
+}
+
+/*Typography*/
+header {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+}
+
+a {
+    color: var(--secondary-color-light);
+    text-decoration: none;
+
+}
+
+a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+
+}
+
+/*Layouts non-global*/
+.site-header {
+    display: grid;
+    grid-template-columns: 85px 1fr 1fr 85px;
+    grid-template-rows: 48px auto auto auto;
+    grid-template-areas: 
+    "logo navbar profile-info profile-button"
+    ". . . modal";
+}
+
+/*Header Colors*/
+.site-header{
+    border: 2px solid var(--primary-color);
+    background-color: var(--primary-color);
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.site-header > .logo {
+    grid-area: logo;
+    justify-self: right;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: var(--header-imgs-h);
+    width: var(--header-imgs-w);
+}
+
+.site-header > .navbar {
+    grid-area: navbar;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 1em;
+    justify-self: left;
+    margin: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 30px;
+    padding: 0;
+}
+
+.site-header > .profile-info {
+    grid-area: profile-info;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: end;
+}
+
+#user-profile-button{
+    grid-area: profile-button;
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 0;
+    height: var(--header-imgs-h);
+    width: var(--header-imgs-w);
+    background-color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    justify-self: left;
+    background: url("https://www.dropbox.com/s/btren61pt6jgxpp/Profile%20Pic.jpeg?raw=1");
+    background-size: var(--header-imgs-w) var(--header-imgs-h);
+}
+
+#dropdown-menu{
+    position: absolute;
+    right: 9px;
+    background-color: white;
+    padding: 30px;
+    margin: 0px;
+    z-index: 1;
+    box-shadow: 0px 1px 5px black;    
+    display: none;
+    animation-name: dropdown-menu-open;
+    animation-duration: 1s;
+}
+
+#dropdown-menu > li
+{
+    margin-bottom: 10px;
+}
+
+/*Animations*/
+@keyframes dropdown-menu-open
+{
+    from {opacity: 0} 
+    to {opacity: 1}
+}
+

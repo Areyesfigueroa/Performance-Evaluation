@@ -1,0 +1,61 @@
+
+body {
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+th
+{
+    font-size: 15px;
+}
+
+.site-main {
+    display: grid;
+    grid-template-columns: 85px 1fr 1fr 85px;
+    grid-template-rows: 79px auto auto 1fr;
+    grid-template-areas: 
+    " title title title title "
+    " . date-filter total-grid . "
+    " . main-table main-table . ";
+}
+
+.title {
+    grid-area: title;
+    font-family: 'Open Sans', sans-serif;
+
+
+    text-align: center;
+    align-self: center;
+}
+
+.date-filter {
+    grid-area: date-filter;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+}
+
+.main-table > table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.main-table > table, th, td {
+    border: 1px solid black;
+}
+.main-table {
+    grid-area: main-table;
+    text-align: center;
+}
+
+.total-grid{
+    grid-area: total-grid;
+    text-align: end;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+}
+
+
+
