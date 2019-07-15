@@ -15,8 +15,8 @@
 
 
     /*References*/
-    --header-imgs-w: 48px;
-    --header-imgs-h: 48px;
+    --header-imgs-w: 40px;
+    --header-imgs-h: 40px;
 }
 
 /*Global*/
@@ -25,12 +25,6 @@ li {
     list-style: none;
     text-align: center;
     overflow-wrap: hidden;
-}
-
-/*Typography*/
-header {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
 }
 
 a {
@@ -45,93 +39,207 @@ a:hover {
 
 }
 
-/*Layouts non-global*/
+/*Layout*/
 .site-header {
     display: grid;
-    grid-template-columns: 85px 1fr 1fr 85px;
-    grid-template-rows: 48px auto auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
     grid-template-areas: 
-    "logo navbar profile-info profile-button"
-    ". . . modal";
-}
+    "logo mobile-navbar";
 
-/*Header Colors*/
-.site-header{
-    border: 2px solid var(--primary-color);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
     background-color: var(--primary-color);
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    z-index: 1;
 }
 
 .site-header > .logo {
     grid-area: logo;
-    justify-self: right;
-    margin-top: auto;
-    margin-bottom: auto;
-    height: var(--header-imgs-h);
-    width: var(--header-imgs-w);
-}
-
-.site-header > .navbar {
-    grid-area: navbar;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: 1em;
     justify-self: left;
-    margin: 0;
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 30px;
+    margin-left: 10px;
+    height: var(--header-imgs-h);
+    width: var(--header-imgs-w);
+}
+
+.mobile-navbar {
+    grid-area: mobile-navbar;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 1em;
+    justify-content: right;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
     padding: 0;
 }
 
-.site-header > .profile-info {
-    grid-area: profile-info;
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: end;
-}
-
-#user-profile-button{
-    grid-area: profile-button;
-    display: inline-block;
+/*MOBILE - ONLY*/
+.hamburger-menu{
     margin-top: auto;
     margin-bottom: auto;
     padding: 0;
     height: var(--header-imgs-h);
     width: var(--header-imgs-w);
-    background-color: white;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    background-color: none;
+    background: url("https://www.dropbox.com/s/y71fbmlo4cg8krc/Char_64xnavbar-menu.png?raw=1");
+    background-size: var(--header-imgs-w) var(--header-imgs-h);
+}
+
+.profile-menu{
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 0;
+    height: var(--header-imgs-h);
+    width: var(--header-imgs-w);
+    outline: none;
     border: none;
     outline: none;
     cursor: pointer;
     border-radius: 50%;
-    justify-self: left;
+    cursor: pointer;
     background: url("https://www.dropbox.com/s/btren61pt6jgxpp/Profile%20Pic.jpeg?raw=1");
     background-size: var(--header-imgs-w) var(--header-imgs-h);
 }
 
-#dropdown-menu{
-    position: absolute;
-    right: 9px;
-    background-color: white;
-    padding: 30px;
-    margin: 0px;
-    z-index: 1;
-    box-shadow: 0px 1px 5px black;    
+.navbar {
     display: none;
-    animation-name: dropdown-menu-open;
-    animation-duration: 1s;
+    position: relative;
+    width: 100%;
+    background-color: var(--primary-color);
+    overflow: hidden;
+    z-index: 0;
 }
 
-#dropdown-menu > li
-{
-    margin-bottom: 10px;
+.navbar li a {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 /*Animations*/
-@keyframes dropdown-menu-open
-{
-    from {opacity: 0} 
-    to {opacity: 1}
+@keyframes navbar-slide-down {
+    from {top: -166.4px;} 
+    to {top: 0px;}
 }
 
+@keyframes navbar-slide-up {
+    from {top: 0px;}
+    to {top: -166.4px;}
+}
+
+
+/*DESKTOP Changes*/
+@media only screen and (min-width: 768px) {
+
+
+    :root {
+        /*References*/
+        --header-imgs-w: 48px;
+        --header-imgs-h: 48px;
+    }
+
+    header {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    /*MOBILE ELEMENT REMOVAL*/
+    .hamburger-menu {
+        display: none;
+    }
+    .mobile-navbar
+    {
+        display: none;
+    }
+
+    /*Layouts non-global*/
+    .site-header {
+        display: grid;
+        grid-template-columns: 85px 1fr 1fr 85px;
+        grid-template-rows: 48px auto auto auto;
+        grid-template-areas: 
+        "logo navbar profile-info profile-button"
+        ". . . modal";
+    }
+
+    .site-header > .logo {
+        grid-area: logo;
+        justify-self: right;
+        margin-top: auto;
+        margin-bottom: auto;
+        height: var(--header-imgs-h);
+        width: var(--header-imgs-w);
+    }
+
+    .site-header > .navbar {
+        grid-area: navbar;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        column-gap: 1em;
+        justify-self: left;
+        margin: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 30px;
+        padding: 0;
+    }
+
+    .site-header > .profile-info {
+        grid-area: profile-info;
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: end;
+    }
+
+    #user-profile-button{
+        grid-area: profile-button;
+        display: inline-block;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 0;
+        height: var(--header-imgs-h);
+        width: var(--header-imgs-w);
+        background-color: white;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        border-radius: 50%;
+        justify-self: left;
+        background: url("https://www.dropbox.com/s/btren61pt6jgxpp/Profile%20Pic.jpeg?raw=1");
+        background-size: var(--header-imgs-w) var(--header-imgs-h);
+    }
+
+    #dropdown-menu{
+        position: absolute;
+        right: 9px;
+        background-color: white;
+        padding: 30px;
+        margin: 0px;
+        z-index: 1;
+        box-shadow: 0px 1px 5px black;    
+        display: none;
+        animation-name: dropdown-menu-open;
+        animation-duration: 1s;
+    }
+
+    #dropdown-menu > li
+    {
+        margin-bottom: 10px;
+    }
+
+    /*Animations*/
+    @keyframes dropdown-menu-open
+    {
+        from {opacity: 0} 
+        to {opacity: 1}
+    }
+}

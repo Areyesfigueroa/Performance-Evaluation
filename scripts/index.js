@@ -17,10 +17,10 @@ let questionsTable = [["Parked withing the lines", "4", "Andrew Long", "Excellen
 
 //Button Event Listeners. 
 
-window.addEventListener("click", outsideClickddMenu);
-userProfileButton.addEventListener("click", function(){
-    toggleVisibility(ddMenu);
-});
+//window.addEventListener("click", outsideClickddMenu);
+/*userProfileButton.addEventListener("click", function(){
+    //toggleVisibility(ddMenu);
+});*/
 createTableButton.addEventListener("click", function(){
     createHTMLTable(questionsTable);
     calculateOverallScore();

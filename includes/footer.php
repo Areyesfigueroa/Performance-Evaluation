@@ -9,16 +9,25 @@
             </ul>
         </footer>
 
-        
-        <script src="scripts/footer.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            copyrightFooter();
-        </script>
-    </body>
-    <?php
-        require "../hotreloader.php";
-        $reloader = new HotReloader();
-        $reloader->init();
-    ?>
+        <!--LOAD SCRIPTS-->
 
+        <!--Load Helper Script-->
+        <script src="scripts/utilities.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                //Call Helper Script Functions
+            </script>
+
+        <!--Load Header Script-->
+        <script src="scripts/header.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                //Call Header Script Functions.
+            </script>
+
+        <!--Load Footer Script-->    
+        <script src="scripts/footer.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                //Call Footer Script Functions.
+                copyrightFooter();
+            </script>
+    </body>            
 </html>
