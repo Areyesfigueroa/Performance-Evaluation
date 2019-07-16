@@ -24,8 +24,6 @@ AllAboutParking.PerformanceEvaluation.Utilities = {
                 //e.style.display = "none";
                 e.style.animation = "navbar-slide-up 1s";
                 console.log(e.style.animation);
-
-
             }
         }
     }

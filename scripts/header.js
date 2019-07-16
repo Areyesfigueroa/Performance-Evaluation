@@ -1,48 +1,88 @@
-//TODO: New Problem. What happens when I press the button in-between animations. 
-//When pressed fade-in, otherwise fade-out.
 
+var AllAboutParking = AllAboutParking || {}; //Root Level Namespace
+AllAboutParking.PerformanceEvaluation = AllAboutParking.PerformanceEvaluation || {}; //Nested namespace
 
-//Namespace shorthand
-var utilties = AllAboutParking.PerformanceEvaluation.Utilities; 
+//Namespace
+AllAboutParking.PerformanceEvaluation = {
 
-//Get navbar buttons
-let hamburgerMenuBtn = document.getElementById("hamburger-btn");
-let profileBtn = document.getElementById("profile-btn");
+Header: function() {
 
-//Get navbar modal
-let navbarModal = document.getElementById("header-navbar");
+        //Get buttons
+        let hamburgerMenuBtn = document.getElementById("hamburger-btn");
+        let profileBtn = document.getElementById("profile-btn");
+        let signOutBtn = document.getElementById("sign-out-btn");
 
-//Enum to let us know if the animation has faded in and out.
-const animStates = {
-    FADEIN: 'fade-In',
-    FADEOUT: 'fade-out' 
-};
+        //Get modals
+        let navbarModal = document.getElementById("navbar-modal");
+        let profileModal = document.getElementById("profile-modal");
 
-//These values get hoisted when called for the first time. 
-let animState = animStates.FADEIN;
-const fadeInAnim = "navbar-slide-down 0.5s ease-in";
-const fadeOutAnim = "navbar-slide-up 0.5s ease-out";
+        //Enum to let us know if the animation has faded in and out.
+        const animStates = {
+            SLIDEDOWN: 'slide-down',
+            SLIDEUP: 'slide-up' 
+        };
 
+        //These values get hoisted when called for the first time. 
+        let animState = animStates.SLIDEDOWN;
 
-hamburgerMenuBtn.addEventListener("click", function() {
-    if(animState == animStates.FADEIN) {
-        console.log("Set/Start FadeIn Animation, navbar display is block, set animState = FadeOut");
-        navbarModal.style.animation = fadeInAnim;
-        navbarModal.style.display = "block";
-        animState = animStates.FADEOUT;
+        //Navbar Modal Animations
+        const navbarModalSlideDownAnim = "navbar-slide-down 0.5s ease-in";
+        const navbarModalSlideUpAnim = "navbar-slide-up 0.5s ease-out";
+
+        //Profile Modal Animations
+        const profileModalSlideDownAnim = "profile-modal-slide-down 0.5s ease-out";
+        const profileModalSlideUpAnim = "profile-modal-slide-up 0.5s ease-in";
+
+        //Navbar btn on button press
+        hamburgerMenuBtn.addEventListener("click", function() {
+            animateHeaderModal(navbarModal, "block", navbarModalSlideDownAnim, navbarModalSlideUpAnim);
+        });
+
+        //Navbar Modal on animation end.
+        navbarModal.addEventListener("animationend", function()
+        {
+            hideHeaderModal(navbarModal, "none");
+        });
+
+        //Profile btn on button press
+        profileBtn.addEventListener("click", function() {
+            animateHeaderModal(profileModal, "grid", profileModalSlideDownAnim, profileModalSlideUpAnim);
+        });
+
+        //Profile Modal on animation end.
+        profileModal.addEventListener("animationend", function() {
+            hideHeaderModal(profileModal, "none");
+        });
+
+        //Sign Out Button
+        signOutBtn.addEventListener("click", function()
+        {
+            window.location = "includes/logout.inc.php";
+        });
+
+        //Function goes within the animationEnd 
+        let hideHeaderModal = function (modal, fadeOutDisplay) {
+            if(animState === animStates.SLIDEDOWN) {
+                console.log("modal display is " + fadeOutDisplay + ".");
+                modal.style.display = fadeOutDisplay;
+            }
+        };
+
+        //Function that goes within the button event listener
+        let animateHeaderModal = function(modal, fadeInDisplay, slideDownAnim, slideUpAnim) {
+            if(animState == animStates.SLIDEDOWN) {
+                console.log("Set/Start Slide Down Animation, navbar display is " + fadeInDisplay + ", set animState = FadeOut");
+                modal.style.animation = slideDownAnim;
+                modal.style.display = fadeInDisplay;
+                animState = animStates.SLIDEUP;
+            }
+            else if(animState == animStates.SLIDEUP){
+                console.log("Set/Start Slide Up Animation, set animState = SLIDEDOWN");
+                modal.style.animation = slideUpAnim;
+                animState = animStates.SLIDEDOWN;
+            }
+        };
     }
-    else if(animState == animStates.FADEOUT){
-        console.log("Set/Start FadeOut Animation, set animState = FadeIn");
-        navbarModal.style.animation = fadeOutAnim;
-        animState = animStates.FADEIN;
-    }
-});
+}
 
-//Triggers a function when the animation ends.
-navbarModal.addEventListener("animationend", function()
-{
-    if(animState === animStates.FADEIN) {
-        console.log("navbar display is none, animState remains FadeIn");
-        navbarModal.style.display = "none";
-    }
-});
+window.AllAboutParking.PerformanceEvaluation.Header();

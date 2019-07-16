@@ -12,6 +12,7 @@
     --secondary-color-light: rgb(240, 240, 240);
     --secondary-color-dark: #000000; 
     --accent-color: #9B8228;
+    --button-color: rgb(90, 90, 90);
 
 
     /*References*/
@@ -79,7 +80,7 @@ a:hover {
 }
 
 /*MOBILE - ONLY*/
-.hamburger-menu{
+.hamburger-menu-btn{
     margin-top: auto;
     margin-bottom: auto;
     padding: 0;
@@ -94,7 +95,7 @@ a:hover {
     background-size: var(--header-imgs-w) var(--header-imgs-h);
 }
 
-.profile-menu{
+.profile-menu-btn{
     margin-top: auto;
     margin-bottom: auto;
     padding: 0;
@@ -116,6 +117,7 @@ a:hover {
     width: 100%;
     background-color: var(--primary-color);
     overflow: hidden;
+    border: none;
     z-index: 0;
 }
 
@@ -125,6 +127,57 @@ a:hover {
     padding-bottom: 10px;
 }
 
+.profile-slide-menu {
+    display: none;
+    grid-template-columns: 1fr 0.5fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
+    grid-template-areas: 
+    ". profile-modal-btn ."
+    "profile-info profile-info profile-info"
+    "view-profile-btn . sign-out-btn";
+
+    background-color: var(--primary-color);
+    position: relative;
+    z-index: 0;
+}
+
+#change-profile-btn {
+    grid-area: profile-modal-btn;
+    justify-self: center;
+}
+
+.profile-info {
+    grid-area: profile-info;
+    justify-self: center;
+    color: var(--secondary-color-light);
+}
+
+#view-profile-btn {
+    grid-area: view-profile-btn;
+    justify-self: right;
+}
+
+#sign-out-btn {
+    grid-area: sign-out-btn;
+    justify-self: left;
+}
+
+.profile-modal-btn {
+    background-color: var(--button-color);
+    color: var(--secondary-color-light);
+    border: none;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.profile-modal-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    border: none;
+}
+
+
+
 /*Animations*/
 @keyframes navbar-slide-down {
     from {top: -166.4px;} 
@@ -132,6 +185,17 @@ a:hover {
 }
 
 @keyframes navbar-slide-up {
+    from {top: 0px;}
+    to {top: -166.4px;}
+}
+
+/*Animations*/
+@keyframes profile-modal-slide-down {
+    from {top: -166.4px;} 
+    to {top: 0px;}
+}
+
+@keyframes profile-modal-slide-up {
     from {top: 0px;}
     to {top: -166.4px;}
 }
@@ -153,7 +217,7 @@ a:hover {
     }
 
     /*MOBILE ELEMENT REMOVAL*/
-    .hamburger-menu {
+    .hamburger-menu-btn {
         display: none;
     }
     .mobile-navbar

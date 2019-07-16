@@ -34,3 +34,7 @@ AllAboutParking.PerformanceEvaluation.Utilities.FunctionHelpers.prototype = {
 
 //Use case of our Function Constructor Emulating a static method behaviour.
 AllAboutParking.PerformanceEvaluation.Utilities.FunctionHelpers.prototype.toggleVisibility(10);
+
+//Namespace shorthand
+var utilties = AllAboutParking.PerformanceEvaluation.Utilities;
+ 
