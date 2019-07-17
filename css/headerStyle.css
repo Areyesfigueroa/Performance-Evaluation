@@ -191,13 +191,13 @@ a:hover {
 
 /*Animations*/
 @keyframes profile-modal-slide-down {
-    from {top: -166.4px;} 
+    from {top: -195px;} 
     to {top: 0px;}
 }
 
 @keyframes profile-modal-slide-up {
     from {top: 0px;}
-    to {top: -166.4px;}
+    to {top: -195px;}
 }
 
 

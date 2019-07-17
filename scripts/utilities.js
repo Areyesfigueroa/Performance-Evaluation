@@ -5,6 +5,7 @@ AllAboutParking.PerformanceEvaluation = AllAboutParking.PerformanceEvaluation ||
 AllAboutParking.PerformanceEvaluation.Utilities = AllAboutParking.PerformanceEvaluation.Utilities || {};
 
 //Declaring our new constructor function within our namespace object.
+//General Function Helpers
 AllAboutParking.PerformanceEvaluation.Utilities = {
     toggleVisibility: function(e) {
         if(!e){
@@ -28,3 +29,5 @@ AllAboutParking.PerformanceEvaluation.Utilities = {
         }
     }
 }
+
+

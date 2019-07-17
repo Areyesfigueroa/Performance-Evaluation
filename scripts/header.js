@@ -1,88 +1,145 @@
-
+//Let's create a namespace: <Company>.<Technology>.<Feature>
+//Check if performance evaluation already exists, otherwise create a new object. 
 var AllAboutParking = AllAboutParking || {}; //Root Level Namespace
 AllAboutParking.PerformanceEvaluation = AllAboutParking.PerformanceEvaluation || {}; //Nested namespace
+AllAboutParking.PerformanceEvaluation.Utilities = AllAboutParking.PerformanceEvaluation.Utilities || {};
 
-//Namespace
 AllAboutParking.PerformanceEvaluation = {
+    Header: function(){
 
-Header: function() {
+        //Get Navbar elements
+        let navbar = document.getElementById("navbar-modal");
+        let navbarBtn = document.getElementById("hamburger-btn");
 
-        //Get buttons
-        let hamburgerMenuBtn = document.getElementById("hamburger-btn");
+        //Get Profile elements
+        let profile = document.getElementById("profile-modal");
         let profileBtn = document.getElementById("profile-btn");
-        let signOutBtn = document.getElementById("sign-out-btn");
-
-        //Get modals
-        let navbarModal = document.getElementById("navbar-modal");
-        let profileModal = document.getElementById("profile-modal");
-
-        //Enum to let us know if the animation has faded in and out.
-        const animStates = {
-            SLIDEDOWN: 'slide-down',
-            SLIDEUP: 'slide-up' 
-        };
-
-        //These values get hoisted when called for the first time. 
-        let animState = animStates.SLIDEDOWN;
 
         //Navbar Modal Animations
-        const navbarModalSlideDownAnim = "navbar-slide-down 0.5s ease-in";
-        const navbarModalSlideUpAnim = "navbar-slide-up 0.5s ease-out";
+        const navbarModalSlideDownAnim = "navbar-slide-down .7s ease-in";
+        const navbarModalSlideUpAnim = "navbar-slide-up .7s ease-out";
 
         //Profile Modal Animations
-        const profileModalSlideDownAnim = "profile-modal-slide-down 0.5s ease-out";
-        const profileModalSlideUpAnim = "profile-modal-slide-up 0.5s ease-in";
+        const profileModalSlideDownAnim = "profile-modal-slide-down .7s ease-out";
+        const profileModalSlideUpAnim = "profile-modal-slide-up .7s ease-in";
 
-        //Navbar btn on button press
-        hamburgerMenuBtn.addEventListener("click", function() {
-            animateHeaderModal(navbarModal, "block", navbarModalSlideDownAnim, navbarModalSlideUpAnim);
+        //Set modal visible display
+        const navbarDisplay = "block";
+        const profileDisplay = "grid";
+
+        //Create animation handler object.
+        let navbarAnimHandler = new HeaderAnimationSlider(
+            navbar,
+            navbarDisplay,
+            navbarModalSlideDownAnim,
+            navbarModalSlideUpAnim
+        );
+
+        //Create animation handler for Profile Modal
+        let profileAnimHandler = new HeaderAnimationSlider(
+            profile,
+            profileDisplay,
+            profileModalSlideDownAnim,
+            profileModalSlideUpAnim
+        );
+
+        //Navbar Event Listener
+        navbarBtn.addEventListener("click", function() {
+            if(profileAnimHandler.getIsModalActive()) //Profile is in the way
+            {
+                //Remove profile
+                profileAnimHandler.animateHeaderModal();
+            }
+            else {
+                navbarAnimHandler.animateHeaderModal();
+            }
+        });
+        navbar.addEventListener("animationend", function() {
+            navbarAnimHandler.hideHeaderModal();
         });
 
-        //Navbar Modal on animation end.
-        navbarModal.addEventListener("animationend", function()
-        {
-            hideHeaderModal(navbarModal, "none");
-        });
-
-        //Profile btn on button press
+        //Profile Event Listener
         profileBtn.addEventListener("click", function() {
-            animateHeaderModal(profileModal, "grid", profileModalSlideDownAnim, profileModalSlideUpAnim);
+            if(navbarAnimHandler.getIsModalActive()) //Navbar is in the way
+            {
+                //Remove navbar
+                navbarAnimHandler.animateHeaderModal();
+            }
+            else{
+                profileAnimHandler.animateHeaderModal();
+            }
+        });
+        profile.addEventListener("animationend", function(){
+
+            profileAnimHandler.hideHeaderModal();
         });
 
-        //Profile Modal on animation end.
-        profileModal.addEventListener("animationend", function() {
-            hideHeaderModal(profileModal, "none");
+        //If we click outside our Sliders.
+        window.addEventListener("click", function(e){
+            if(e.target != navbarBtn && e.target != profileBtn && !e.target.closest(".navbar") && !e.target.closest(".profile-slide-menu")){
+                if(profileAnimHandler.getIsModalActive())
+                {
+                    profileAnimHandler.animateHeaderModal();
+                }
+
+                if(navbarAnimHandler.getIsModalActive())
+                {
+                    navbarAnimHandler.animateHeaderModal();
+                }
+            }
         });
+        //Function Constructor
+        function HeaderAnimationSlider (modal, slideDownDisplay, slideDownAnim, slideUpAnim) {
+    
+            this.modal = modal;
+            this.slideDownDisplay = slideDownDisplay;
+            this.slideDownAnim = slideDownAnim;
+            this.slideUpAnim = slideUpAnim;
+            
+            
+            let _isModalActive = false;
 
-        //Sign Out Button
-        signOutBtn.addEventListener("click", function()
-        {
-            window.location = "includes/logout.inc.php";
-        });
+            const slideUpDisplay = "none";
+        
+            const animStates = {
+                SLIDEDOWN: 'slide-down',
+                SLIDEUP: 'slide-up'
+            };
+        
+            let animState = animStates.SLIDEDOWN;
+        
+            this.animateHeaderModal = function() {
+                if(animState == animStates.SLIDEDOWN) {
+                    console.log("Set/Start Slide Down Animation, navbar display is " + slideDownDisplay + ", set animState = FadeOut");
+                    modal.style.animation = slideDownAnim;
+                    modal.style.display = slideDownDisplay;
+                    animState = animStates.SLIDEUP;
+                    _isModalActive = true;
+                }
+                else if(animState == animStates.SLIDEUP){
+                    console.log("Set/Start Slide Up Animation, set animState = SLIDEDOWN");
+                    modal.style.animation = slideUpAnim;
+                    animState = animStates.SLIDEDOWN;
+                    _isModalActive = false;
+                }
+            };
+        
+            this.hideHeaderModal = function () {
+                if(animState === animStates.SLIDEDOWN) {
+                    console.log("modal display is " + slideUpDisplay + ".");
+                    modal.style.display = slideUpDisplay;
+                }
+            };
 
-        //Function goes within the animationEnd 
-        let hideHeaderModal = function (modal, fadeOutDisplay) {
-            if(animState === animStates.SLIDEDOWN) {
-                console.log("modal display is " + fadeOutDisplay + ".");
-                modal.style.display = fadeOutDisplay;
-            }
-        };
-
-        //Function that goes within the button event listener
-        let animateHeaderModal = function(modal, fadeInDisplay, slideDownAnim, slideUpAnim) {
-            if(animState == animStates.SLIDEDOWN) {
-                console.log("Set/Start Slide Down Animation, navbar display is " + fadeInDisplay + ", set animState = FadeOut");
-                modal.style.animation = slideDownAnim;
-                modal.style.display = fadeInDisplay;
-                animState = animStates.SLIDEUP;
-            }
-            else if(animState == animStates.SLIDEUP){
-                console.log("Set/Start Slide Up Animation, set animState = SLIDEDOWN");
-                modal.style.animation = slideUpAnim;
-                animState = animStates.SLIDEDOWN;
-            }
-        };
+            this.getIsModalActive = function(){ return _isModalActive; }
+        }
     }
 }
 
 window.AllAboutParking.PerformanceEvaluation.Header();
+
+
+
+
+
+
