@@ -1,42 +1,55 @@
 
+img {
+    justify-self: center;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+
+
 .site {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 50px 1fr 50px;
+    grid-template-columns: .1fr 1fr .1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas: 
     ". . ."
     " . login . "
     ". . .";
-
-    font-size: 1rem;
 }
 
 .login {
     grid-area: login;
-    justify-items: center;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 800px;
+    grid-template-rows: 100px;
     border: 1px solid black;
 
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
+    justify-self: center;
+    text-align: center;
 }
 
-input, button {
+input {
     display: block;
     margin: auto;
     margin-bottom: 1em;
+    font-size: 50px;
 }
 
-h2 {
-    font-size: 15pt;
+button {
+    display: block;
+    justify-self: center;
+    font-size: 30px;
+    height: 60px;
 }
 
-p {
-    font-size: 10pt;
+button p {
+    text-align: center;
+    align-self: center;
+    justify-self: center;
 }
 
 .status-message {
     color: rgb(199, 61, 61);
 }
-

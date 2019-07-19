@@ -14,7 +14,7 @@
                 <div>    
                     <form action="../includes/lookup.inc.php" method="POST">
                         <input type="text" name="mailuid" placeholder="Email...">
-                        <button type="submit" name="continue-submit">Continue</button>
+                        <button type="submit" name="continue-submit"><p>Continue</p></button>
                     </form>
                     <p>Don't have an account? Contact your IT Department</p>
 

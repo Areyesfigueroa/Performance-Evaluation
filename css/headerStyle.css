@@ -18,6 +18,9 @@
     /*References*/
     --header-imgs-w: 40px;
     --header-imgs-h: 40px;
+
+    /*Mobile Font Sizes*/
+    --filters-font-size: 15px;
 }
 
 /*Global*/

@@ -7,14 +7,11 @@ html,body {
     color: var(--primary-color);
 }
 
-#container 
-{
-    min-height: 100%;
-}
-
 main {
     overflow: auto;
-    padding-bottom: 100px;
+    padding-bottom: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 
@@ -23,31 +20,71 @@ th
     font-size: 15px;
 }
 
+
+
+#container 
+{
+    min-height: 100%;
+}
+
 .site-main {
     display: grid;
     grid-template-columns: 85px 1fr 1fr 85px;
-    grid-template-rows: 79px auto auto 1fr;
+    grid-template-rows: 120px auto auto 1fr;
     grid-template-areas: 
     " title title title title "
-    " . date-filter total-grid . "
-    " . main-table main-table . ";
+    " filter-bar filter-bar filter-bar total-grid "
+    " main-table main-table main-table main-table "
+    " download-reports . table-pages table-pages";
 }
 
 .title {
     grid-area: title;
     font-family: 'Open Sans', sans-serif;
-
-
     text-align: center;
     align-self: center;
 }
 
-.date-filter {
-    grid-area: date-filter;
+.filter-bar {
+    grid-area: filter-bar;
+    display: grid;
+    grid-template-columns: auto auto;
     border: 1px solid black;
     margin: 0;
     padding: 0;
+    font-size: var(--filters-font-size);
 }
+
+.search-form .search{
+    width: 65%;
+    font-size: var(--filters-font-size);
+}
+.search-form .submit{
+    font-size: var(--filters-font-size);
+}
+#dateSelect {
+    font-size: var(--filters-font-size);
+}
+
+.inline-container {
+    display: inline-flex;
+}
+
+/*TESTING Pages Button*/
+#createTable-button {
+    grid-area: download-reports; /*Until a download button is created.*/
+}
+
+.table-nav {
+    grid-area: table-pages;
+    justify-self: end;
+
+}
+
+
+
+
+
 
 .main-table > table {
     border-collapse: collapse;
@@ -67,6 +104,7 @@ th
     border: 1px solid black;
     margin: 0;
     padding: 0;
+    font-size: var(--filters-font-size);
 }
 
 

@@ -19,13 +19,20 @@ require "includes/header.php";
                 <!--Page Title LAYOUT-->
                 <h2 id="page-title" class="title">Page title</h2>
 
-                <!--FILTER LAYOUT-->
-                <div class="date-filter">
-                    Date: <select id="dateSelect">
-                        <option value="Show All" selected="true">Show All</option>
-                    </select>
-                </div>
-
+                <!--FILTERS LAYOUT-->
+                <section class="filter-bar">
+                    <div>
+                        <form class="search-form" action="">
+                            <input type="text" name="searchbar" class="search" placeholder="Search...">
+                            <input type="submit" name="submit" class= "submit" value="Search">
+                        </form>
+                    </div>
+                    <div>
+                        Date: <select id="dateSelect">
+                            <option value="Show All" selected="true">Show All</option>
+                        </select>
+                    </div>
+                </section>
                 <!--Performance Table LAYOUT-->
                 <div class="main-table">
                     <table id="performance-table">
@@ -45,8 +52,15 @@ require "includes/header.php";
                 </div>
 
                 <!--TODO: DELETE WHEN COMPLETED-->
-                <button id=createTable-button>Create Table</button>
-                
+                <button id="createTable-button">Create Table</button>
+                    
+                <div class="table-nav inline-container">
+                    <button id="previous-btn" class="table-nav-btn">Prev</button>
+                        <!--Button Nav-->
+                        <div class="table-nav-btn-container"></div>
+                    <button id="next-btn" class="table-nav-btn">Next</button>
+                </div>
+
                 <script src= "scripts/index.js"></script>
                 <!--PHP TO JS CALLS-->
                 <script type="text/javascript">
