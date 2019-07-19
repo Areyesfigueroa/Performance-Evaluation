@@ -78,9 +78,13 @@ th
 .table-nav {
     grid-area: table-pages;
     justify-self: end;
-
 }
 
+.page-btn {
+    background-color: green;
+    width: 22px;
+    height: 25px;
+}
 
 
 

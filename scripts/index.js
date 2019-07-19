@@ -1,3 +1,7 @@
+var AllAboutParking = AllAboutParking || {}; //Root Level Namespace
+AllAboutParking.PerformanceEvaluation = AllAboutParking.PerformanceEvaluation || {}; //Nested namespace
+AllAboutParking.PerformanceEvaluation.Table = AllAboutParking.PerformanceEvaluation.Table || {};
+
 //DOM Public Variables
 let userProfileButton = document.getElementById("user-profile-button");
 let createTableButton = document.getElementById("createTable-button");
@@ -5,32 +9,38 @@ let dateSelect = document.getElementById("dateSelect");
 let performanceTable = document.getElementById("performance-table");
 let totalScore = document.getElementById("total-score");
 let ddMenu = document.getElementById("dropdown-menu");
+let tableNavContainer = document.getElementById("table-nav-container");
 
 //Public Variables
 let hiddenRowIdx = [];
 let visibleRowIdx = [];
 
-//Temp Questions Array - Will come from a Database in Future.
-let questionsTable = [
-  ["Parking Tier 1", "Andrew Long", "Details", "3.0", "04/23/2019"],
-  ["Parking Tier 1", "Andrew Long", "Details", "2.5", "04/24/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "Details", "1.5", "04/25/2019"]
+//Temp Questions Array - Will come from a Database in Future. 10 Rows.
+let reportsDataQuery = [
+  ["Parking Tier 1", "Andrew Long", "<button class='details-btn'>Details</button>", "3.0", "04/23/2019"],
+  ["Parking Tier 1", "Andrew Long", "<button class='details-btn'>Details</button>", "2.5", "04/24/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"]
 ];
 
 //Object Creation
-reportsTable = new CreateHTMLTable(performanceTable, questionsTable);
+reportsTable = new AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 10, tableNavContainer);
 
 //Button Event Listeners.
 
-//window.addEventListener("click", outsideClickddMenu);
-/*userProfileButton.addEventListener("click", function(){
-    //toggleVisibility(ddMenu);
-});*/
-createTableButton.addEventListener("click", function() {
-  
+createTableButton.addEventListener("click", function() {  
     reportsTable.createTable();
-  
-  //createHTMLTable(questionsTable);
   //calculateOverallScore();
 });
 dateSelect.addEventListener("change", function() {
@@ -38,45 +48,15 @@ dateSelect.addEventListener("change", function() {
   calculateOverallScore();
 });
 
+//window.addEventListener("click", outsideClickddMenu);
+/*userProfileButton.addEventListener("click", function(){
+    //toggleVisibility(ddMenu);
+});*/
+
+
+
 function testing(somedata) {
   console.log(somedata);
-}
-
-/**
- * Summary: Adds rows onto the performance table for testing.
- *
- * Description: Performance Table is first created through html as an empty table.
- *              This function creates the content within it to initialize the table.
- *
- * @requires: performanceTable, questionsTable
- * @fires: window.onload, createTableButton.addEventListener
- * @returns: {void} Returns nothing.
- */
-function createHTMLTable(reportsQuery) {
-  var rowLenght = reportsQuery.length;
-  var colLength = reportsQuery[0].length;
-
-  const detailColumnIdx = 2;
-
-  for (let row = 0; row < rowLenght; row++) {
-    //Insert a new row at the end of the table.
-    let newRow = performanceTable.insertRow(performanceTable.length);
-
-    for (let col = 0; col < colLength; col++) {
-      //Create a cell for our data to go in by specifying the column position.
-      let cell = newRow.insertCell(col);
-
-      //Insert the question
-      //If it is the third column include button.
-
-      if (col == detailColumnIdx) {
-        //Add button.
-        cell.innerHTML = "<button class='details-btn'>Details</button>";
-      } else {
-        cell.innerHTML = reportsQuery[row][col];
-      }
-    }
-  }
 }
 
 /**

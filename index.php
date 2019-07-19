@@ -54,19 +54,13 @@ require "includes/header.php";
                 <!--TODO: DELETE WHEN COMPLETED-->
                 <button id="createTable-button">Create Table</button>
                     
+                <!--Table Page Nav-->
                 <div class="table-nav inline-container">
                     <button id="previous-btn" class="table-nav-btn">Prev</button>
                         <!--Button Nav-->
-                        <div class="table-nav-btn-container"></div>
+                        <div id="table-nav-container"></div>
                     <button id="next-btn" class="table-nav-btn">Next</button>
                 </div>
-
-                <script src= "scripts/index.js"></script>
-                <!--PHP TO JS CALLS-->
-                <script type="text/javascript">
-                    
-                    loadUserInfo(<?= json_encode($_SESSION) ?>);
-                </script>
             </main>
         </div>
 <?php 
