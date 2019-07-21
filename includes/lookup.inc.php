@@ -31,6 +31,9 @@ if(isset($_POST['continue-submit']))
         $conn = OpenCon(); //Establish SQL Connection
         $stmt = mysqli_stmt_init($conn); //Initialize statement, statment allows for queries to run within the database.
         
+        //TEST:
+        //echo $conn;
+
         //If statement failed.
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header("Location: ../LoginSystem/lookup.php?error=sqlerror");
