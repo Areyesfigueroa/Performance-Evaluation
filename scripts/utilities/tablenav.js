@@ -45,8 +45,8 @@ AllAboutParking.PerformanceEvaluation.Table = {
         //Private Methods
         let createPages = function (){
 
-            //Get the max number of pages: TODO: VERIFY MATH IS CORRECT.
-            let maxNumOfPages = Math.ceil(rowLength/maxNumRowsDisplayed);
+            //Get the max number of pages:
+            let maxNumOfPages = Math.ceil(rowLength/rowsDisplayed);
 
             //Loop through the pages and create a new button per page.
             for(let i = 0; i < maxNumOfPages; i++){
@@ -63,65 +63,52 @@ AllAboutParking.PerformanceEvaluation.Table = {
 
         let initPageListeners = function(){ 
             //Event Bubbling, childEvent will trigger then, the parent div tableNav.
-            tableNav.addEventListener("click", function(event){
-
-                console.log("Button Clicked!: " + event.target.id);
-
-                //Pattern:
-                /**
-                 * Page: 0 = 0 Loop
-                 * Page: 1 = 1 Loop
-                 * Page: 2 = 2 Loops
-                 * 
-                 * 
-                 * let startSliceIdx = 0;
-                 * let endSlideIdx = maxNumRowsDisplayed; //8
-                 * let slicedArr = [];
-                 * 
-                 * if user picks 0:
-                 * default: slice(startSliceIdx, endSliceIdx);
-                 * 
-                 * if user picks 1: 1 Loop
-                 * for(let i = 0; i < currPage; i++){
-                 * 
-                 *  startSliceIdx = endSliceIdx + 1; //9
-                 *  endSliceIdx = startSliceIdx + maxNumRowsDisplayed; //17
-                 * 
-                 * }
-                 * 
-                 * slicedArr = reportsQuery.slice(startSliceIdx, endSliceIdx); 
-                 * 
-                 * if user picks 3: 2 Loops
-                 * 
-                 * 
-                 * Start at 0: startIdx(0)-endIdx(8)
-                 * Start Index to slice = 8 + 1 = 9
-                 * End Index to slice = 9 + 8 = 17
-                 */
-
-                //If it is page 0, only load the first 8 rows.
-                //let arr = reportsQuery.slice(9,17); //Page 0: 0-8, Page 1: 9-17
-                
+            tableNav.addEventListener("click", function(event){                
                 //TESTING ZONE:
                 
                 //Convert btn num into pageid:
                 console.log("Page #: " + parseInt(event.target.id));
                 console.log(getPageData(parseInt(event.target.id)));
-
-                
-                //console.log(arr);
-                //Clear table.
-                //clearTable();
             });
         }
 
+        /**
+         * Page: 0 = 0 Loop
+         * Page: 1 = 1 Loop
+         * Page: 2 = 2 Loops
+         * 
+         * 
+         * let startSliceIdx = 0;
+         * let endSlideIdx = maxNumRowsDisplayed; //8
+         * let slicedArr = [];
+         * 
+         * if user picks 0:
+         * default: slice(startSliceIdx, endSliceIdx);
+         * 
+         * if user picks 1: 1 Loop
+         * for(let i = 0; i < currPage; i++){
+         * 
+         *  startSliceIdx = endSliceIdx; //8
+         *  endSliceIdx = startSliceIdx + maxNumRowsDisplayed; //17
+         * 
+         * }
+         * 
+         * slicedArr = reportsQuery.slice(startSliceIdx, endSliceIdx); 
+         * 
+         * if user picks 3: 2 Loops
+         * 
+         * 
+         * Start at 0: startIdx(0)-endIdx(8)
+         * Start Index to slice = 8
+         * End Index to slice = 9 + 8 = 17
+         */
         let getPageData = function(pageNum) {
             let startSliceIdx = 0;
             let endSliceIdx = rowsDisplayed;
             let slicedArr = [];
 
             for(let i = 0; i < pageNum; i++){
-                startSliceIdx = endSliceIdx + 1;
+                startSliceIdx = endSliceIdx;
                 endSliceIdx = startSliceIdx + rowsDisplayed;
             }
 

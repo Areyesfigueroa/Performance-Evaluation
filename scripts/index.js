@@ -17,25 +17,25 @@ let visibleRowIdx = [];
 
 //Temp Questions Array - Will come from a Database in Future. 10 Rows.
 let reportsDataQuery = [
-  ["Parking Tier 1", "Andrew Long", "<button class='details-btn'>Details</button>", "3.0", "04/23/2019"],
-  ["Parking Tier 1", "Andrew Long", "<button class='details-btn'>Details</button>", "2.5", "04/24/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
-  ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"]
+  ["0", "Andrew Long", "<button class='details-btn'>Details</button>", "3.0", "04/23/2019"],
+  ["1", "Andrew Long", "<button class='details-btn'>Details</button>", "2.5", "04/24/2019"],
+  ["2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["3", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["4", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["5", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["6", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["7", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["8", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["9", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["10", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["11", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["12", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["13", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"],
+  ["14", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"]
 ];
 
 //Object Creation 
-reportsTable = new AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 10, tableNavContainer);
+reportsTable = new AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 8, tableNavContainer);
 
 //Button Event Listeners.
 
