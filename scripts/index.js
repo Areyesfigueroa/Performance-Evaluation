@@ -10,6 +10,8 @@ let performanceTable = document.getElementById("performance-table");
 let totalScore = document.getElementById("total-score");
 let ddMenu = document.getElementById("dropdown-menu");
 let tableNavContainer = document.getElementById("table-nav-container");
+let nextBtn = document.getElementById("next-btn");
+let prevBtn = document.getElementById("previous-btn");
 
 //Public Variables
 let hiddenRowIdx = [];
@@ -35,7 +37,7 @@ let reportsDataQuery = [
 ];
 
 //Object Creation 
-reportsTable = new AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 8, tableNavContainer);
+reportsTable = new AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 8, tableNavContainer, nextBtn, prevBtn);
 
 //Button Event Listeners.
 
