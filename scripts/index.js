@@ -34,7 +34,7 @@ let reportsDataQuery = [
   ["Parking Tier 2", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"]
 ];
 
-//Object Creation
+//Object Creation 
 reportsTable = new AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 10, tableNavContainer);
 
 //Button Event Listeners.
