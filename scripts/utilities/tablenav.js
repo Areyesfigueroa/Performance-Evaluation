@@ -6,7 +6,7 @@ AllAboutParking.PerformanceEvaluation.Table = AllAboutParking.PerformanceEvaluat
 
 
 AllAboutParking.PerformanceEvaluation.Table = {
-    CreateHTMLTable: function(table, reportsQuery, maxNumRows, tableNavDiv, nextBtn = null, prevBtn = null){
+    CreateHTMLTable: (table, reportsQuery, maxNumRows, tableNavDiv, nextBtn = null, prevBtn = null, searchbar = null, dateFilter = null) => {
         //Constants        
         const _maxNumRowsDisplayed = 8;
 
@@ -15,13 +15,6 @@ AllAboutParking.PerformanceEvaluation.Table = {
         let _tableNav = tableNavDiv; //Container for where we will populate the button pages. 
         let _currPageNum = 0; //set and get the current page number.
         let _maxNumOfPages = 0; //Needs to be global.
-
-        //Public Methods
-        this.createTable = function() {
-
-            createRows(_rowsDisplayed, reportsQuery[0].length, reportsQuery);
-            createPages();
-        }
 
         let createRows = function(rowLength, colLength, dataArr, rowOffset = 0, colOffset = 0) {            
             for(let row = rowOffset; row < rowLength; row++){
@@ -70,8 +63,7 @@ AllAboutParking.PerformanceEvaluation.Table = {
                 //set the current page
                 setCurrentPageNum(parseInt(event.target.id));
 
-                //Clear the search bar.
-
+                updateFilters();
             });
         }
 
@@ -136,13 +128,25 @@ AllAboutParking.PerformanceEvaluation.Table = {
                     console.log("Next Page");
                     setCurrentPageNum(getCurrentPageNum() + 1);
                     loadTableData(getPageData(getCurrentPageNum()));
+                    updateFilters();
                 });
 
                 prevBtn.addEventListener("click", function(){
                     console.log("Prev Page");
                     setCurrentPageNum(getCurrentPageNum() - 1);
                     loadTableData(getPageData(getCurrentPageNum()));
+                    updateFilters();
                 });
+            }
+        }
+
+        let updateFilters = () => {
+            if(!dateFilter || !searchbar){
+                console.log("Either DateFilter or Searchbar is null");
+            }
+            else{
+                searchbar.search();
+                dateFilter.filter();
             }
         }
 
@@ -159,30 +163,91 @@ AllAboutParking.PerformanceEvaluation.Table = {
         let getCurrentPageNum = function() {
             return _currPageNum;
         }
-    }
-}
 
-function Searchbar(searchBarElem, searchTable){
-    let searchbar = searchBarElem; //save the element for reference on the search function.
-    let table = searchTable;
+        return {
+            //Public Methods
+            createTable : ()=> {
+                createRows(_rowsDisplayed, reportsQuery[0].length, reportsQuery);
+                createPages();
+            }
+        };
+    },
 
-    return {
-        search: ()=>{
-            let filter = searchbar.value.toUpperCase();
-            let rows = table.rows;
-
-            for(let i = 1; i < rows.length; i++){
-                let firstCol = rows[i].cells[0].textContent.toUpperCase();
-                let secondCol = rows[i].cells[1].textContent.toUpperCase();
-                let fourthCol = rows[i].cells[3].textContent.toUpperCase();
-                let fithCol = rows[i].cells[4].textContent.toUpperCase();
-
-                if(firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || fourthCol.indexOf(filter) > -1 || fithCol.indexOf(filter) > -1) {
-                    rows[i].style.display = "";
-                } else {
-                    rows[i].style.display = "none";
+    Searchbar: (searchBarElem, searchTable) => {
+        let searchbar = searchBarElem; //save the element for reference on the search function.
+        let table = searchTable;
+    
+        return {
+            search: ()=>{
+                let filter = searchbar.value.toUpperCase();
+                let rows = table.rows;
+    
+                for(let i = 1; i < rows.length; i++){
+                    let firstCol = rows[i].cells[0].textContent.toUpperCase();
+                    let secondCol = rows[i].cells[1].textContent.toUpperCase();
+                    let fourthCol = rows[i].cells[3].textContent.toUpperCase();
+                    let fithCol = rows[i].cells[4].textContent.toUpperCase();
+    
+                    if(firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || fourthCol.indexOf(filter) > -1 || fithCol.indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
                 }
             }
         }
+    },
+
+    DateFilter: (dateColIdx, dateSelectElement, reportsQuery, table) => {
+        //Get the value being selected.
+        let dateSelect = dateSelectElement;
+    
+        let init = () => {
+            let dateQuery = [];
+          
+            //Slice the query to get only the date
+            for (let i = 0; i < reportsQuery.length; i++) {
+              dateQuery[i] = reportsQuery[i].slice(4)[0];
+            }
+            //Make dateQuery unique.
+            const uniqDates = [...new Set(dateQuery)];
+          
+            for (let i = 0; i < uniqDates.length; i++) {
+              //Create a new option element
+              var option = document.createElement("option");
+          
+              //Create text node to add to option element
+              option.appendChild(document.createTextNode(uniqDates[i]));
+          
+              //Set value property of opt
+              option.value = uniqDates[i];
+          
+              //add option to end of selection box
+              dateSelect.appendChild(option);
+            }
+        }
+    
+        init();
+        return {
+            filter: ()=> {
+                let filter = dateSelect.options[dateSelect.selectedIndex].value;
+                let rows = table.rows;
+    
+                if(filter !== 'Show All') {            
+                    for(let i=1; i < rows.length; i++) {
+                        if(rows[i].cells[dateColIdx].textContent.indexOf(filter) > -1){
+                            rows[i].style.display = "";
+                        }
+                        else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+                } else {
+                    for(let i=1; i < rows.length; i++) {
+                        rows[i].style.display = "";
+                    }
+                }
+            }
+        };
     }
 }

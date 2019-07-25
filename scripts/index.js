@@ -1,8 +1,7 @@
 var AllAboutParking = AllAboutParking || {}; //Root Level Namespace
 AllAboutParking.PerformanceEvaluation = AllAboutParking.PerformanceEvaluation || {}; //Nested namespace
-AllAboutParking.PerformanceEvaluation.Table = AllAboutParking.PerformanceEvaluation.Table || {};
 
-//DOM Public Variables
+//DOM Global Variables
 let userProfileButton = document.getElementById("user-profile-button");
 let createTableButton = document.getElementById("createTable-button");
 let dateSelect = document.getElementById("dateSelect");
@@ -15,10 +14,6 @@ let prevBtn = document.getElementById("previous-btn");
 
 //Search Bar
 let searchbarInput = document.getElementById("search-bar");
-
-//Public Variables
-let hiddenRowIdx = [];
-let visibleRowIdx = [];
 
 //Temp Questions Array - Will come from a Database in Future. 10 Rows.
 let reportsDataQuery = [
@@ -39,36 +34,32 @@ let reportsDataQuery = [
   ["14", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"]
 ];
 
+//Constant Variables.
+const dateColIdx = 4;
+
 //Object Creation 
-let reportsTable = new AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 8, tableNavContainer, nextBtn, prevBtn);
-let performanceSearchbar = Searchbar(searchbarInput, performanceTable);
+let performanceSearchbar = AllAboutParking.PerformanceEvaluation.Table.Searchbar(searchbarInput, performanceTable);
+let performanceDateFilter = AllAboutParking.PerformanceEvaluation.Table.DateFilter(dateColIdx, dateSelect, reportsDataQuery, performanceTable);
+let reportsTable = AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 8, tableNavContainer, nextBtn, prevBtn, performanceSearchbar, performanceDateFilter);
 
 //When page loads.
 window.onload = reportsTable.createTable();
 
 //Event Listeners.
 searchbarInput.addEventListener("keyup", function(){
-  performanceSearchbar.search();
+   performanceSearchbar.search();
 });
 createTableButton.addEventListener("click", function() {  
-    //reportsTable.createTable();
-    performanceSearchbar.search();
-  //calculateOverallScore();
+    //performanceSearchbar.search();
 });
 dateSelect.addEventListener("change", function() {
-  dateFilter();
-  calculateOverallScore();
+  performanceDateFilter.filter();
+  //calculateOverallScore();
 });
 //window.addEventListener("click", outsideClickddMenu);
 /*userProfileButton.addEventListener("click", function(){
     //toggleVisibility(ddMenu);
 });*/
-
-
-
-function testing(somedata) {
-  console.log(somedata);
-}
 
 /**
  * Summary: Calculates the score from the performance table and outputs it on the overall score table
@@ -110,90 +101,6 @@ function calculateOverallScore() {
   totalScore.innerHTML = result;
 }
 
-function initializeDateFilter(reportsQuery) {
-  let dateQuery = [];
-
-  //Slice the query to get only the date
-  for (let i = 0; i < reportsQuery.length; i++) {
-    dateQuery[i] = reportsQuery[i].slice(4)[0];
-  }
-  //Make dateQuery unique.
-  const uniqDates = [...new Set(dateQuery)];
-
-  for (let i = 0; i < uniqDates.length; i++) {
-    //Create a new option element
-    var option = document.createElement("option");
-
-    //Create text node to add to option element
-    option.appendChild(document.createTextNode(uniqDates[i]));
-
-    //Set value property of opt
-    option.value = uniqDates[i];
-
-    //add option to end of selection box
-    dateSelect.appendChild(option);
-  }
-}
-
-/**
- * Summary: Filters the date based on the date dropdown selector.
- *
- * Description: Based on the selector html tag it will hide or show
- *              the table rows on the performance table by relying on
- *              the date column.
- *
- * @requires: performanceTable, hiddenRowIdx, visibleRowIdx
- * @fires: dateSelect.addEventListener
- * @returns: {void} Returns nothing.
- */
-function dateFilter() {
-  //Get the value being selected.
-  let dateSelectValue = dateSelect.options[dateSelect.selectedIndex].value;
-
-  //Get the date col index.
-  const dateColIdx = 4;
-
-  if (dateSelectValue === "Show All") {
-    //console.log("Show All: " + hiddenRowIdx.length);
-
-    //Are there any hidden rows.
-    if (hiddenRowIdx.length > 0) {
-      //Reveal the hidden rows only.
-      for (let i = 0; i < hiddenRowIdx.length; i++) {
-        performanceTable.rows[hiddenRowIdx[i]].style.display = "";
-        //console.log("Show row of index: " + hiddenRowIdx[i]);
-      }
-    }
-  } else {
-    //Clear prev hidden and visible rows
-    hiddenRowIdx = [];
-    visibleRowIdx = [];
-
-    //Loop through all the rows
-    for (let rowIdx = 1; rowIdx < performanceTable.rows.length; rowIdx++) {
-      //Compare only the date column with the date selected.
-      if (
-        performanceTable.rows[rowIdx].cells[dateColIdx].innerText !=
-        dateSelectValue
-      ) {
-        //Hide the row
-        performanceTable.rows[rowIdx].style.display = "none";
-        hiddenRowIdx.push(rowIdx);
-        //console.log("Hide Row Index of : " + rowIdx);
-      } else if (
-        performanceTable.rows[rowIdx].cells[dateColIdx].innerText ===
-        dateSelectValue
-      ) {
-        //Show the row
-        performanceTable.rows[rowIdx].style.display = "";
-        visibleRowIdx.push(rowIdx);
-        //console.log("Show Row Index of: " + rowIdx);
-      }
-    }
-    //console.log("Hidden Row Indexes: " + hiddenRowIdx);
-  }
-}
-
 function loadUserInfo(userProfile) {
   //Get the dom objects
   //let userName = document.getElementById("user-name");
@@ -205,16 +112,6 @@ function loadUserInfo(userProfile) {
   //userName.innerHTML = userProfile.employee_name;
   //userEmail.innerHTML = userProfile.employee_email;
   //userPosition.innerHTML = userProfile.employee_position;
-}
-
-function toggleVisibility(element) {
-  if (element.style.display != "block") {
-    //Visible
-    element.style.display = "block";
-  } else {
-    //Invisible
-    element.style.display = "none";
-  }
 }
 
 function outsideClickddMenu(e) {
