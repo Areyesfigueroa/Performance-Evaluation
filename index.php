@@ -21,11 +21,8 @@ require "includes/header.php";
 
                 <!--FILTERS LAYOUT-->
                 <section class="filter-bar">
-                    <div>
-                        <form class="search-form" action="">
-                            <input type="text" name="searchbar" class="search" placeholder="Search...">
-                            <input type="submit" name="submit" class= "submit" value="Search">
-                        </form>
+                    <div class="search-form">
+                        <input type="text" name="searchbar" id="search-bar" class="search" placeholder="Search...">
                     </div>
                     <div>
                         Date: <select id="dateSelect">

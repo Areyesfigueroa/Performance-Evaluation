@@ -13,6 +13,9 @@ let tableNavContainer = document.getElementById("table-nav-container");
 let nextBtn = document.getElementById("next-btn");
 let prevBtn = document.getElementById("previous-btn");
 
+//Search Bar
+let searchbarInput = document.getElementById("search-bar");
+
 //Public Variables
 let hiddenRowIdx = [];
 let visibleRowIdx = [];
@@ -37,19 +40,25 @@ let reportsDataQuery = [
 ];
 
 //Object Creation 
-reportsTable = new AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 8, tableNavContainer, nextBtn, prevBtn);
+let reportsTable = new AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 8, tableNavContainer, nextBtn, prevBtn);
+let performanceSearchbar = Searchbar(searchbarInput, performanceTable);
 
-//Button Event Listeners.
+//When page loads.
+window.onload = reportsTable.createTable();
 
+//Event Listeners.
+searchbarInput.addEventListener("keyup", function(){
+  performanceSearchbar.search();
+});
 createTableButton.addEventListener("click", function() {  
-    reportsTable.createTable();
+    //reportsTable.createTable();
+    performanceSearchbar.search();
   //calculateOverallScore();
 });
 dateSelect.addEventListener("change", function() {
   dateFilter();
   calculateOverallScore();
 });
-
 //window.addEventListener("click", outsideClickddMenu);
 /*userProfileButton.addEventListener("click", function(){
     //toggleVisibility(ddMenu);

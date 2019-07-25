@@ -69,6 +69,9 @@ AllAboutParking.PerformanceEvaluation.Table = {
 
                 //set the current page
                 setCurrentPageNum(parseInt(event.target.id));
+
+                //Clear the search bar.
+
             });
         }
 
@@ -155,6 +158,31 @@ AllAboutParking.PerformanceEvaluation.Table = {
 
         let getCurrentPageNum = function() {
             return _currPageNum;
+        }
+    }
+}
+
+function Searchbar(searchBarElem, searchTable){
+    let searchbar = searchBarElem; //save the element for reference on the search function.
+    let table = searchTable;
+
+    return {
+        search: ()=>{
+            let filter = searchbar.value.toUpperCase();
+            let rows = table.rows;
+
+            for(let i = 1; i < rows.length; i++){
+                let firstCol = rows[i].cells[0].textContent.toUpperCase();
+                let secondCol = rows[i].cells[1].textContent.toUpperCase();
+                let fourthCol = rows[i].cells[3].textContent.toUpperCase();
+                let fithCol = rows[i].cells[4].textContent.toUpperCase();
+
+                if(firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1 || fourthCol.indexOf(filter) > -1 || fithCol.indexOf(filter) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
         }
     }
 }
