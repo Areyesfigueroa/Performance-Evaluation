@@ -9,31 +9,36 @@
             </ul>
         </footer>
 
-        <!--LOAD SCRIPTS-->
-        <!--Load Scripts-->
-        <!--Load DB Info Scripts-->
-        <!--Load Utilities-->
-        <script src="scripts/utilities/tablenav.js" type="text/javascript"></script>
-        <script src="scripts/utilities/utilities.js" type="text/javascript"></script>
+        <!-- LOAD SCRIPTS -->
         <script src= "scripts/index.js"></script>
-        <!--PHP TO JS CALLS-->
+
+        <!-- VENDOR -->
+
+        <!-- JQuery -->
+        <script type="text/javascript" src="vendor/mdb/js/jquery-3.4.1.min.js"></script>
+        <!-- MDBootstrap Datatables  -->
+        <script type="text/javascript" src="vendor/mdb/js/addons/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+            $('#performance-table').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+            });
+        </script>
+
+        <!-- PHP TO JS CALLS -->
         <script type="text/javascript">
             loadUserInfo(<?= json_encode($_SESSION) ?>);
         </script>
 
-
-        
-
-        <!--Load Header Script-->
+        <!-- Load Header Script -->
         <script src="scripts/header.js" type="text/javascript"></script>
             <script type="text/javascript">
                 //Call Header Script Functions.
             </script>
 
-        <!--Load Footer Script-->    
+        <!-- Load Footer Script -->    
         <script src="scripts/footer.js" type="text/javascript"></script>
             <script type="text/javascript">
-                //Call Footer Script Functions.
                 copyrightFooter();
             </script>
     </body>            

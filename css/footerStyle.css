@@ -1,21 +1,21 @@
 
 /*Global Footer Layout*/
-footer {
-    position: relative;
-    height: 50px;
-    clear: both;
+
+
+.site-footer {
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color-light);
+    font-size: 80%;
+}
+
+.site-footer ul li {
+    margin: 20px 0;
 }
 
 /*Desktop and Up Layout*/
 @media only screen and (min-width: 768px) {
-        /*Footer Layout Non-Global*/ /*Footer Color & Typography*/
-    .site-footer {
-        border: 1px solid var(--primary-color);
-        background-color: var(--primary-color);
-        color: var(--secondary-color-light);
-        font-family: 'Open Sans', sans-serif;
-        font-size: 10px;
-    }
+
 
     .site-footer {
         display: grid;

@@ -1,10 +1,14 @@
 
+/* --------------------------- */
+/* BASIC SETUP */
+/* --------------------------- */
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+    /*border: solid rgb(25, 174, 201) 1px; /*TODO: Remove when done*/
 }
 
-/*Variables*/
 :root {
     /*Color Pallete*/
     --primary-color: rgb(59, 59, 59);
@@ -23,7 +27,29 @@
     --filters-font-size: 15px;
 }
 
-/*Global*/
+html{
+    height: 100%;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+}
+header {
+    margin-bottom: 0px;
+}
+
+body{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+h1 {
+    font-size: 150%;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+
 li {
     white-space: nowrap;
     list-style: none;
@@ -31,6 +57,7 @@ li {
     overflow-wrap: hidden;
 }
 
+/*----- NAVIGATION LINKS -----*/
 a {
     color: var(--secondary-color-light);
     text-decoration: none;
@@ -43,7 +70,9 @@ a:hover {
 
 }
 
-/*Layout*/
+/* --------------------------- */
+/* HEADER */
+/* --------------------------- */
 .site-header {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -51,16 +80,14 @@ a:hover {
     grid-template-areas: 
     "logo mobile-navbar";
 
-    font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
+    font-size: 15%;
     background-color: var(--primary-color);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    position: relative;
+    padding: 10px 0;
+    width: 100%;
     z-index: 1;
 }
 
-.site-header > .logo {
+.site-header .logo {
     grid-area: logo;
     justify-self: left;
     margin-top: auto;
@@ -212,11 +239,6 @@ a:hover {
         /*References*/
         --header-imgs-w: 48px;
         --header-imgs-h: 48px;
-    }
-
-    header {
-        padding-top: 30px;
-        padding-bottom: 30px;
     }
 
     /*MOBILE ELEMENT REMOVAL*/

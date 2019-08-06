@@ -8,11 +8,26 @@ session_start();
     <head>
         <meta charset="utf-8">
         <meta name="description" content="This is an example of a meta description">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Performance Evaluation</title>
+
+        <!-- Normalize -->
+        <link rel="stylesheet" href="vendor/css/normalize.css">
+
+        <!-- MDBootstrap Datatables  -->
+        <link href="vendor/mdb/css/addons/datatables.min.css" rel="stylesheet">
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/mdb/css/bootstrap.min.css" rel="stylesheet"> 
+        <!-- Material Design Bootstrap -->
+        <link href="vendor/mdb/css/mdb.min.css" rel="stylesheet">   
+        
+
+        <!--Custom CSS-->
         <link rel="stylesheet" href="css/headerStyle.css">
+        <link rel="stylesheet" href="css/mainStyle.css">
         <link rel="stylesheet" href="css/footerStyle.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet">    
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     </head>
     <body>
         <header>
@@ -20,22 +35,11 @@ session_start();
                 
                 <img class="logo" src="https://www.dropbox.com/s/j8qocfcdccb8x5m/logo-dark.png?raw=1" alt="">
                 
-
                 <!--MOBILE ONLY-->
                 <div class="mobile-navbar">
                     <button id="hamburger-btn" class="hamburger-menu-btn"></button>
                     <button id="profile-btn" class="profile-menu-btn"></button>
                 </div>
-
-                <!--TODO: Dynamically Changes-->
-                <!--<div class="profile-info">    
-                    <div id="user-name"></div>
-                    <div id="user-email"></div> 
-                    <div id="user-position"></div>
-                </div>-->
-
-                <!--<button id="user-profile-button" class="profile-button">
-                </button>-->
             </section>
 
             <!--Mobile Profile Modal-->

@@ -5,12 +5,13 @@ AllAboutParking.PerformanceEvaluation = AllAboutParking.PerformanceEvaluation ||
 let userProfileButton = document.getElementById("user-profile-button");
 let createTableButton = document.getElementById("createTable-button");
 let dateSelect = document.getElementById("dateSelect");
-let performanceTable = document.getElementById("performance-table");
+let performanceTable = document.getElementById("performance-table").getElementsByTagName("tbody")[0];
 let totalScore = document.getElementById("total-score");
 let ddMenu = document.getElementById("dropdown-menu");
 let tableNavContainer = document.getElementById("table-nav-container");
 let nextBtn = document.getElementById("next-btn");
 let prevBtn = document.getElementById("previous-btn");
+
 
 //Search Bar
 let searchbarInput = document.getElementById("search-bar");
@@ -34,71 +35,35 @@ let reportsDataQuery = [
   ["14", "Marcelo Nieto", "<button class='details-btn'>Details</button>", "1.5", "04/25/2019"]
 ];
 
-//Constant Variables.
-const dateColIdx = 4;
-
-//Object Creation 
-let performanceSearchbar = AllAboutParking.PerformanceEvaluation.Table.Searchbar(searchbarInput, performanceTable);
-let performanceDateFilter = AllAboutParking.PerformanceEvaluation.Table.DateFilter(dateColIdx, dateSelect, reportsDataQuery, performanceTable);
-let reportsTable = AllAboutParking.PerformanceEvaluation.Table.CreateHTMLTable(performanceTable, reportsDataQuery, 8, tableNavContainer, nextBtn, prevBtn, performanceSearchbar, performanceDateFilter);
-
 //When page loads.
-window.onload = reportsTable.createTable();
-
-//Event Listeners.
-searchbarInput.addEventListener("keyup", function(){
-   performanceSearchbar.search();
-});
-createTableButton.addEventListener("click", function() {  
-    //performanceSearchbar.search();
-});
-dateSelect.addEventListener("change", function() {
-  performanceDateFilter.filter();
-  //calculateOverallScore();
-});
-//window.addEventListener("click", outsideClickddMenu);
-/*userProfileButton.addEventListener("click", function(){
-    //toggleVisibility(ddMenu);
-});*/
+window.onload = createRows(performanceTable, reportsDataQuery.length, reportsDataQuery[0].length, reportsDataQuery);
 
 /**
- * Summary: Calculates the score from the performance table and outputs it on the overall score table
- *
- * Decription: Based on the date filter we loop through the performance table
- *             and get the sum of the visible scores.
- *
- * @requires: performanceTable, totalScore, visibleRowIdx
- * @fires: window.onload, createTableButton.addEventListener, dateSelect.addEventListener
- * @returns: {void} Returns nothing.
+ * 
+ * @param {*} table 
+ * @param {*} rowLength 
+ * @param {*} colLength 
+ * @param {*} dataArr 
+ * @param {*} rowOffset 
+ * @param {*} colOffset 
+ * 
+ * TODO: Table rows showing up on the table head element.
+ * 
  */
-function calculateOverallScore() {
-  //Get score col index.
-  const scoreColIdx = 1;
+function createRows(table, rowLength, colLength, dataArr, rowOffset = 0, colOffset = 0) {            
+  for(let row = rowOffset; row < rowLength; row++) {
 
-  //Variable to hold the sum result.
-  let result = 0;
+      //Insert a new row at the end of the table.
+      let newRow = table.insertRow(table.rows.length);
 
-  //If the selection is show all
-  let dateSelectValue = dateSelect.options[dateSelect.selectedIndex].value;
+      for(let col = colOffset; col < colLength; col++) {
+          //Create a cell for our data to go in by specifying the column position. 
+          let cell = newRow.insertCell(col);
 
-  if (dateSelectValue === "Show All") {
-    //Add all the scores. Start at index 1 to skip the header.
-    for (let i = 1; i < performanceTable.rows.length; i++) {
-      //Add all rows
-      result += Number(performanceTable.rows[i].cells[scoreColIdx].innerHTML);
-    }
-  } else {
-    //Add only the visible scores.
-    for (let i = 0; i < visibleRowIdx.length; i++) {
-      //Add visible scores
-      result += Number(
-        performanceTable.rows[visibleRowIdx[i]].cells[scoreColIdx].innerHTML
-      );
-    }
+          //Insert data into html cell
+          cell.innerHTML = dataArr[row][col];
+      }
   }
-
-  //Change overall score html element value.
-  totalScore.innerHTML = result;
 }
 
 function loadUserInfo(userProfile) {
@@ -112,14 +77,4 @@ function loadUserInfo(userProfile) {
   //userName.innerHTML = userProfile.employee_name;
   //userEmail.innerHTML = userProfile.employee_email;
   //userPosition.innerHTML = userProfile.employee_position;
-}
-
-function outsideClickddMenu(e) {
-  if (
-    !e.target.closest("ul > li") &&
-    !e.target.closest("ul") &&
-    e.target != userProfileButton
-  ) {
-    ddMenu.style.display = "none";
-  }
 }

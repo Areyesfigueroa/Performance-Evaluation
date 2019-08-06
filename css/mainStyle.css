@@ -1,41 +1,36 @@
 
-html,body {
-    height: 100%;
-    width: 100%;
-    font-family: 'Open Sans', sans-serif;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-}
-
-main {
-    overflow: auto;
-    padding-bottom: 0px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-
-th
-{
-    font-size: 15px;
-}
-
-
-
-#container 
-{
-    min-height: 100%;
-}
-
+/* ----- MAIN LAYOUT -----*/
 .site-main {
     display: grid;
     grid-template-columns: 85px 1fr 1fr 85px;
     grid-template-rows: 120px auto auto 1fr;
     grid-template-areas: 
     " title title title title "
-    " filter-bar filter-bar filter-bar total-grid "
-    " main-table main-table main-table main-table "
-    " download-reports . table-pages table-pages";
+    " main-table main-table main-table main-table ";
+}
+
+/* ----- TABLE SECTION -----*/
+main {
+    padding-bottom: 0px;
+    margin: 0 20px;
+}
+
+.sorting-asc:before{
+    content: '\25B2';
+}
+
+.st-sort-descent:before{
+    content: '\25BC';
+}
+
+th
+{
+    font-size: 15%;
+}
+
+#container 
+{
+    min-height: 100%;
 }
 
 .title {
@@ -45,66 +40,9 @@ th
     align-self: center;
 }
 
-.filter-bar {
-    grid-area: filter-bar;
-    display: grid;
-    grid-template-columns: auto auto;
-    border: 1px solid black;
-    margin: 0;
-    padding: 0;
-    font-size: var(--filters-font-size);
-}
-
-.search-form .search{
-    width: 65%;
-    font-size: var(--filters-font-size);
-}
-.search-form .submit{
-    font-size: var(--filters-font-size);
-}
-#dateSelect {
-    font-size: var(--filters-font-size);
-}
-
-.inline-container {
-    display: inline-flex;
-}
-
-/*TESTING Pages Button*/
-#createTable-button {
-    grid-area: download-reports; /*Until a download button is created.*/
-}
-
-.table-nav {
-    grid-area: table-pages;
-    justify-self: end;
-}
-
-.page-btn {
-    width: 22px;
-    height: 25px;
-}
-
-
-.main-table > table {
-    border-collapse: collapse;
-    width: 100%;
-}
-.main-table > table, th, td {
-    border: 1px solid black;
-}
 .main-table {
     grid-area: main-table;
     text-align: center;
-}
-
-.total-grid{
-    grid-area: total-grid;
-    text-align: end;
-    border: 1px solid black;
-    margin: 0;
-    padding: 0;
-    font-size: var(--filters-font-size);
 }
 
 
