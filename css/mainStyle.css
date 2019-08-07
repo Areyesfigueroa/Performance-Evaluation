@@ -3,7 +3,7 @@
 .site-main {
     display: grid;
     grid-template-columns: 85px 1fr 1fr 85px;
-    grid-template-rows: 120px auto auto 1fr;
+    grid-template-rows: auto;
     grid-template-areas: 
     " title title title title "
     " main-table main-table main-table main-table ";
@@ -12,20 +12,9 @@
 /* ----- TABLE SECTION -----*/
 main {
     padding-bottom: 0px;
-    margin: 0 20px;
-}
-
-.sorting-asc:before{
-    content: '\25B2';
-}
-
-.st-sort-descent:before{
-    content: '\25BC';
-}
-
-th
-{
-    font-size: 15%;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 90%;
+    margin: 0 10px;
 }
 
 #container 
@@ -44,6 +33,17 @@ th
     grid-area: main-table;
     text-align: center;
 }
+
+/* ----- TABLE PAGES -----*/
+.pagination .page-item.active .page-link,
+.pagination .page-item.active .page-link:active,
+.pagination .page-item.active .page-link:visited, 
+.pagination .page-item.active .page-link:hover {
+    background-color: var(--accent-color) !important;
+
+}
+
+
 
 
 

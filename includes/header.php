@@ -21,7 +21,6 @@ session_start();
         <!-- Material Design Bootstrap -->
         <link href="vendor/mdb/css/mdb.min.css" rel="stylesheet">   
         
-
         <!--Custom CSS-->
         <link rel="stylesheet" href="css/headerStyle.css">
         <link rel="stylesheet" href="css/mainStyle.css">
@@ -41,30 +40,27 @@ session_start();
                     <button id="profile-btn" class="profile-menu-btn"></button>
                 </div>
             </section>
-
-            <!--Mobile Profile Modal-->
-            <div id="profile-modal" class="profile-slide-menu">
-                <button id="change-profile-btn" class="profile-menu-btn"></button>
-                <div class="profile-info">    
-                    <div id="user-name">Aliel Reyes</div>
-                    <div id="user-email">alielreyes@gmail.com</div> 
-                    <div id="user-position">IT Lead</div>
+            <section>
+                <!--Mobile Profile Modal-->
+                <div id="profile-modal" class="profile-slide-menu">
+                    <button id="change-profile-btn" class="profile-menu-btn"></button>
+                    <div class="profile-info">    
+                        <div id="user-name">Aliel Reyes</div>
+                        <div id="user-email">alielreyes@gmail.com</div> 
+                        <div id="user-position">IT Lead</div>
+                    </div>
+                    <button id="view-profile-btn" class="profile-modal-btn">View Profile</button>
+                    <button id="sign-out-btn" class="profile-modal-btn">Sign Out</button>
                 </div>
-                <button id="view-profile-btn" class="profile-modal-btn">View Profile</button>
-                <button id="sign-out-btn" class="profile-modal-btn">Sign Out</button>
-            </div>
 
-            <!--Mobile Navbar Modal-->
-            <ul id="navbar-modal" class="navbar">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Manage Users</a></li>
-            </ul>
-            <!--Outside the header border-->
-            <!--<ul id="dropdown-menu">
-                <li><a href="#">Profile</a></li>
-                <li><a href="includes/logout.inc.php">Sign out</a></li>
-            </ul>-->
+                <!--Mobile Navbar Modal-->
+                <ul id="navbar-modal" class="navbar">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Manage Users</a></li>
+                </ul>
+            </section>
+
         </header>
 

@@ -46,7 +46,8 @@ body{
 h1 {
     font-size: 150%;
     font-weight: 300;
-    margin: 0;
+    line-height: 1.5;
+    margin: 50px 0;
     padding: 0;
 }
 
@@ -58,16 +59,17 @@ li {
 }
 
 /*----- NAVIGATION LINKS -----*/
-a {
+a:link,
+a:visited {
     color: var(--secondary-color-light);
     text-decoration: none;
-
 }
 
-a:hover {
+a:hover,
+a:active {
     color: var(--accent-color);
     text-decoration: none;
-
+    cursor: pointer;
 }
 
 /* --------------------------- */
@@ -84,6 +86,7 @@ a:hover {
     background-color: var(--primary-color);
     padding: 10px 0;
     width: 100%;
+    position: relative;
     z-index: 1;
 }
 
@@ -97,7 +100,7 @@ a:hover {
     width: var(--header-imgs-w);
 }
 
-.mobile-navbar {
+.site-header .mobile-navbar {
     grid-area: mobile-navbar;
     display: grid;
     grid-template-columns: auto auto;
@@ -153,8 +156,7 @@ a:hover {
 
 .navbar li a {
     display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
 }
 
 .profile-slide-menu {
@@ -166,6 +168,8 @@ a:hover {
     "profile-info profile-info profile-info"
     "view-profile-btn . sign-out-btn";
 
+    font-family: "Open-Sans", sans-serif;
+    font-size: 80%;
     background-color: var(--primary-color);
     position: relative;
     z-index: 0;
@@ -210,24 +214,24 @@ a:hover {
 
 /*Animations*/
 @keyframes navbar-slide-down {
-    from {top: -166.4px;} 
+    from {top: -218.4px;} 
     to {top: 0px;}
 }
 
 @keyframes navbar-slide-up {
     from {top: 0px;}
-    to {top: -166.4px;}
+    to {top: -218.4px;}
 }
 
 /*Animations*/
 @keyframes profile-modal-slide-down {
-    from {top: -195px;} 
+    from {top: -257.2px;} 
     to {top: 0px;}
 }
 
 @keyframes profile-modal-slide-up {
     from {top: 0px;}
-    to {top: -195px;}
+    to {top: -257.2px;}
 }
 
 
