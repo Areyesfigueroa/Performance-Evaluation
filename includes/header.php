@@ -22,14 +22,18 @@ session_start();
         <link href="vendor/mdb/css/mdb.min.css" rel="stylesheet">   
         
         <!--Custom CSS-->
-        <link rel="stylesheet" href="css/headerStyle.css">
-        <link rel="stylesheet" href="css/mainStyle.css">
-        <link rel="stylesheet" href="css/footerStyle.css">
+        <link rel="stylesheet" href="resources/css/headerStyle.css">
+        <link rel="stylesheet" href="resources/css/mainStyle.css">
+        <link rel="stylesheet" href="resources/css/admin.css">
+        <link rel="stylesheet" href="resources/css/footerStyle.css">
+
+        <!-- Fonts & Icons -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet">    
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     </head>
     <body>
         <header>
+            <!--Navigation Bar Section-->
             <section class="site-header">
                 
                 <img class="logo" src="https://www.dropbox.com/s/j8qocfcdccb8x5m/logo-dark.png?raw=1" alt="">
@@ -40,6 +44,8 @@ session_start();
                     <button id="profile-btn" class="profile-menu-btn"></button>
                 </div>
             </section>
+
+            <!--Navigation Modal Section-->
             <section>
                 <!--Mobile Profile Modal-->
                 <div id="profile-modal" class="profile-slide-menu">
@@ -53,12 +59,11 @@ session_start();
                     <button id="sign-out-btn" class="profile-modal-btn">Sign Out</button>
                 </div>
 
-                <!--Mobile Navbar Modal-->
                 <ul id="navbar-modal" class="navbar">
                     <li><a href="index.php">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><a href="#">Manage Users</a></li>
+                    <li><a href="admin.php">Manage Users</a></li>
                 </ul>
             </section>
 

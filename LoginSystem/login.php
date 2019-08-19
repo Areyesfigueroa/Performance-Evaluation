@@ -4,11 +4,16 @@
     <head>
         <title>Login Page</title>
         <link rel="stylesheet" href="css/login-system.css">
+        <link rel="stylesheet" href="css/login-queries.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet">
     </head>
     <body>
-       <main class= "site">
-        <div class="login">
-            <img src="http://placehold.jp/75x75.png" alt="Company Logo">
+       <main>
+        <div class="login-section">
+            <div>
+                <img class="logo" src="../resources/img/AAP-logo.png" alt="Company Logo">
+            </div>
             <div>
                 <h2>Member Login</h2>
             </div>
@@ -16,6 +21,8 @@
                 <form action="../includes/login.inc.php" method="POST">
                     <input type="text" name="mailuid" placeholder="Username/Email...">
                     <input type="password" name="pwd" placeholder="Password...">
+                    <a href="reset-password.php">Forgot Password</a>
+
                     <button type="submit" name="login-submit">Login</button>
                 </form>
             </div>
@@ -31,7 +38,6 @@
                         }
                     }
                 ?>
-                <a href="reset-password.php">Forgot Password</a>
             </div>
         </div>
        </main> 

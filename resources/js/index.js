@@ -78,3 +78,17 @@ function loadUserInfo(userProfile) {
   //userEmail.innerHTML = userProfile.employee_email;
   //userPosition.innerHTML = userProfile.employee_position;
 }
+
+  /* Mobile Nav */
+  $('.js--nav-icon').click(function(){
+    var nav = $('.js--main-nav');
+    var icon = $('.js--nav-icon ion-icon');
+
+    if(icon[0].name === "close") {
+        icon[0].name = "menu";
+    } else {
+        icon[0].name = "close";
+    }
+
+    nav.slideToggle(200);
+});
