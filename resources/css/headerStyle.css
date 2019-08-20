@@ -88,7 +88,6 @@ a:active {
     padding: 10px 0;
     width: 100%;
     position: relative;
-    z-index: 1;
 }
 
 .site-header .logo {
@@ -114,15 +113,13 @@ a:active {
 }
 
 /*MOBILE - ONLY*/
-.hamburger-menu-btn{
-    margin-top: auto;
-    margin-bottom: auto;
+.mobile-nav-icon{
+    margin: auto auto;
     padding: 0;
     height: var(--header-imgs-h);
     width: var(--header-imgs-w);
     border: none;
     border-radius: 50%;
-    outline: none;
     cursor: pointer;
     background-color: none;
     background: url("https://www.dropbox.com/s/y71fbmlo4cg8krc/Char_64xnavbar-menu.png?raw=1");
@@ -147,12 +144,12 @@ a:active {
 
 .navbar {
     display: none;
-    position: relative;
+    position: absolute;
     width: 100%;
     background-color: var(--primary-color);
     overflow: hidden;
     border: none;
-    z-index: 0;
+    z-index: 9999;
 }
 
 .navbar li a {
@@ -173,7 +170,6 @@ a:active {
     font-size: 80%;
     background-color: var(--primary-color);
     position: relative;
-    z-index: 0;
 }
 
 #change-profile-btn {
@@ -212,30 +208,6 @@ a:active {
 }
 
 
-
-/*Animations*/
-@keyframes navbar-slide-down {
-    from {top: -218.4px;} 
-    to {top: 0px;}
-}
-
-@keyframes navbar-slide-up {
-    from {top: 0px;}
-    to {top: -218.4px;}
-}
-
-/*Animations*/
-@keyframes profile-modal-slide-down {
-    from {top: -257.2px;} 
-    to {top: 0px;}
-}
-
-@keyframes profile-modal-slide-up {
-    from {top: 0px;}
-    to {top: -257.2px;}
-}
-
-
 /*DESKTOP Changes*/
 @media only screen and (min-width: 768px) {
 
@@ -263,6 +235,7 @@ a:active {
         grid-template-areas: 
         "logo navbar profile-info profile-button"
         ". . . modal";
+
     }
 
     .site-header > .logo {
@@ -318,7 +291,6 @@ a:active {
         background-color: white;
         padding: 30px;
         margin: 0px;
-        z-index: 1;
         box-shadow: 0px 1px 5px black;    
         display: none;
         animation-name: dropdown-menu-open;

@@ -28,7 +28,6 @@
         </script>
 
 
-
         <!-- CUSTOM SCRIPTS -->
         <!-- Load Header Script -->
         <script src="resources/js/header.js" type="text/javascript"></script>
@@ -46,6 +45,6 @@
             <script type="text/javascript">
                 copyrightFooter();
             </script>
-        
+
     </body>            
 </html>

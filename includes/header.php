@@ -40,26 +40,14 @@ session_start();
                 
                 <!--MOBILE ONLY-->
                 <div class="mobile-navbar">
-                    <button id="hamburger-btn" class="hamburger-menu-btn"></button>
-                    <button id="profile-btn" class="profile-menu-btn"></button>
+                    <a class="mobile-nav-icon js--nav-icon"></a>
                 </div>
             </section>
 
             <!--Navigation Modal Section-->
             <section>
-                <!--Mobile Profile Modal-->
-                <div id="profile-modal" class="profile-slide-menu">
-                    <button id="change-profile-btn" class="profile-menu-btn"></button>
-                    <div class="profile-info">    
-                        <div id="user-name">Aliel Reyes</div>
-                        <div id="user-email">alielreyes@gmail.com</div> 
-                        <div id="user-position">IT Lead</div>
-                    </div>
-                    <button id="view-profile-btn" class="profile-modal-btn">View Profile</button>
-                    <button id="sign-out-btn" class="profile-modal-btn">Sign Out</button>
-                </div>
-
-                <ul id="navbar-modal" class="navbar">
+                <!-- Navbar -->
+                <ul id="navbar-modal" class="navbar js--mobile-navbar">
                     <li><a href="index.php">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
@@ -68,4 +56,5 @@ session_start();
             </section>
 
         </header>
+                
 

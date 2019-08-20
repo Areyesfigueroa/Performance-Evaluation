@@ -142,11 +142,13 @@ AllAboutParking.PerformanceEvaluation.Header = function() {
     }
 }
 
+//window.AllAboutParking.PerformanceEvaluation.Header();
 
-window.AllAboutParking.PerformanceEvaluation.Header();
+/* Mobile Nav */
+$('.js--nav-icon').click(function(){
+    var nav = $('.js--mobile-navbar');
 
-
-
-
+    nav.slideToggle(350);
+});
 
 
