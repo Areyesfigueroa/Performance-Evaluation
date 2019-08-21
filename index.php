@@ -18,6 +18,88 @@ require "includes/header.php";
                 <!--Page Title LAYOUT-->
                 <h1 id="page-title" class="title">Page title</h1>
 
+                <!-- Modal -->
+                <section class="modal--details-section active">
+                    <div class="modal--details-body">
+                        <a href="#">X</a>
+                        <div class="modal--details-content">
+                            <div>
+                                <h6>Report Details</h6>
+                            </div>
+                            <div>
+                                <!-- Questions Table -->
+                                <table class="modal--details-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="modal--details-date">Date: 08/20/2019</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Questions</th>
+                                            <th>Answers</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Parked within the lines?</td>
+                                            <td>Acceptable</td>
+                                            <td>4/4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customer Service?</td>
+                                            <td>Acceptable</td>
+                                            <td>4/4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>On-Time Attendance?</td>
+                                            <td>Needs Improvement</td>
+                                            <td>2/4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dressed up to code?</td>
+                                            <td>Not Acceptable</td>
+                                            <td>0/4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <!-- Notes Table -->
+                                <table class="modal--details-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Needs more work when dressing up to code. Wrong shirt worn multiple times.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <!-- Submission & Overall Score Table -->
+                                <table class="modal--details-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Submitted By</th>
+                                            <th>Overall Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Andrew Long</td>
+                                            <td>10/16</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
                 <!--Performance Table LAYOUT-->
                 <section class="main-table table-responsive-sm">
                     <table id="performance-table" class="table table-striped table-bordered table-sm" cellspacing="0">
