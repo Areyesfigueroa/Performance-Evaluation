@@ -19,12 +19,12 @@ require "includes/header.php";
                 <h1 id="page-title" class="title">Page title</h1>
 
                 <!-- Modal -->
-                <section class="modal--details-section active">
+                <section class="modal--details-section">
                     <div class="modal--details-body">
-                        <a href="#">X</a>
+                        <a id="modal--close-btn" href="#">X</a>
                         <div class="modal--details-content">
                             <div>
-                                <h6>Report Details</h6>
+                                <h6>Report Details <span class="modal--details-index">1</span></h6>
                             </div>
                             <div>
                                 <!-- Questions Table -->
