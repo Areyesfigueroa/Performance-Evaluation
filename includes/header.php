@@ -52,6 +52,7 @@ session_start();
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="admin.php">Manage Users</a></li>
+                    <li><a href="includes/logout.inc.php">Sign Out</a></li>
                 </ul>
             </section>
 

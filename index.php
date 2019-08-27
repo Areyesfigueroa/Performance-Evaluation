@@ -36,30 +36,10 @@ require "includes/header.php";
                                         <tr>
                                             <th>Questions</th>
                                             <th>Answers</th>
-                                            <th>Score</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Parked within the lines?</td>
-                                            <td>Acceptable</td>
-                                            <td>4/4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Customer Service?</td>
-                                            <td>Acceptable</td>
-                                            <td>4/4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>On-Time Attendance?</td>
-                                            <td>Needs Improvement</td>
-                                            <td>2/4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Dressed up to code?</td>
-                                            <td>Not Acceptable</td>
-                                            <td>0/4</td>
-                                        </tr>
+                                        <!-- DATA GOES HERE -->
                                     </tbody>
                                 </table>
                             </div>
@@ -72,9 +52,7 @@ require "includes/header.php";
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Needs more work when dressing up to code. Wrong shirt worn multiple times.</td>
-                                        </tr>
+                                        <!-- DATA GOES HERE -->
                                     </tbody>
                                 </table>
                             </div>
@@ -84,14 +62,10 @@ require "includes/header.php";
                                     <thead>
                                         <tr>
                                             <th>Submitted By</th>
-                                            <th>Overall Score</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Andrew Long</td>
-                                            <td>10/16</td>
-                                        </tr>
+                                        <!-- DATA GOES HERE -->
                                     </tbody>
                                 </table>
                             </div>
@@ -108,7 +82,6 @@ require "includes/header.php";
                                 <th class="th-sm">Report Tier</th>
                                 <th class="th-sm">Submitted By</th>
                                 <th class="th-sm">Details</th>
-                                <th class="th-sm">Score</th>
                                 <th class="th-sm">Date of submission</th>
                             </tr>
                         </thead>
@@ -120,7 +93,6 @@ require "includes/header.php";
                                 <th class="th-sm">Report Tier</th>
                                 <th class="th-sm">Submitted By</th>
                                 <th class="th-sm">Details</th>
-                                <th class="th-sm">Score</th>
                                 <th class="th-sm">Date of submission</th>
                             </tr>
                         </tfoot>

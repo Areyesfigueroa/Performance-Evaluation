@@ -76,6 +76,7 @@ button {
     color: #fff;
     justify-self: end;
     padding: 6px 5%;
+    cursor: pointer;
 }
 
 button:hover {
