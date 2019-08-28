@@ -79,6 +79,7 @@ if(isset($_POST['login-submit']))
                             $report1Responses[$row][$col++] = $fetch['on_time_attendance'];
                             $report1Responses[$row][$col++] = $fetch['dressed_up_to_code'];
                             $report1Responses[$row][$col++] = $fetch['submitter_name'];
+                            $report1Responses[$row][$col++] = $fetch['notes'];
                             $report1Responses[$row][$col++] = $fetch['date_of_submission'];
                             $row++;
                             $col = 0;

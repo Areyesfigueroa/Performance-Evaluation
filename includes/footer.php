@@ -36,7 +36,18 @@
 
         <!-- PHP TO JS CALLS -->
         <script type="text/javascript">
+            //Load user data
             loadUserInfo(<?= json_encode($_SESSION) ?>);
+
+            //Load Reports
+            //QUESTIONS
+            let report1Questions = ["Parked within the lines?", "Customer Service?", "On time attendance", "Dressed up to code?"];
+            
+            //CREATE REPORT
+            let report1 = createReport(<?= json_encode($_SESSION['report_1_responses'])?>, report1Questions, modal, 1);
+            
+            //Populate main table with report summary entries. 
+            createRows(performanceTable, report1.getSummary().length, report1.getSummary()[0].length, report1.getSummary());
         </script>
 
         <!-- Load Footer Script -->    
