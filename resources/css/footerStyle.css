@@ -18,6 +18,10 @@
 
 
     .site-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        margin-top: 78px; /*Footer 78px*/
         display: grid;
         grid-template-columns: auto auto auto auto;
         grid-template-rows: 1fr;
@@ -34,5 +38,6 @@
         margin-top: auto;
         margin-bottom: auto;
         padding: 6px;
+        
     }
 }

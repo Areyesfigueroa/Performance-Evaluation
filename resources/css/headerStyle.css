@@ -28,7 +28,6 @@
 }
 
 html{
-    height: 100%;
     width: 100%;
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
@@ -72,6 +71,13 @@ a:active {
     text-decoration: none;
     cursor: pointer;
 }
+/* --------------------------- */
+/* Site Structure */
+/* --------------------------- */
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
 
 /* --------------------------- */
 /* HEADER */
@@ -81,27 +87,25 @@ a:active {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: 
-    "logo mobile-navbar";
+    "logo navbar";
 
-    font-size: 15%;
+    font-size: 80%;
     background-color: var(--primary-color);
     padding: 10px 0;
-    width: 100%;
     position: relative;
+    z-index: 9999;
 }
 
-.site-header .logo {
+.logo {
     grid-area: logo;
     justify-self: left;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 10px;
+    margin: auto 0 auto 10px;
     height: var(--header-imgs-h);
     width: var(--header-imgs-w);
 }
 
-.site-header .mobile-navbar {
-    grid-area: mobile-navbar;
+.mobile-navbar {
+    grid-area: navbar;
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 1em;
@@ -126,30 +130,17 @@ a:active {
     background-size: var(--header-imgs-w) var(--header-imgs-h);
 }
 
-.profile-menu-btn{
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 0;
-    height: var(--header-imgs-h);
-    width: var(--header-imgs-w);
-    outline: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    border-radius: 50%;
-    cursor: pointer;
-    background: url("https://www.dropbox.com/s/btren61pt6jgxpp/Profile%20Pic.jpeg?raw=1");
-    background-size: var(--header-imgs-w) var(--header-imgs-h);
-}
-
 .navbar {
     display: none;
     position: absolute;
+    top: 60px;
     width: 100%;
     background-color: var(--primary-color);
-    overflow: hidden;
-    border: none;
-    z-index: 9999;
+    box-shadow: none;
+}
+
+.navbar li {
+    list-style: none;
 }
 
 .navbar li a {
@@ -157,155 +148,39 @@ a:active {
     padding: 10px;
 }
 
-.profile-slide-menu {
+.admin {
     display: none;
-    grid-template-columns: 1fr 0.5fr 1fr;
-    grid-template-rows: 1fr 1fr auto;
-    grid-template-areas: 
-    ". profile-modal-btn ."
-    "profile-info profile-info profile-info"
-    "view-profile-btn . sign-out-btn";
-
-    font-family: "Open-Sans", sans-serif;
-    font-size: 80%;
-    background-color: var(--primary-color);
-    position: relative;
 }
-
-#change-profile-btn {
-    grid-area: profile-modal-btn;
-    justify-self: center;
-}
-
-.profile-info {
-    grid-area: profile-info;
-    justify-self: center;
-    color: var(--secondary-color-light);
-}
-
-#view-profile-btn {
-    grid-area: view-profile-btn;
-    justify-self: right;
-}
-
-#sign-out-btn {
-    grid-area: sign-out-btn;
-    justify-self: left;
-}
-
-.profile-modal-btn {
-    background-color: var(--button-color);
-    color: var(--secondary-color-light);
-    border: none;
-    padding: 15px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.profile-modal-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--accent-color);
-    border: none;
-}
-
 
 /*DESKTOP Changes*/
 @media only screen and (min-width: 768px) {
 
-
-    :root {
-        /*References*/
-        --header-imgs-w: 48px;
-        --header-imgs-h: 48px;
-    }
-
-    /*MOBILE ELEMENT REMOVAL*/
-    .hamburger-menu-btn {
-        display: none;
-    }
-    .mobile-navbar
-    {
-        display: none;
-    }
-
-    /*Layouts non-global*/
     .site-header {
         display: grid;
-        grid-template-columns: 85px 1fr 1fr 85px;
-        grid-template-rows: 48px auto auto auto;
-        grid-template-areas: 
-        "logo navbar profile-info profile-button"
-        ". . . modal";
-
-    }
-
-    .site-header > .logo {
-        grid-area: logo;
-        justify-self: right;
-        margin-top: auto;
-        margin-bottom: auto;
-        height: var(--header-imgs-h);
-        width: var(--header-imgs-w);
-    }
-
-    .site-header > .navbar {
-        grid-area: navbar;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        column-gap: 1em;
-        justify-self: left;
-        margin: 0;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: 30px;
-        padding: 0;
-    }
-
-    .site-header > .profile-info {
-        grid-area: profile-info;
-        display: grid;
         grid-template-columns: 1fr;
-        justify-items: end;
+        grid-template-rows: auto;
     }
 
-    #user-profile-button{
-        grid-area: profile-button;
-        display: inline-block;
-        margin-top: auto;
-        margin-bottom: auto;
-        padding: 0;
-        height: var(--header-imgs-h);
-        width: var(--header-imgs-w);
-        background-color: white;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        border-radius: 50%;
-        justify-self: left;
-        background: url("https://www.dropbox.com/s/btren61pt6jgxpp/Profile%20Pic.jpeg?raw=1");
-        background-size: var(--header-imgs-w) var(--header-imgs-h);
-    }
-
-    #dropdown-menu{
-        position: absolute;
-        right: 9px;
-        background-color: white;
-        padding: 30px;
-        margin: 0px;
-        box-shadow: 0px 1px 5px black;    
+    .mobile-navbar {
         display: none;
-        animation-name: dropdown-menu-open;
-        animation-duration: 1s;
     }
 
-    #dropdown-menu > li
-    {
-        margin-bottom: 10px;
+    .navbar {
+        position: relative;
+        top: 0;
+        display: grid !important;
+        grid-template-columns: auto auto auto auto auto;
+        column-gap: 2em;
+        margin: auto;
+        padding: 0;
+        padding-right: 10px;
+
+        justify-self: center;
     }
 
-    /*Animations*/
-    @keyframes dropdown-menu-open
-    {
-        from {opacity: 0} 
-        to {opacity: 1}
+    .navbar li a {
+        padding: 0;
     }
+    
+
 }

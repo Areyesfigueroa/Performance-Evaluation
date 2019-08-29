@@ -51,6 +51,7 @@ if(isset($_POST['login-submit']))
                     $_SESSION['employee_email'] = $row['employee_email'];
                     $_SESSION['employee_name'] = $row['employee_name'];
                     $_SESSION['employee_position'] = $row['employee_position'];
+                    $_SESSION['employee_role'] = $row["employee_role"];
                     
                     //REPORT 1 QUERY
                     $sql = "SELECT * FROM report1responses WHERE employee_email=?;";

@@ -19,10 +19,7 @@ main {
     margin: 0 10px;
 }
 
-#container 
-{
-    min-height: 100%;
-}
+
 
 .title {
     grid-area: title;

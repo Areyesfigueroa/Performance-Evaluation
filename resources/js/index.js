@@ -3,7 +3,6 @@ AllAboutParking.PerformanceEvaluation = AllAboutParking.PerformanceEvaluation ||
 
 //Table
 let performanceTable = document.getElementById("performance-table").getElementsByTagName("tbody")[0];
-let tableData = document.getElementsByClassName("details-btn");
 
 //Modal
 let modal = document.querySelector(".modal--details-section");
@@ -173,17 +172,11 @@ modalCloseBtn.addEventListener("click", () => {
  * @description Loads user information.  
  */
 function loadUserInfo(userProfile) {
-  //Get the dom objects
-  //let userName = document.getElementById("user-name");
-  //let userEmail = document.getElementById("user-email");
-  //let userPosition = document.getElementById("user-position");
   console.log(userProfile);
-  let pageTitle = document.getElementById("page-title");
+  isAdmin(userProfile.employee_role);
 
+  let pageTitle = document.getElementById("page-title");
   pageTitle.textContent = userProfile.employee_name + " Performance Evaluation";
-  //userName.innerHTML = userProfile.employee_name;
-  //userEmail.innerHTML = userProfile.employee_email;
-  //userPosition.innerHTML = userProfile.employee_position;
 }
 
 /**

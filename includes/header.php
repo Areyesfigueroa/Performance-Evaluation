@@ -32,30 +32,23 @@ session_start();
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     </head>
     <body>
-        <header>
-            <!--Navigation Bar Section-->
-            <section class="site-header">
-                
-                <img class="logo" src="https://www.dropbox.com/s/j8qocfcdccb8x5m/logo-dark.png?raw=1" alt="">
-                
-                <!--MOBILE ONLY-->
-                <div class="mobile-navbar">
-                    <a class="mobile-nav-icon js--nav-icon"></a>
-                </div>
-            </section>
+    <div id="page-container">
+        <header class="site-header">                
+            <img class="logo" src="https://www.dropbox.com/s/j8qocfcdccb8x5m/logo-dark.png?raw=1" alt="">
+            
+            <!--MOBILE ONLY-->
+            <div class="mobile-navbar">
+                <a class="mobile-nav-icon js--nav-icon"></a>
+            </div>
 
-            <!--Navigation Modal Section-->
-            <section>
-                <!-- Navbar -->
-                <ul id="navbar-modal" class="navbar js--mobile-navbar">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="admin.php">Manage Users</a></li>
-                    <li><a href="includes/logout.inc.php">Sign Out</a></li>
-                </ul>
-            </section>
-
+            <!-- Navbar Modal-->
+            <ul class="navbar js--mobile-navbar">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li class="admin"><a href="admin.php">Manage Users</a></li>
+                <li><a href="includes/logout.inc.php">Sign Out</a></li>
+            </ul>
         </header>
                 
 
