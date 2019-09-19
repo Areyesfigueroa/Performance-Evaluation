@@ -28,7 +28,7 @@
 }
 
 html{
-    width: 100%;
+    width: 100vw;
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     text-rendering: optimizeLegibility;
@@ -71,6 +71,23 @@ a:active {
     text-decoration: none;
     cursor: pointer;
 }
+
+/*----- BUTTONS -----*/
+/*
+button {
+    background-color: rgb(134, 112, 31); 
+    border: none;
+    box-shadow: 0 2px 2px #858585;
+    color: #fff;
+    justify-self: end;
+    padding: 6px 5%;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(92, 77, 22);
+}*/
+
 /* --------------------------- */
 /* Site Structure */
 /* --------------------------- */
@@ -155,6 +172,10 @@ a:active {
 /*DESKTOP Changes*/
 @media only screen and (min-width: 768px) {
 
+    body {
+        margin: 0 50px;
+    }
+
     .site-header {
         display: grid;
         grid-template-columns: 1fr;
@@ -181,6 +202,4 @@ a:active {
     .navbar li a {
         padding: 0;
     }
-    
-
 }

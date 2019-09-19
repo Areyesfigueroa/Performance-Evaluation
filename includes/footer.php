@@ -36,15 +36,17 @@
 
             <!-- PHP TO JS CALLS -->
             <script type="text/javascript">
-                //Load user data
-                loadUserInfo(<?= json_encode($_SESSION) ?>);
+                //Set user data
+                //performanceModalController.setUserData(<?= json_encode($_SESSION) ?>);
+                performanceController.init(<?= json_encode($_SESSION) ?>);
 
-                //Load Reports
-                let report1Questions = ["Parked within the lines?", "Customer Service?", "On time attendance", "Dressed up to code?"];
-                let report1 = createReport(<?= json_encode($_SESSION['report_1_responses'])?>, report1Questions, modal, 1);
+
+                // //Load Reports
+                // let report1Questions = ["Parked within the lines?", "Customer Service?", "On time attendance", "Dressed up to code?"];
+                // let report1 = createReport(<?= json_encode($_SESSION['report_1_responses'])?>, report1Questions, modal, 1);
                 
-                //Populate main table with report summary entries. 
-                createRows(performanceTable, report1.getSummary().length, report1.getSummary()[0].length, report1.getSummary());
+                // //Populate main table with report summary entries. 
+                // createRows(performanceTable, report1.getSummary().length, report1.getSummary()[0].length, report1.getSummary());
             </script>
 
             <!-- Load Footer Script -->    

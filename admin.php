@@ -10,7 +10,6 @@ require "includes/header.php";
         </div>
 
         <div class="table-responsive-sm">
-            <button>Actions</button>
             <table id="admin-table" class="table table-striped table-bordered table-sm" cellspacing="0">
                 <thead>                
                     <tr>

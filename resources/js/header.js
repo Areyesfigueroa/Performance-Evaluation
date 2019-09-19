@@ -142,20 +142,5 @@ AllAboutParking.PerformanceEvaluation.Header = function() {
     }
 }
 
-//Get the navbar element.
-let adminBtn = document.querySelector(".admin");
-
-function isAdmin(role) {
-    if(role==="Admin") {
-        adminBtn.classList.add("active");
-    }
-}
-
-/* Mobile Nav */
-$('.js--nav-icon').click(function(){
-    var nav = $('.js--mobile-navbar');
-
-    nav.slideToggle(350);
-});
 
 

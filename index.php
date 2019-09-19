@@ -8,7 +8,7 @@ require "includes/header.php";
                 if(!isset($_SESSION['employee_email']))
                 {
                     //You are not logged in. Redirect the user so that he mail log in.
-                    header("Location: LoginSystem/lookup.php");
+                    header("Location: LoginSystem/login.php");
                     exit();
                 }
             ?>
