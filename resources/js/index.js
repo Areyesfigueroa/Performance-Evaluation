@@ -176,7 +176,7 @@ const performanceUIController = (function(){
     clearModalContent: () => {
       //Get modal section
       const modal = document.querySelector(`.${DOM.modalDetails}`);
-      
+
       const qBody = modal.getElementsByTagName(DOM.tableBody)[0];
       const nBody = modal.getElementsByTagName(DOM.tableBody)[1];
       const sBody = modal.getElementsByTagName(DOM.tableBody)[2];

@@ -18,10 +18,7 @@
 
 
     .site-footer {
-        position: absolute;
-        bottom: 0;
         width: 100%;
-        margin-top: 0; /*Footer 78px*/
         display: grid;
         grid-template-columns: auto auto auto auto;
         grid-template-rows: 1fr;

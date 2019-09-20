@@ -9,7 +9,10 @@
                 </ul>
             </footer>
 
-            <!-- VENDOR SCRIPTS -->
+            <!---------------------->
+            <!--- VENDOR SCRIPTS --->
+            <!---------------------->
+  
             <!-- JQuery -->
             <script type="text/javascript" src="vendor/mdb/js/jquery-3.4.1.min.js"></script>
 
@@ -27,26 +30,16 @@
                 });
             </script>
 
-            <!-- CUSTOM SCRIPTS -->
-            <!-- Load Header Script -->
-            <script src="resources/js/header.js"></script>
+            <!---------------------->
+            <!--- CUSTOM SCRIPTS --->
+            <!---------------------->
 
             <!-- Load Index Script-->
             <script src= "resources/js/index.js"></script>
 
             <!-- PHP TO JS CALLS -->
             <script type="text/javascript">
-                //Set user data
-                //performanceModalController.setUserData(<?= json_encode($_SESSION) ?>);
                 performanceController.init(<?= json_encode($_SESSION) ?>);
-
-
-                // //Load Reports
-                // let report1Questions = ["Parked within the lines?", "Customer Service?", "On time attendance", "Dressed up to code?"];
-                // let report1 = createReport(<?= json_encode($_SESSION['report_1_responses'])?>, report1Questions, modal, 1);
-                
-                // //Populate main table with report summary entries. 
-                // createRows(performanceTable, report1.getSummary().length, report1.getSummary()[0].length, report1.getSummary());
             </script>
 
             <!-- Load Footer Script -->    
