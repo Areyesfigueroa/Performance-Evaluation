@@ -97,15 +97,25 @@ require "includes/header.php";
                 </table>
             </section>
         </main>
+
 <?php 
 require "includes/footer.php";
 ?>
 
-<!--
-TODO: Add functions to script one by one
-            testing(<?= json_encode($_SESSION) ?>); //Use this function to initiate the table creation.
+<!-- MDBootstrap Datatables  -->
+<script>
+    $(document).ready(function () {
+    $('#performance-table').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 
-//loadUserInfo(<?= json_encode($employeeDatas) ?>);
-            //createHTMLTable(<?= json_encode($reportDatas) ?>);
-            //initializeDateFilter(<?= json_encode($reportDatas) ?>);
-            //calculateOverallScore();-->
+<!---------------------->
+<!--- CUSTOM SCRIPTS --->
+<!---------------------->
+
+<!-- Load Index Script-->
+<script src= "resources/js/index.js"></script>
+<script type="text/javascript">
+    performanceController.init(<?= json_encode($_SESSION) ?>);
+</script>

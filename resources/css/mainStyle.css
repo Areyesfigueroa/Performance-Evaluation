@@ -1,43 +1,58 @@
-
 /* ----- MAIN LAYOUT -----*/
 .site-main {
-    display: grid;
-    grid-template-columns: 150px 1fr 1fr 150px;
-    grid-template-rows: auto;
-    grid-template-areas: 
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr 150px;
+  grid-template-rows: auto;
+  grid-template-areas:
     " title title title title "
     " main-table main-table main-table main-table ";
 }
 
 /* --------------------------- */
-/* PEFORMANCE TABLE SECTION */
+/* TABLE SECTION */
 /* --------------------------- */
 main {
-    padding-bottom: 0px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 90%;
+  padding-bottom: 0px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 90%;
 }
 
 .title {
-    grid-area: title;
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    align-self: center;
+  grid-area: title;
+  text-align: center;
+  align-self: center;
 }
 
 .main-table {
-    grid-area: main-table;
-    justify-self: center;
-    text-align: center;
-    width: 90%;
+  grid-area: main-table;
+  justify-self: center;
+  text-align: center;
+  width: 90%;
+}
+
+.table thead th {
+    vertical-align: middle;
+}
+
+/*Overwrite Bootstrap*/
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+    bottom: .5em;
 }
 
 .pagination .page-item.active .page-link,
 .pagination .page-item.active .page-link:active,
-.pagination .page-item.active .page-link:visited, 
+.pagination .page-item.active .page-link:visited,
 .pagination .page-item.active .page-link:hover {
-    background-color: var(--accent-color) !important;
-
+  background-color: var(--accent-color) !important;
 }
 
 /* --------------------------- */
@@ -45,74 +60,74 @@ main {
 /* --------------------------- */
 
 .modal--details-section {
-    z-index: 9999;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
 .modal--details-body {
-    background-color: rgb(235, 232, 232);
-    max-width: 45%;
-    min-width: 300px;
-    min-height: 10em;
-    z-index: 9999;
-    position: fixed;
-    top: 5em;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    font-size: 80%;
-    box-shadow: 0px 0px 10px #000;
+  background-color: rgb(235, 232, 232);
+  max-width: 45%;
+  min-width: 300px;
+  min-height: 10em;
+  z-index: 9999;
+  position: fixed;
+  top: 5em;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  font-size: 80%;
+  box-shadow: 0px 0px 10px #000;
 }
 
 /*---- LINKS ----*/
-.modal--details-body a{
-    position: absolute;
-    top: 5px;
-    right: 6px;
+.modal--details-body a {
+  position: absolute;
+  top: 5px;
+  right: 6px;
 }
 
 .modal--details-body a:link,
 .modal--details-body a:visited {
-    color: #000;
+  color: #000;
 }
 
 .modal--details-body a:hover,
 .modal--details-body a:active {
-    font-size: 100%;
-    font-weight: bold;
-    color: var(--accent-color);
+  font-size: 100%;
+  font-weight: bold;
+  color: var(--accent-color);
 }
 
 .modal--details-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    row-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  row-gap: 10px;
 
-    margin: 20px 0;
-    justify-items: center;
+  margin: 20px 0;
+  justify-items: center;
 }
 
 .modal--details-content div:first-child {
-    width: 90%;
+  width: 90%;
 }
 
 .modal--details-content h6 {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .modal--details-table {
-    table-layout: fixed;
-    border-collapse: collapse;
-    text-align: start;
-    width: 90%;
-    margin: 0 auto;
+  table-layout: fixed;
+  border-collapse: collapse;
+  text-align: start;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .modal--details-table thead tr:first-child {
@@ -120,22 +135,21 @@ main {
 }
 
 .modal--details-table,
-.modal--details-table th, 
+.modal--details-table th,
 .modal--details-table td {
-    border: 1px solid black;
+  border: 1px solid black;
 }
 
 .modal--details-table td {
-    font-size: 100%;
+  font-size: 100%;
 }
 
 .modal--details-table .modal--details-date {
-    text-align: left;
-    border: none;
-    font-size: 80%;
+  text-align: left;
+  border: none;
+  font-size: 80%;
 }
 
 .active {
-    display: block;
+  display: block;
 }
-

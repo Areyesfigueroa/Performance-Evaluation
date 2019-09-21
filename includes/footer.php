@@ -12,34 +12,21 @@
             <!---------------------->
             <!--- VENDOR SCRIPTS --->
             <!---------------------->
-  
+
             <!-- JQuery -->
             <script type="text/javascript" src="vendor/mdb/js/jquery-3.4.1.min.js"></script>
 
             <!-- MDBootstrap Datatables  -->
             <script type="text/javascript" src="vendor/mdb/js/addons/datatables.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                $('#performance-table').DataTable();
-                $('.dataTables_length').addClass('bs-select');
-                });
-
-                $(document).ready(function () {
-                $('#admin-table').DataTable();
-                $('.dataTables_length').addClass('bs-select');
-                });
-            </script>
 
             <!---------------------->
             <!--- CUSTOM SCRIPTS --->
             <!---------------------->
 
-            <!-- Load Index Script-->
-            <script src= "resources/js/index.js"></script>
-
-            <!-- PHP TO JS CALLS -->
-            <script type="text/javascript">
-                performanceController.init(<?= json_encode($_SESSION) ?>);
+            <!-- Load Global Script -->
+            <script src="resources/js/global.js" type="text/javascript"></script>
+            <script>
+                globalController.init(<?= json_encode($_SESSION) ?>);
             </script>
 
             <!-- Load Footer Script -->    

@@ -10,7 +10,6 @@ const DOM = {
   modalDetailsCloseBtn: "modal--close-btn",
   pageTitle: "page-title",
   active: "active",
-  adminBtn: "admin",
   mobileNavBtn: "js--nav-icon",
   mobileNav: "js--mobile-navbar"
 }
@@ -118,11 +117,6 @@ const performanceUIController = (function(){
     showUserTitle: userData => {
       let pageTitle = document.getElementById(DOM.pageTitle);
       pageTitle.textContent = userData.employee_name + " Performance Evaluation";
-    },
-
-    showAdminContent: () => {
-      let adminBtn = document.querySelector(`.${DOM.adminBtn}`);
-      adminBtn.classList.add(DOM.active);
     },
 
     // Toggle modal visibility. 
@@ -251,11 +245,8 @@ const performanceController = (function(pUICtrl, pModelCtrl) {
       //1. Get user sql data. 
       pModelCtrl.setUserData(sqlUserData);
 
-      //2. Show custom title and admin content if applicable
+      //2. Show custom title
       pUICtrl.showUserTitle(pModelCtrl.getUserData());
-      if(pModelCtrl.isAdmin()) {
-        pUICtrl.showAdminContent();
-      }
 
       //3. Build Report Data Structure
       const report1 = pModelCtrl.createReport();

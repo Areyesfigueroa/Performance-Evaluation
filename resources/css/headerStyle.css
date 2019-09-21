@@ -173,6 +173,8 @@ button:hover {
 @media only screen and (min-width: 768px) {
 
     .site-header {
+        display: grid;
+        grid-template-columns: .5fr 1fr;
         grid-template-rows: auto;
     }
 
@@ -184,14 +186,19 @@ button:hover {
         position: relative;
         top: 0;
         display: grid !important;
-        grid-template-columns: auto auto auto auto auto;
-        column-gap: 2em;
+        grid-template-columns: auto auto auto auto;
+        column-gap: 5em;
         margin: auto;
         padding: 0;
-        padding-right: 10px;
+        padding-right: 20px;
 
-        justify-self: center;
+        justify-content: end;
     }
+
+    .admin-navbar {
+        grid-template-columns: auto auto auto auto auto;
+    }
+
 
     .navbar li a {
         padding: 0;
