@@ -1,6 +1,6 @@
 /**
  * -----------------------------------------
- * GLOBAL CONTROLLER - Applies to all sites.
+ * GLOBAL CONTROLLER - Applies to all pages.
  * -----------------------------------------
  */
 
@@ -16,10 +16,17 @@ const globalUIController = (function(){
         adminBtn: "admin",
         adminNavbar: "admin-navbar",
         navbar: "navbar",
-        active: "active"
+        active: "active",
+        mobileNavBtn: "js--nav-icon",
+        mobileNav: "js--mobile-navbar"
       }
 
     return {
+
+        getDOMstrings: () => {
+            return DOM;
+        },
+
         showAdminContent: () => {
             const adminBtn = document.querySelector(`.${DOM.adminBtn}`);
             const navbar = document.querySelector(`.${DOM.navbar}`);
@@ -32,12 +39,26 @@ const globalUIController = (function(){
         }
     }
 })(); 
-const globalController = (function(gUICtrl, gModelCtrl){
+const globalController = (function(gUICtrl, gModelCtrl) {
+
+    const setUpEventListeners = () => {
+        const DOMstrings = gUICtrl.getDOMstrings();
+
+        /* Mobile Nav */
+        $(`.${DOMstrings.mobileNavBtn}`).click(() => {
+            console.log("TESTING");
+            var nav = $(`.${DOMstrings.mobileNav}`);
+            nav.slideToggle(350);
+        });
+    }
+
     return {
         init: (userData)=> {
             if(gModelCtrl.isAdmin(userData)) {
                 gUICtrl.showAdminContent();
             }
+
+            setUpEventListeners();
         }
     }
 })(globalUIController, globalModelController); 

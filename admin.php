@@ -14,8 +14,8 @@ require "includes/header.php";
                     <th class="select-all th-sm">        
                         <!-- Default unchecked -->
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="selectall-table-check-1">
-                            <label class="custom-control-label" for="selectall-table-check-1">Select All</label>
+                            <input type="checkbox" class="custom-control-input" id="selectall-table-check-0">
+                            <label class="custom-control-label" for="selectall-table-check-0">Select All</label>
                         </div>
                     </th>
                     <th class="th-sm">User Name</th>
@@ -29,6 +29,33 @@ require "includes/header.php";
                 <tr>
                     <td>
                         <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="table-check-0">
+                            <label class="custom-control-label" for="table-check-0"></label>
+                        </div>
+                    </td>
+                    <td>Aliel Reyes</td>
+                    <td>alielreyes@gmail.com</td>
+                    <td>admin</td>
+                    <td>
+                        <!--------------------
+                        ------- TESTING -------
+                        --------------------->
+
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action List
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Reset Password</a>
+                                <a class="dropdown-item" href="#">Remove User</a>
+                                <a class="dropdown-item" href="#">Change Role</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>                      
+                        <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="table-check-1">
                             <label class="custom-control-label" for="table-check-1"></label>
                         </div>
@@ -39,7 +66,7 @@ require "includes/header.php";
                     <td><button>Action</button></td>
                 </tr>
                 <tr>
-                    <td>                      
+                    <td>                        
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="table-check-2">
                             <label class="custom-control-label" for="table-check-2"></label>
@@ -51,7 +78,7 @@ require "includes/header.php";
                     <td><button>Action</button></td>
                 </tr>
                 <tr>
-                    <td>                        
+                    <td>
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="table-check-3">
                             <label class="custom-control-label" for="table-check-3"></label>
@@ -74,25 +101,13 @@ require "includes/header.php";
                     <td>admin</td>
                     <td><button>Action</button></td>
                 </tr>
-                <tr>
-                    <td>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="table-check-5">
-                            <label class="custom-control-label" for="table-check-5"></label>
-                        </div>
-                    </td>
-                    <td>Aliel Reyes</td>
-                    <td>alielreyes@gmail.com</td>
-                    <td>admin</td>
-                    <td><button>Action</button></td>
-                </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <th class="th-sm">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="selectall-table-check-2">
-                            <label class="custom-control-label" for="selectall-table-check-2">Select All</label>
+                            <input type="checkbox" class="custom-control-input" id="selectall-table-check-1">
+                            <label class="custom-control-label" for="selectall-table-check-1">Select All</label>
                         </div>
                     </th>
                     <th class="th-sm">User Name</th>
@@ -121,4 +136,27 @@ require "includes/footer.php";
     });
     $('.dataTables_length').addClass('bs-select');
     });
+
 </script>
+
+<!---------------------->
+<!--- CUSTOM SCRIPTS --->
+<!---------------------->
+
+<!-- Load Admin Script-->
+<script src= "resources/js/admin.js"></script>
+
+<!-- Basic dropdown -->
+<!--
+<button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown"
+  aria-haspopup="true" aria-expanded="false">Basic dropdown</button>
+
+<div class="dropdown-menu">
+  <a class="dropdown-item" href="#">Action</a>
+  <a class="dropdown-item" href="#">Another action</a>
+  <a class="dropdown-item" href="#">Something else here</a>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" href="#">Separated link</a>
+</div>
+-->
+<!-- Basic dropdown -->

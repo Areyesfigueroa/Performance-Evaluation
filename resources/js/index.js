@@ -9,9 +9,7 @@ const DOM = {
   modalDetailsDate: "modal--details-date",
   modalDetailsCloseBtn: "modal--close-btn",
   pageTitle: "page-title",
-  active: "active",
-  mobileNavBtn: "js--nav-icon",
-  mobileNav: "js--mobile-navbar"
+  active: "active"
 }
 
 const performanceModelController = (function() {
@@ -230,13 +228,6 @@ const performanceController = (function(pUICtrl, pModelCtrl) {
     modalCloseBtn.addEventListener("click", () => {
       pUICtrl.toggleModal(modalDetails);
       pUICtrl.clearModalContent();
-    });
-
-    /* Mobile Nav */
-    $(`.${DOM.mobileNavBtn}`).click(() => {
-      var nav = $(DOM.mobileNav);
-
-      nav.slideToggle(350);
     });
   }
 

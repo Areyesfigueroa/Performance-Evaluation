@@ -13,10 +13,13 @@
             <!--- VENDOR SCRIPTS --->
             <!---------------------->
 
-            <!-- JQuery -->
+            <!-- JQuery & Popper & Bootstrap -->
             <script type="text/javascript" src="vendor/mdb/js/jquery-3.4.1.min.js"></script>
+            <script type="text/javascript" src="vendor/mdb/js/popper.min.js"></script>
+            <script type="text/javascript" src="vendor/mdb/js/bootstrap.min.js"></script>
 
-            <!-- MDBootstrap Datatables  -->
+
+            <!-- MDBootstrap Datatables -->
             <script type="text/javascript" src="vendor/mdb/js/addons/datatables.min.js"></script>
 
             <!---------------------->
