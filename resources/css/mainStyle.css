@@ -6,6 +6,7 @@
   grid-template-areas:
     " title title title title "
     " main-table main-table main-table main-table ";
+  height: 100%;
 }
 
 /* --------------------------- */

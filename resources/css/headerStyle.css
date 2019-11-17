@@ -93,7 +93,10 @@ button:hover {
 /* --------------------------- */
 #page-container {
     position: relative;
-    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    min-height: 100vh; 
 }
 
 /* --------------------------- */
