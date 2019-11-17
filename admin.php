@@ -33,6 +33,7 @@ require "includes/header.php";
                             <label class="custom-control-label" for="table-check-0"></label>
                         </div>
                     </td>
+                    
                     <td>Aliel Reyes</td>
                     <td>alielreyes@gmail.com</td>
                     <td>admin</td>
@@ -42,13 +43,13 @@ require "includes/header.php";
                         --------------------->
 
                         <div class="dropdown">
-                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Action List
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Reset Password</a>
-                                <a class="dropdown-item" href="#">Remove User</a>
-                                <a class="dropdown-item" href="#">Change Role</a>
+                                <a class="dropdown-item font-weight-light" href="#">Reset Password</a>
+                                <a class="dropdown-item font-weight-light" href="#">Remove User</a>
+                                <a class="dropdown-item font-weight-light" href="#">Change Role</a>
                             </div>
                         </div>
                     </td>

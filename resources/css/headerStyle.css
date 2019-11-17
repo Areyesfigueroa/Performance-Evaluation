@@ -72,6 +72,11 @@ a:active {
     cursor: pointer;
 }
 
+/*----- TABLE -----*/
+.table td {
+    vertical-align: middle;
+}
+
 /*----- BUTTONS -----*/
 /*
 button {
