@@ -26,7 +26,7 @@ require "includes/header.php";
             </thead>
             <tbody>
                 <!--Data Insert Here-->
-                <tr>
+                <!-- <tr>
                     <td>
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="table-check-0">
@@ -38,10 +38,6 @@ require "includes/header.php";
                     <td>alielreyes@gmail.com</td>
                     <td>admin</td>
                     <td>
-                        <!--------------------
-                        ------- TESTING -------
-                        --------------------->
-
                         <div class="dropdown">
                             <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Action List
@@ -53,55 +49,7 @@ require "includes/header.php";
                             </div>
                         </div>
                     </td>
-                </tr>
-                <tr>
-                    <td>                      
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="table-check-1">
-                            <label class="custom-control-label" for="table-check-1"></label>
-                        </div>
-                    </td>
-                    <td>Aliel Reyes</td>
-                    <td>alielreyes@gmail.com</td>
-                    <td>admin</td>
-                    <td><button>Action</button></td>
-                </tr>
-                <tr>
-                    <td>                        
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="table-check-2">
-                            <label class="custom-control-label" for="table-check-2"></label>
-                        </div>
-                    </td>
-                    <td>Aliel Reyes</td>
-                    <td>alielreyes@gmail.com</td>
-                    <td>admin</td>
-                    <td><button>Action</button></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="table-check-3">
-                            <label class="custom-control-label" for="table-check-3"></label>
-                        </div>
-                    </td>
-                    <td>Aliel Reyes</td>
-                    <td>alielreyes@gmail.com</td>
-                    <td>admin</td>
-                    <td><button>Action</button></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="table-check-4">
-                            <label class="custom-control-label" for="table-check-4"></label>
-                        </div>
-                    </td>
-                    <td>Aliel Reyes</td>
-                    <td>alielreyes@gmail.com</td>
-                    <td>admin</td>
-                    <td><button>Action</button></td>
-                </tr>
+                </tr>-->
             </tbody>
             <tfoot>
                 <tr>

@@ -26,11 +26,15 @@
             <!--- CUSTOM SCRIPTS --->
             <!---------------------->
 
+            <!-- Load Utilities Script -->
+            <script src="resources/js/utilities.js" type="text/javascript"></script>
+
             <!-- Load Global Script -->
             <script src="resources/js/global.js" type="text/javascript"></script>
             <script>
                 globalController.init(<?= json_encode($_SESSION) ?>);
             </script>
+
 
             <!-- Load Footer Script -->    
             <script src="resources/js/footer.js" type="text/javascript"></script>

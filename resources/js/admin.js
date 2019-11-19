@@ -5,6 +5,39 @@
  */
 
 const adminModelController = (function() {
+    const data = [
+        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
+        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
+        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
+        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
+        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
+        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
+        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin']
+    ];
+
+    const resetPwd = (id) => {
+        console.log(`Reset Pwd: ${id}`);
+    }
+    const removeUser = (id) => {
+        console.log(`Remove User: ${id}`);
+    }
+    const changeRole = (id) => {
+        console.log(`Change Role: ${id}`);
+    }
+
+    return {
+        getData: () => {
+            return data;
+        }, 
+
+        getActions: () => {
+            return {
+                resetPwd,
+                removeUser,
+                changeRole
+            }
+        }
+    }
 
 })();
 
@@ -14,7 +47,10 @@ const adminUIController = (function() {
         selectAllCheckbox: "selectall-table-check-",
         checkbox: "table-check-",
         adminTable: "admin-table",
-        tableBody: "tbody"  
+        tableBody: "tbody",
+        resetPwdBtn: "reset-pwd-btn-",
+        removeUserBtn: "remove-user-btn-",
+        changeRoleBtn: "change-role-btn-"
     }
 
     const setCheckbox = (active, idNum, checkbox = DOMstrings.checkbox) => {
@@ -39,6 +75,37 @@ const adminUIController = (function() {
             adminTableArr.forEach((e, i) => {
                 setCheckbox(active, i);
             });            
+        },
+
+        createCheckbox: (parentElement, id) => {
+            const html = `
+            <td>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="table-check-${id}">
+                    <label class="custom-control-label" for="table-check-${id}"></label>
+                </div>
+            </td>`;
+            
+
+            parentElement.insertAdjacentHTML('afterbegin', html);
+        },
+
+        createActionBtn: (parentElement, id) => {
+            const html = `
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton-${id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Action List
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-${id}" id="actionBtn-${id}">
+                        <a class="dropdown-item font-weight-light" id='${DOMstrings.resetPwdBtn}${id}'}>Reset Password</a>
+                        <a class="dropdown-item font-weight-light" id='${DOMstrings.removeUserBtn}${id}'>Remove User</a>
+                        <a class="dropdown-item font-weight-light" id='${DOMstrings.changeRoleBtn}${id}'>Change Role</a>
+                    </div>
+                </div>
+            </td>`
+
+            parentElement.insertAdjacentHTML('beforeend', html);
         }
     }
 })();
@@ -50,6 +117,7 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         DOMstrings = aUICtrl.getDOMstrings();
         const selectAllLength = 2;
 
+        //Select All Checkbox Event Listeners
         for(let i =0; i < selectAllLength; i++) {
             document.getElementById(`${DOMstrings.selectAllCheckbox}${i}`).addEventListener('change', function() {
                 
@@ -57,10 +125,48 @@ const adminController = (function(aModelCtrl, aUICtrl) {
                 aUICtrl.setAllCheckboxes(status);
             });
         }
+
+        //Set adming actions event listeners //TODO: Clear redundancy, refactor. 
+        aModelCtrl.getData().forEach((_, i) => {
+            document.getElementById(`${DOMstrings.resetPwdBtn}${i}`).addEventListener('click', (event) => {
+                aModelCtrl.getActions().resetPwd(event.target.id);
+            });
+
+            document.getElementById(`${DOMstrings.removeUserBtn}${i}`).addEventListener('click', (event) => {
+                aModelCtrl.getActions().removeUser(event.target.id);
+            });
+
+            document.getElementById(`${DOMstrings.changeRoleBtn}${i}`).addEventListener('click', (event) => {
+                aModelCtrl.getActions().changeRole(event.target.id);
+            });
+        });
+
+    }
+
+    const createAdminTable = () => {
+
+        //Get dom strings
+        const DOMstrings = aUICtrl.getDOMstrings();
+        
+        //Initialize variables
+        const table = document.querySelector(DOMstrings.tableBody);
+        const [rowLength, colLength] = [aModelCtrl.getData().length, aModelCtrl.getData()[0].length];
+        const data = aModelCtrl.getData();
+        
+        //Populate the table with the admin data. 
+        AllAboutParking.PerformanceEvaluation.Utilities.createRows(table, rowLength, colLength, data);
+
+        //Add the html elements to the table.
+        data.forEach((_, i) => {
+            const tr = document.getElementById(`row-${i}`);
+            aUICtrl.createCheckbox(tr, i);
+            aUICtrl.createActionBtn(tr, i, aModelCtrl.getActions());
+        });
     }
     
     return {
         init: () => {
+            createAdminTable();
             setEventListeners();
         }
     }

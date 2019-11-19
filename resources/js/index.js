@@ -244,8 +244,8 @@ const performanceController = (function(pUICtrl, pModelCtrl) {
       const report1Summary = report1.getSummary(pUICtrl.createDetailBtn);
 
       //4. Build Summary Report UI
-      pUICtrl.createRows(performanceTable, report1Summary.length, report1Summary[0].length, report1Summary);
-
+      AllAboutParking.PerformanceEvaluation.Utilities.createRows(performanceTable, report1Summary.length, report1Summary[0].length, report1Summary);
+      
       //5. Setup Event Listeners
       setUpEventListeners(report1);
     }
