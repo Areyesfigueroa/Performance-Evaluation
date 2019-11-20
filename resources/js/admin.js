@@ -5,7 +5,7 @@
  */
 
 const adminModelController = (function() {
-    const data = [
+    const sqlData = [
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
@@ -14,6 +14,9 @@ const adminModelController = (function() {
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin']
     ];
+
+    //TODO: Work out a data structure store the index values for the checkboxes that are on, so that we can use it later and quickly know which data we are referring to. 
+    const checkedRows = []
 
     const resetPwd = (id) => {
         console.log(`Reset Pwd: ${id}`);
@@ -25,9 +28,11 @@ const adminModelController = (function() {
         console.log(`Change Role: ${id}`);
     }
 
+
+
     return {
         getData: () => {
-            return data;
+            return sqlData;
         }, 
 
         getActions: () => {
@@ -36,6 +41,11 @@ const adminModelController = (function() {
                 removeUser,
                 changeRole
             }
+        },
+
+        rowChecked: (id, value) => {
+            console.log(`Row Checked - ${id}: Value - ${value}`);
+            //Save the true values and remove the false ones. 
         }
     }
 
@@ -81,8 +91,8 @@ const adminUIController = (function() {
             const html = `
             <td>
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="table-check-${id}">
-                    <label class="custom-control-label" for="table-check-${id}"></label>
+                    <input type="checkbox" class="custom-control-input" id="${DOMstrings.checkbox}${id}">
+                    <label class="custom-control-label" for="${DOMstrings.checkbox}${id}"></label>
                 </div>
             </td>`;
             
@@ -117,6 +127,7 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         DOMstrings = aUICtrl.getDOMstrings();
         const selectAllLength = 2;
 
+        
         //Select All Checkbox Event Listeners
         for(let i =0; i < selectAllLength; i++) {
             document.getElementById(`${DOMstrings.selectAllCheckbox}${i}`).addEventListener('change', function() {
@@ -126,22 +137,31 @@ const adminController = (function(aModelCtrl, aUICtrl) {
             });
         }
 
-        //Set adming actions event listeners //TODO: Clear redundancy, refactor. 
+        //Set checkbox event listeners
+        const setCheckboxBtn = (i, btnID, callback) => {
+            document.getElementById(`${btnID}${i}`).addEventListener('click', (event) => {
+                callback(event.target.id, event.target.checked);
+            });
+        }
+
+        
+        //Set adming actions event listeners
+        const setActionButton = (i, btnID, callback) => {
+            document.getElementById(`${btnID}${i}`).addEventListener('click', (event) => {
+                callback(event.target.id);
+            });
+        }
+
         aModelCtrl.getData().forEach((_, i) => {
-            document.getElementById(`${DOMstrings.resetPwdBtn}${i}`).addEventListener('click', (event) => {
-                aModelCtrl.getActions().resetPwd(event.target.id);
-            });
-
-            document.getElementById(`${DOMstrings.removeUserBtn}${i}`).addEventListener('click', (event) => {
-                aModelCtrl.getActions().removeUser(event.target.id);
-            });
-
-            document.getElementById(`${DOMstrings.changeRoleBtn}${i}`).addEventListener('click', (event) => {
-                aModelCtrl.getActions().changeRole(event.target.id);
-            });
+            setActionButton(i, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
+            setActionButton(i, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
+            setActionButton(i, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
+            setCheckboxBtn(i, DOMstrings.checkbox, aModelCtrl.rowChecked);
         });
 
     }
+
+
 
     const createAdminTable = () => {
 
