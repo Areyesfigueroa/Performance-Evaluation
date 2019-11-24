@@ -8,6 +8,18 @@ require "includes/header.php";
 
     <!--Admin Table Layout-->
     <section class="main-table table-responsive-sm">
+        <div class="action-list-all">
+            <div class="dropdown">
+                <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton-global" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action List All
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-global">
+                    <a class="dropdown-item font-weight-light" href="#">Reset Password</a>
+                    <a class="dropdown-item font-weight-light" href="#">Remove User</a>
+                    <a class="dropdown-item font-weight-light" href="#">Change Role</a>
+                </div>
+            </div>
+        </div>
         <table id="admin-table" class="table table-striped table-bordered table-sm" cellspacing="0">
             <thead>                
                 <tr>
@@ -77,11 +89,11 @@ require "includes/footer.php";
 <script>
     $(document).ready(function () {
     $('#admin-table').DataTable({
-        columnDefs: [{
+        "columnDefs": [{
             orderable: false,
             targets: 0, 
             autoWidth: true
-        }]
+        }], 
     });
     $('.dataTables_length').addClass('bs-select');
     });

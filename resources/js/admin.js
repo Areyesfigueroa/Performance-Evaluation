@@ -86,7 +86,9 @@ const adminUIController = (function() {
         tableBody: "tbody",
         resetPwdBtn: "reset-pwd-btn-",
         removeUserBtn: "remove-user-btn-",
-        changeRoleBtn: "change-role-btn-"
+        changeRoleBtn: "change-role-btn-",
+        adminTableLength: "admin-table_length",
+        showEntries: "show-entries"
     }
 
     return {
@@ -121,7 +123,7 @@ const adminUIController = (function() {
                     <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton-${id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action List
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-${id}" id="actionBtn-${id}">
+                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton-${id}" id="actionBtn-${id}">
                         <a class="dropdown-item font-weight-light" id='${DOMstrings.resetPwdBtn}${id}'}>Reset Password</a>
                         <a class="dropdown-item font-weight-light" id='${DOMstrings.removeUserBtn}${id}'>Remove User</a>
                         <a class="dropdown-item font-weight-light" id='${DOMstrings.changeRoleBtn}${id}'>Change Role</a>
@@ -130,40 +132,16 @@ const adminUIController = (function() {
             </td>`
 
             parentElement.insertAdjacentHTML('beforeend', html);
+        },
+        
+        addClass: (elementId, className) => {
+            document.getElementById(elementId).classList.add(className);
         }
     }
 })();
 
 
 const adminController = (function(aModelCtrl, aUICtrl) {
-    
-    const setEventListeners = () => {
-        DOMstrings = aUICtrl.getDOMstrings();
-        const selectAllLength = 2;
-
-        //Select All Checkbox Event Listeners
-        for(let i =0; i < selectAllLength; i++) {
-            document.getElementById(`${DOMstrings.selectAllCheckbox}${i}`).addEventListener('change', function() {
-                let status = document.getElementById(`${DOMstrings.selectAllCheckbox}${i}`).checked;
-                updateAllCheckboxes(status);
-            });
-        }
-
-        //Set list based listeners
-        const setEventListener = (i, btnID, callback) => {
-            document.getElementById(`${btnID}${i}`).addEventListener('click', (event) => {
-                callback(event.target);
-            });
-        }
-
-
-        aModelCtrl.getData().forEach((_, i) => {
-            setEventListener(i, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
-            setEventListener(i, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
-            setEventListener(i, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
-            setEventListener(i, DOMstrings.checkbox, aModelCtrl.rowChecked);
-        });
-    }
 
     const updateAllCheckboxes = (value) => {
         const DOMstrings = aUICtrl.getDOMstrings();
@@ -223,12 +201,48 @@ const adminController = (function(aModelCtrl, aUICtrl) {
             aUICtrl.createActionBtn(tr, i, aModelCtrl.getActions());
         });
     }
+
+    const setEventListeners = () => {
+        DOMstrings = aUICtrl.getDOMstrings();
+        const selectAllLength = 2;
+
+
+        //Set a callback for after the document loads. 
+        window.onload = () => {
+            aUICtrl.addClass(DOMstrings.adminTableLength, DOMstrings.showEntries);
+        }
+
+        //Select All Checkbox Event Listeners
+        for(let i =0; i < selectAllLength; i++) {
+            document.getElementById(`${DOMstrings.selectAllCheckbox}${i}`).addEventListener('change', function() {
+                let status = document.getElementById(`${DOMstrings.selectAllCheckbox}${i}`).checked;
+                updateAllCheckboxes(status);
+            });
+        }
+
+        //Set list based listeners
+        const setEventListener = (i, btnID, callback) => {
+            document.getElementById(`${btnID}${i}`).addEventListener('click', (event) => {
+                callback(event.target);
+            });
+        }
+
+        //Initialize All Table event listeners. 
+        aModelCtrl.getData().forEach((_, i) => {
+            setEventListener(i, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
+            setEventListener(i, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
+            setEventListener(i, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
+            setEventListener(i, DOMstrings.checkbox, aModelCtrl.rowChecked);
+        });
+    }
     
     return {
         init: () => {
             createAdminTable();
             setEventListeners();
         }
+
+        
     }
 })(adminModelController, adminUIController);
 

@@ -1,3 +1,13 @@
 .dropdown-menu {
     font-size: inherit;
 }
+
+.action-list-all {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.show-entries {
+    text-align: left;
+}
+
