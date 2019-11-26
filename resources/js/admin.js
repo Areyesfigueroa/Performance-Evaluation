@@ -234,6 +234,12 @@ const adminController = (function(aModelCtrl, aUICtrl) {
             setEventListener(i, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
             setEventListener(i, DOMstrings.checkbox, aModelCtrl.rowChecked);
         });
+
+        //Initialize Action LIst All
+        const id = "all";
+        setEventListener(id, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
+        setEventListener(id, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
+        setEventListener(id, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
     }
     
     return {

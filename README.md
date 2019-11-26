@@ -5,6 +5,9 @@ This project only includes the htdocs folder from the apache web server. An apac
 
 I have also omitted my db_connection file so that I can keep mysql server credentials to myself. 
 
+//PHP Mailer
+Install phpmailer using composer by referring to the composer.json file. 
+
 //COMMENTS FOR MYSELF
 Activate Hot Reloader with using the following code snippet. Must go after the body in your main page.
 require "../hotreloader.php";

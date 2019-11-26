@@ -43,7 +43,7 @@ if(isset($_POST['reset-request-submit']))
     $token = random_bytes(32); //This token is to authenticate the user. No conversion needed. 
 
     //Link sent to user via email.
-    $url = "localhost/authentication/LoginSystem/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "localhost/authentication/Performance-Evaluation/LoginSystem/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 1800;
 
@@ -106,12 +106,14 @@ if(isset($_POST['reset-request-submit']))
 
     //Send user to the reset password page. 
     //TODO: DELETE urltest value
+    
+    //echo $url;
     header('Location: ../LoginSystem/reset-password.php?reset=success&useremail='.$userEmail.'&urltest='. $url);
     exit();
 }
 else 
 {
-    header("Location: ../LoginSystem/lookup.php");
+    header("Location: ../LoginSystem/login.php");
     exit();
 }
 

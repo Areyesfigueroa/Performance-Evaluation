@@ -124,7 +124,7 @@
                                     mysqli_stmt_execute($stmt);
 
                                     //Navigate to the main screen
-                                    header("Location: ../LoginSystem/lookup.php?newpwd=passwordupdated");
+                                    header("Location: ../LoginSystem/login.php?newpwd=passwordupdated");
                                     exit();
                                 }
                             }
@@ -136,7 +136,7 @@
     }
     else
     {
-        header("Location: ../LoginSystem/lookup.php");
+        header("Location: ../LoginSystem/login.php");
         exit();
     }
 

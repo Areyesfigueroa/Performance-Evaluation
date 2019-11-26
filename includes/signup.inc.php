@@ -81,7 +81,7 @@ if(isset($_POST['signup-submit']))
                     //SQL Statement successful.
                     mysqli_stmt_bind_param($stmt, 'ssss', $name, $mailuid, $hashed_pwd, $position); //bind
                     mysqli_stmt_execute($stmt);//execute
-                    header("Location: ../LoginSystem/lookup.php?signup=success");
+                    header("Location: ../LoginSystem/login.php?signup=success");
                     exit();
                 }
             }

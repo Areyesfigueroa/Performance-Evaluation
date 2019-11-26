@@ -14,9 +14,9 @@ require "includes/header.php";
                     Action List All
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-global">
-                    <a class="dropdown-item font-weight-light" href="#">Reset Password</a>
-                    <a class="dropdown-item font-weight-light" href="#">Remove User</a>
-                    <a class="dropdown-item font-weight-light" href="#">Change Role</a>
+                    <a class="dropdown-item font-weight-light action-link" id="reset-pwd-btn-all" href="#">Reset Password</a>
+                    <a class="dropdown-item font-weight-light action-link" id="remove-user-btn-all" href="#">Remove User</a>
+                    <a class="dropdown-item font-weight-light action-link" id="change-role-btn-all"href="#">Change Role</a>
                 </div>
             </div>
         </div>
