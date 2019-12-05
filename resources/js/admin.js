@@ -54,8 +54,10 @@ const adminModelController = (function() {
     const changeRole = (tableRow) => {
         console.log(`Change Role: ${tableRow.id}`);
     }
-
-
+    const createUser = (user) => {
+        console.log("New User: " + user);
+        console.log(user);
+    }
 
     return {
         getData: () => {
@@ -66,7 +68,8 @@ const adminModelController = (function() {
             return {
                 resetPwd,
                 removeUser,
-                changeRole
+                changeRole,
+                createUser
             }
         },
 
@@ -109,6 +112,7 @@ const adminUIController = (function() {
         resetPwdBtn: "reset-pwd-btn-",
         removeUserBtn: "remove-user-btn-",
         changeRoleBtn: "change-role-btn-",
+        createUserBtn: "create-user-btn-",
         adminTableLength: "admin-table_length",
         showEntries: "show-entries"
     }
@@ -154,6 +158,10 @@ const adminUIController = (function() {
             </td>`
 
             parentElement.insertAdjacentHTML('beforeend', html);
+        },
+
+        showModal: () => {
+            
         },
         
         addClass: (elementId, className) => {
@@ -270,6 +278,7 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         setEventListener(id, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
         setEventListener(id, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
         setEventListener(id, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
+        setEventListener(id, DOMstrings.createUserBtn, aModelCtrl.getActions().createUser);
     }
 
     const setEventListeners = () => {
