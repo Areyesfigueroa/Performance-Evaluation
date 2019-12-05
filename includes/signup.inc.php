@@ -14,6 +14,7 @@ if(isset($_POST['signup-submit']))
     $confirmPassword = $_POST['confirmpwd'];
     $name = $_POST['name']; //Needs check
     $position = $_POST['position']; //Needs Check
+    $role = $_POST['role']; //Needs Check
 
     //Make sure to error check.
     if(empty($mailuid) || empty($password) || empty($confirmPassword))
@@ -61,8 +62,8 @@ if(isset($_POST['signup-submit']))
             else
             {
                 //User does not exist. Add to database.
-                $sql = "INSERT INTO employees(employee_name, employee_email, employee_password, employee_position) 
-                VALUES(?, ?, ?, ?);";
+                $sql = "INSERT INTO employees(employee_email, employee_name, employee_password, employee_position, employee_role) 
+                VALUES(?, ?, ?, ?, ?);";
 
                 //Prepare statement
                 $stmt = mysqli_stmt_init($conn);
@@ -79,7 +80,7 @@ if(isset($_POST['signup-submit']))
 
                     //Bind and Execute.
                     //SQL Statement successful.
-                    mysqli_stmt_bind_param($stmt, 'ssss', $name, $mailuid, $hashed_pwd, $position); //bind
+                    mysqli_stmt_bind_param($stmt, 'sssss', $mailuid, $name, $hashed_pwd, $position, $role); //bind
                     mysqli_stmt_execute($stmt);//execute
                     header("Location: ../LoginSystem/login.php?signup=success");
                     exit();

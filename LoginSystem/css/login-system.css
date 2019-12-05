@@ -83,6 +83,16 @@ button:hover {
      background-color: rgb(134, 112, 31);
 }
 
+select {
+    height: 28.36px;
+}
+
+select:hover {
+     border-color: rgb(160, 136, 49);
+}
+
+
+
 .status-message {
     color: rgb(199, 61, 61);
 }

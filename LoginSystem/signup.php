@@ -17,11 +17,15 @@
                 </div>
                 <div>    
                     <form action="../includes/signup.inc.php" method="POST">
-                        <input type="text" name="mailuid" placeholder="Email...">
+                        <input type="email" name="mailuid" placeholder="Email...">
                         <input type="password" name="pwd" placeholder="Password...">
                         <input type="password" name="confirmpwd" placeholder="Confirm Password...">
                         <input type="text" name="name" placeholder="Name...">
                         <input type="text" name="position" placeholder="Position...">
+                        <select name="role">
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                        </select>
                         <button type="submit" name="signup-submit">Signup User</button>
                     </form>
                 </div>

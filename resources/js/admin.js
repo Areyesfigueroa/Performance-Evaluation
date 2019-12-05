@@ -4,10 +4,18 @@
  * ---------------------------------
  */
 
+/**
+ * Reset Password Breakdown
+ * 
+ * 1. When I press the button I should get back the correct row. 
+ * 2. Call reset-request and pass the following info from the selected row. 
+ *  2a. Validator, Selector, and new password. 
+ */
+
 const adminModelController = (function() {
     const sqlData = [
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
+        ['Aliel Reyes', 'along@allaboutparking.com', 'admin'],
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
@@ -20,11 +28,25 @@ const adminModelController = (function() {
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin']
     ];
 
-    //TODO: Work out a data structure store the index values for the checkboxes that are on, so that we can use it later and quickly know which data we are referring to. 
-    let checkedRows = []; //FOR CHECKLISTS INSTEAD OF NUMBERS USE REFERENCES OBJ
+    let checkedRows = []; 
 
-    const resetPwd = (tableRow) => {
-        console.log(`Reset Pwd: ${tableRow.id}`);
+    const resetPwd = (email) => {
+        console.log(`Reset Pwd for: ${email}`);
+    
+        const xhr = new XMLHttpRequest();
+        const url = "includes/reset-request.inc.php";
+        const params = `reset-request-submit=true&email=${email}`;
+            
+        xhr.onreadystatechange = function() {//Call a function when the state changes.
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                alert(`Email sent to ${email}`);
+            }
+        }
+        
+        xhr.open('POST', url);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+
     }
     const removeUser = (tableRow) => {
         console.log(`Remove User: ${tableRow.id}`);
@@ -202,8 +224,15 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         });
     }
 
-    const setEventListeners = () => {
-        DOMstrings = aUICtrl.getDOMstrings();
+    //Set list based listeners
+    const setEventListener = (i, btnID, callback) => {
+        document.getElementById(`${btnID}${i}`).addEventListener('click', (event) => {
+            callback(event.target);
+        });
+    }
+
+    const setCheckboxListeners = () => {
+        const DOMstrings = aUICtrl.getDOMstrings();
         const selectAllLength = 2;
 
 
@@ -219,17 +248,18 @@ const adminController = (function(aModelCtrl, aUICtrl) {
                 updateAllCheckboxes(status);
             });
         }
+    }
 
-        //Set list based listeners
-        const setEventListener = (i, btnID, callback) => {
-            document.getElementById(`${btnID}${i}`).addEventListener('click', (event) => {
-                callback(event.target);
-            });
-        }
+    const setActionListeners = () => {
+        const DOMstrings = aUICtrl.getDOMstrings();
+        const emailColIdx = 2;
 
         //Initialize All Table event listeners. 
         aModelCtrl.getData().forEach((_, i) => {
-            setEventListener(i, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
+            document.getElementById(`${DOMstrings.resetPwdBtn}${i}`).addEventListener('click', (event) => {
+                aModelCtrl.getActions().resetPwd(event.target.closest("tr").getElementsByTagName("td")[emailColIdx].textContent);
+            });
+
             setEventListener(i, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
             setEventListener(i, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
             setEventListener(i, DOMstrings.checkbox, aModelCtrl.rowChecked);
@@ -240,6 +270,12 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         setEventListener(id, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
         setEventListener(id, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
         setEventListener(id, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
+    }
+
+    const setEventListeners = () => {
+ 
+        setCheckboxListeners();
+        setActionListeners();
     }
     
     return {

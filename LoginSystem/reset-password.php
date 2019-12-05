@@ -26,6 +26,7 @@
                 </form>
                 
                 <?php
+                
                     if(isset($_GET["reset"]))
                     {
                         if($_GET["reset"] == "success")
