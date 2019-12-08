@@ -138,3 +138,10 @@ require "includes/footer.php";
 
 <!-- Load Admin Script-->
 <script src= "resources/js/admin.js"></script>
+<script type="text/javascript">
+    window.onload = () => {
+        console.log("REFRESH");
+    };
+    console.log("LOADED");
+    adminController.init(<?= json_encode($_SESSION['allUsers']) ?>);
+</script>

@@ -233,6 +233,8 @@ const performanceController = (function(pUICtrl, pModelCtrl) {
 
   return {
     init: (sqlUserData) => {
+      console.log(sqlUserData);
+
       //1. Get user sql data. 
       pModelCtrl.setUserData(sqlUserData);
 

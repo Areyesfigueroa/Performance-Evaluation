@@ -52,13 +52,13 @@ if(isset($_POST['login-submit']))
                     $_SESSION['employee_name'] = $row['employee_name'];
                     $_SESSION['employee_position'] = $row['employee_position'];
                     $_SESSION['employee_role'] = $row["employee_role"];
-                    
+
                     //REPORT 1 QUERY
                     $sql = "SELECT * FROM report1responses WHERE employee_email=?;";
         
                     $conn = OpenCon();
                     $stmt = mysqli_stmt_init($conn);
-            
+
                     if(!mysqli_stmt_prepare($stmt, $sql)){
                         header("Location: ../LoginSystem/login.php?error=sqlerror");
                         exit();
@@ -90,6 +90,36 @@ if(isset($_POST['login-submit']))
 
                     }
 
+                    //ADMIN QUERY, if this user is admin.
+                    if($_SESSION['employee_role'] === 'Admin') {
+                        $sql = "SELECT * FROM employees";
+
+                        $conn = OpenCon();
+                        $stmt = mysqli_stmt_init($conn);
+
+                        if(!mysqli_stmt_prepare($stmt, $sql)) {
+                            header("Location: ../LoginSystem/login.php?error=sqlerror");
+                        }
+                        else 
+                        {
+                            //SQL Statement Successful
+                            mysqli_stmt_execute($stmt);
+                            $result = mysqli_stmt_get_result($stmt);
+
+                            $allUsers = [[]];
+                            $row = $col = 0;
+
+                            while($fetch = mysqli_fetch_assoc($result)){
+                                $allUsers[$row][$col++] = $fetch['employee_name'];
+                                $allUsers[$row][$col++] = $fetch['employee_email'];
+                                $allUsers[$row][$col++] = $fetch['employee_role'];
+                                $row++;
+                                $col = 0;
+                            }
+    
+                            $_SESSION["allUsers"] = $allUsers;    
+                        }
+                    }
                     //Success, Go to Main Site.
                     header("Location: ../index.php?login=success");
                     exit();

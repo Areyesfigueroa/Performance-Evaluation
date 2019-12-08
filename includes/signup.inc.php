@@ -7,13 +7,6 @@
 if(isset($_POST['signup-submit']))
 {
     require 'db_connection.php';
-    echo "TEST";
-    echo $_POST['mailuid'];
-    echo $_POST['pwd'];
-    echo $_POST['confirmpwd'];
-    echo $_POST['name'];
-    echo $_POST['position'];
-    echo $_POST['role'];
 
     $mailuid = $_POST['mailuid'];
     $password = $_POST['pwd'];

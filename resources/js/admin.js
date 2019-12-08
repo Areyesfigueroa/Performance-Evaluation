@@ -5,23 +5,8 @@
  */
 
 const adminModelController = (function() {
-    const sqlData = [
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'along@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
-        ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin']
-    ];
-
+    let sqlData = [];
     let checkedRows = []; 
-
 
     const resetPwd = (email) => {
         console.log(`Reset Pwd for: ${email}`);
@@ -71,7 +56,11 @@ const adminModelController = (function() {
     };
 
     return {
-        getData: () => {
+        setSQLData: (value) => {
+            sqlData = value;
+        },
+
+        getSQLData: () => {
             return sqlData;
         }, 
 
@@ -240,8 +229,8 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         
         //Initialize variables
         const table = document.querySelector(DOMstrings.tableBody);
-        const [rowLength, colLength] = [aModelCtrl.getData().length, aModelCtrl.getData()[0].length];
-        const data = aModelCtrl.getData();
+        const [rowLength, colLength] = [aModelCtrl.getSQLData().length, aModelCtrl.getSQLData()[0].length];
+        const data = aModelCtrl.getSQLData();
         
         //Populate the table with the admin data. 
         AllAboutParking.PerformanceEvaluation.Utilities.createRows(table, rowLength, colLength, data);
@@ -285,7 +274,7 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         const emailColIdx = 2;
 
         //Initialize All Table event listeners. 
-        aModelCtrl.getData().forEach((_, i) => {
+        aModelCtrl.getSQLData().forEach((_, i) => {
             document.getElementById(`${DOMstrings.resetPwdBtn}${i}`).addEventListener('click', (event) => {
                 aModelCtrl.getActions().resetPwd(event.target.closest("tr").getElementsByTagName("td")[emailColIdx].textContent);
             });
@@ -381,7 +370,10 @@ const adminController = (function(aModelCtrl, aUICtrl) {
     }
     
     return {
-        init: () => {
+        init: (sqlData) => {
+            //Set SQL Data
+            aModelCtrl.setSQLData(sqlData);
+
             createAdminTable();
             setEventListeners();
         }
@@ -390,5 +382,5 @@ const adminController = (function(aModelCtrl, aUICtrl) {
     }
 })(adminModelController, adminUIController);
 
-adminController.init();
+//adminController.init();
 
