@@ -81,6 +81,11 @@ if(isset($_POST['signup-submit']))
                     //SQL Statement successful.
                     mysqli_stmt_bind_param($stmt, 'sssss', $mailuid, $name, $hashed_pwd, $position, $role); //bind
                     mysqli_stmt_execute($stmt);//execute
+
+                    //Update Session Data with new user.
+                    session_start();
+                    array_push($_SESSION['allUsers'], [$_POST['name'], $_POST['mailuid'], $_POST['role']]);
+
                     header("Location: ../admin.php?signup=success");
                     exit();
                 }

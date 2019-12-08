@@ -143,5 +143,6 @@ require "includes/footer.php";
         console.log("REFRESH");
     };
     console.log("LOADED");
+    console.log(<?= json_encode($_SESSION['allUsers']) ?>);
     adminController.init(<?= json_encode($_SESSION['allUsers']) ?>);
 </script>

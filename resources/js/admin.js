@@ -47,6 +47,9 @@ const adminModelController = (function() {
         xhr.onreadystatechange = function() {//Call a function when the state changes.
             if(xhr.readyState == 4 && xhr.status == 200) {
                 alert(`New User Added!`);
+    
+                //Reload Page to update data.
+                window.location.reload();
             }
         }
         
