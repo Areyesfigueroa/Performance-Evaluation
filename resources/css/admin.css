@@ -29,7 +29,7 @@
     height: 100%;
     background-color: #07070794;
 
-    z-index: 999;
+    z-index: 800;
 }
 
 .modal-inner {
@@ -43,6 +43,8 @@
     background-color: var(--secondary-color);
     padding: 15px;
     margin-top: 2%;
+
+    z-index: 999;
 }
 
 .modal-close-btn {
@@ -105,4 +107,12 @@ button {
 
 button:hover {
      background-color: rgb(134, 112, 31);
+}
+
+/*----------------------
+---- REUSABLE ---
+----------------------*/
+
+.active {
+    display: block;
 }

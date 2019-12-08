@@ -7,7 +7,13 @@
 if(isset($_POST['signup-submit']))
 {
     require 'db_connection.php';
-
+    echo "TEST";
+    echo $_POST['mailuid'];
+    echo $_POST['pwd'];
+    echo $_POST['confirmpwd'];
+    echo $_POST['name'];
+    echo $_POST['position'];
+    echo $_POST['role'];
 
     $mailuid = $_POST['mailuid'];
     $password = $_POST['pwd'];
@@ -15,21 +21,21 @@ if(isset($_POST['signup-submit']))
     $name = $_POST['name']; //Needs check
     $position = $_POST['position']; //Needs Check
     $role = $_POST['role']; //Needs Check
-
+    
     //Make sure to error check.
     if(empty($mailuid) || empty($password) || empty($confirmPassword))
     {
-        header("Location: ../LoginSystem/signup.php?error=emptyfields");
+        header("Location: ../admin.php?error=emptyfields");
         exit();
     }
     else if(!filter_var($mailuid, FILTER_VALIDATE_EMAIL))
     {
-        header("Location: ../LoginSystem/signup.php?error=invalidmail");
+        header("Location: ../admin.php?error=invalidmail");
         exit();
     }
     else if($password !== $confirmPassword) //validate password
     {
-        header("Location: ../LoginSystem/signup.php?error=passwordcheck&mailuid=".$mailuid);
+        header("Location: ../admin.php?error=passwordcheck&mailuid=".$mailuid);
         exit();
     } 
     else
@@ -42,7 +48,7 @@ if(isset($_POST['signup-submit']))
         //Verify the statement works with our query.
         if(!mysqli_stmt_prepare($stmt, $sql))
         {
-            header("Location: ../LoginSystem/signup.php?error=sqlerror");
+            header("Location: ../admin.php?error=sqlerror");
             exit();
         }
         else 
@@ -56,7 +62,7 @@ if(isset($_POST['signup-submit']))
             if($resultCheck > 0)
             {
                 //We have a match redirect
-                header("Location: ../LoginSystem/signup.php?error=usertaken&mailuid=".$mailuid);
+                header("Location: ../admin.php?error=usertaken&mailuid=".$mailuid);
                 exit();
             }
             else
@@ -70,7 +76,7 @@ if(isset($_POST['signup-submit']))
 
                 if(!mysqli_stmt_prepare($stmt, $sql))
                 {
-                    header("Location: ../LoginSystem/signup.php?error=sqlerror");
+                    header("Location: ../admin.php?error=sqlerror");
                     exit();
                 }
                 else
@@ -82,7 +88,7 @@ if(isset($_POST['signup-submit']))
                     //SQL Statement successful.
                     mysqli_stmt_bind_param($stmt, 'sssss', $mailuid, $name, $hashed_pwd, $position, $role); //bind
                     mysqli_stmt_execute($stmt);//execute
-                    header("Location: ../LoginSystem/login.php?signup=success");
+                    header("Location: ../admin.php?signup=success");
                     exit();
                 }
             }
@@ -94,7 +100,7 @@ if(isset($_POST['signup-submit']))
 }
 else
 {
-    header("Location: ../LoginSystem/signup.php");
+    header("Location: ../admin.php");
     exit();
 }
 

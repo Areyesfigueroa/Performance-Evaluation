@@ -4,14 +4,6 @@
  * ---------------------------------
  */
 
-/**
- * Reset Password Breakdown
- * 
- * 1. When I press the button I should get back the correct row. 
- * 2. Call reset-request and pass the following info from the selected row. 
- *  2a. Validator, Selector, and new password. 
- */
-
 const adminModelController = (function() {
     const sqlData = [
         ['Aliel Reyes', 'areyes@allaboutparking.com', 'admin'],
@@ -30,6 +22,7 @@ const adminModelController = (function() {
 
     let checkedRows = []; 
 
+
     const resetPwd = (email) => {
         console.log(`Reset Pwd for: ${email}`);
     
@@ -43,21 +36,39 @@ const adminModelController = (function() {
             }
         }
         
-        xhr.open('POST', url);
+        xhr.open('POST', url, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(params);
 
     }
+
     const removeUser = (tableRow) => {
         console.log(`Remove User: ${tableRow.id}`);
     }
+
     const changeRole = (tableRow) => {
         console.log(`Change Role: ${tableRow.id}`);
     }
-    const createUser = (user) => {
-        console.log("New User: " + user);
-        console.log(user);
-    }
+
+    const createUser = (formInputs) => {
+
+        //POST Http request.
+        console.log("Sending Request");
+
+        const xhr = new XMLHttpRequest();
+        const url = "includes/signup.inc.php";
+        const params = `signup-submit=true&mailuid=${formInputs.email}&pwd=${formInputs.pwd}&confirmpwd=${formInputs.confirmPwd}&name=${formInputs.name}&position=${formInputs.position}&role=${formInputs.role}`;
+            
+        xhr.onreadystatechange = function() {//Call a function when the state changes.
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                alert(`New User Added!`);
+            }
+        }
+        
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+    };
 
     return {
         getData: () => {
@@ -97,6 +108,10 @@ const adminModelController = (function() {
         clearCheckedRows: () => {
             checkedRows = [];
             console.log(checkedRows);
+        },
+        
+        emailIsValid: (email) => {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
     }
 
@@ -112,9 +127,15 @@ const adminUIController = (function() {
         resetPwdBtn: "reset-pwd-btn-",
         removeUserBtn: "remove-user-btn-",
         changeRoleBtn: "change-role-btn-",
-        createUserBtn: "create-user-btn-",
+        createUserBtn: "create-user-btn-all",
         adminTableLength: "admin-table_length",
-        showEntries: "show-entries"
+        showEntries: "show-entries",
+        modal: "modal",
+        modalOuter: "modal-outer",
+        modalCloseBtn: "modal-close-btn",
+        active: "active",
+        signupBtn: "js--signup-btn",
+        signupForm: "js--signup-form"
     }
 
     return {
@@ -160,8 +181,9 @@ const adminUIController = (function() {
             parentElement.insertAdjacentHTML('beforeend', html);
         },
 
-        showModal: () => {
-            
+        toggleModal: () => {
+            const modal = document.querySelector('.' + DOMstrings.modal);
+            modal.classList.toggle(DOMstrings.active);
         },
         
         addClass: (elementId, className) => {
@@ -278,13 +300,84 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         setEventListener(id, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
         setEventListener(id, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
         setEventListener(id, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
-        setEventListener(id, DOMstrings.createUserBtn, aModelCtrl.getActions().createUser);
+
+        //Create User
+        document.getElementById(DOMstrings.createUserBtn).addEventListener("click", () => {
+            //Show the UI
+            aUICtrl.toggleModal();
+        });
+    }
+
+    const setModalListeners = () => {
+        const DOMstrings = aUICtrl.getDOMstrings();
+        const closeBtn = document.querySelector('.' + DOMstrings.modalCloseBtn).children[0];
+        const modalOuter = document.querySelector('.' + DOMstrings.modalOuter);
+
+        //Close Btn
+        closeBtn.addEventListener("click", () => {
+            console.log("Close Modal");
+            aUICtrl.toggleModal();
+        });
+
+        //Click on outer modal Btn
+        modalOuter.addEventListener("click", (event) => {
+            if(event.target === modalOuter) {
+                console.log("Modal Outer Clicked");
+                aUICtrl.toggleModal();
+            }
+        });
+        
+    }
+
+    const setFormListener = () => {
+        const DOMstrings = aUICtrl.getDOMstrings();
+
+        const signupForm = document.getElementById(DOMstrings.signupForm);
+
+        signupForm.onsubmit = (event)=> {
+            event.preventDefault();
+
+            const fieldsArr = Array.prototype.slice.call(event.target);
+            const formFields = {
+                email: fieldsArr[0].value,
+                pwd: fieldsArr[1].value,
+                confirmPwd: fieldsArr[2].value,
+                name: fieldsArr[3].value,
+                position: fieldsArr[4].value,
+                role: fieldsArr[5].value
+            }; 
+
+            //TEST CASES
+            if(!formFields.email || !formFields.pwd || !formFields.confirmPwd || !formFields.name || !formFields.role) {
+                alert("Error, Empty Fields");
+            } 
+            else if(!aModelCtrl.emailIsValid(formFields.email)) {
+                alert("Error, Invalid Email");
+            }
+            else if(formFields.pwd !== formFields.confirmPwd) {
+                alert("Error, passwords don't match");
+            } 
+
+            //Create User
+            aModelCtrl.getActions().createUser(formFields);
+            
+            //Clear Form
+            fieldsArr.forEach((el) => {
+                el.value = "";
+            });
+
+            //Close Form //May need to refresh page.
+            aUICtrl.toggleModal();
+            
+        }
     }
 
     const setEventListeners = () => {
  
         setCheckboxListeners();
         setActionListeners();
+        setModalListeners();
+        setFormListener();
     }
     
     return {
