@@ -31,8 +31,22 @@ const adminModelController = (function() {
         console.log(`Remove User: ${tableRow.id}`);
     }
 
-    const changeRole = (tableRow) => {
-        console.log(`Change Role: ${tableRow.id}`);
+    const changeRole = (email, newRole, rowIdx) => {
+        
+        const xhr = new XMLHttpRequest();
+        const url = "includes/change-roles.inc.php";
+        const params = `change-roles-submit=true&email=${email}&newRole=${newRole}&rowIndex=${String(rowIdx)}`;
+            
+        xhr.onreadystatechange = function() {//Call a function when the state changes.
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                alert(`Role changed to ${newRole} for ${email}`);
+                window.location.reload();
+            }
+        }
+        
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(params);
     }
 
     const createUser = (formInputs) => {
@@ -275,23 +289,36 @@ const adminController = (function(aModelCtrl, aUICtrl) {
     const setActionListeners = () => {
         const DOMstrings = aUICtrl.getDOMstrings();
         const emailColIdx = 2;
+        const roleColIdx = 3;    
 
-        //Initialize All Table event listeners. 
+        //Initialize All Table event listeners. Row buttons.
         aModelCtrl.getSQLData().forEach((_, i) => {
+
+            //Reset Pwd
             document.getElementById(`${DOMstrings.resetPwdBtn}${i}`).addEventListener('click', (event) => {
                 aModelCtrl.getActions().resetPwd(event.target.closest("tr").getElementsByTagName("td")[emailColIdx].textContent);
             });
 
+            //Change Roles
+            document.getElementById(`${DOMstrings.changeRoleBtn}${i}`).addEventListener('click', (event) => {
+                const email = event.target.closest("tr").getElementsByTagName("td")[emailColIdx].textContent;
+                const currRole = event.target.closest("tr").getElementsByTagName("td")[roleColIdx].textContent;
+                const newRole = (currRole==='User') ? "Admin":"User"; //toggle role
+                const rowIdx = i;
+
+                aModelCtrl.getActions().changeRole(email, newRole, rowIdx);
+            });
+
             setEventListener(i, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
-            setEventListener(i, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
             setEventListener(i, DOMstrings.checkbox, aModelCtrl.rowChecked);
         });
 
-        //Initialize Action LIst All
+        //Initialize Action LIst All //TODO: Change the listener for the All section.
         const id = "all";
         setEventListener(id, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
         setEventListener(id, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
         setEventListener(id, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
+
 
         //Create User
         document.getElementById(DOMstrings.createUserBtn).addEventListener("click", () => {
