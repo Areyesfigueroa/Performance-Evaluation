@@ -27,19 +27,25 @@ const adminModelController = (function() {
 
     }
 
-    const removeUser = (tableRow) => {
-        console.log(`Remove User: ${tableRow.id}`);
-    }
+    const removeUser = (email, rowIdx) => {        
 
-    const changeRole = (email, newRole, rowIdx) => {
-        
+        if(!email && !rowIdx) {
+            console.log("Empty Fields");
+            return;
+        }
+
+        if(!window.confirm(`Are you sure you want to delete ${email}`)) {
+            console.log("Abort action");
+            return;
+        }
+
         const xhr = new XMLHttpRequest();
-        const url = "includes/change-roles.inc.php";
-        const params = `change-roles-submit=true&email=${email}&newRole=${newRole}&rowIndex=${String(rowIdx)}`;
+        const url = "includes/remove-user.inc.php";
+        const params = `remove-user-submit=true&email=${email}&rowIndex=${String(rowIdx)}`;
             
         xhr.onreadystatechange = function() {//Call a function when the state changes.
             if(xhr.readyState == 4 && xhr.status == 200) {
-                alert(`Role changed to ${newRole} for ${email}`);
+                alert(`Removed User: ${email} from the database.`);
                 window.location.reload();
             }
         }
@@ -47,6 +53,29 @@ const adminModelController = (function() {
         xhr.open('POST', url, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(params);
+    }
+
+    const changeRole = (email, newRole, rowIdx) => {
+        return new Promise((resolve, reject) => {
+
+            const xhr = new XMLHttpRequest();
+            const url = "includes/change-roles.inc.php";
+            const params = `change-roles-submit=true&email=${email}&newRole=${newRole}&rowIndex=${String(rowIdx)}`;
+                
+            //Request Lifecycle
+            xhr.onreadystatechange = () => {//Call a function when the state changes.
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    resolve(`Role changed to ${newRole} for ${email}`);
+                }
+            }
+
+            //If the request runs into an error
+            xhr.onerror = () => reject(new Error(`Error, could not send request for the following ${email}`));
+            
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send(params);
+        });
     }
 
     const createUser = (formInputs) => {
@@ -260,13 +289,6 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         });
     }
 
-    //Set list based listeners
-    const setEventListener = (i, btnID, callback) => {
-        document.getElementById(`${btnID}${i}`).addEventListener('click', (event) => {
-            callback(event.target);
-        });
-    }
-
     const setCheckboxListeners = () => {
         const DOMstrings = aUICtrl.getDOMstrings();
         const selectAllLength = 2;
@@ -286,10 +308,8 @@ const adminController = (function(aModelCtrl, aUICtrl) {
         }
     }
 
-    const setActionListeners = () => {
+    const setInlineActions = (emailColIdx, roleColIdx) => {
         const DOMstrings = aUICtrl.getDOMstrings();
-        const emailColIdx = 2;
-        const roleColIdx = 3;    
 
         //Initialize All Table event listeners. Row buttons.
         aModelCtrl.getSQLData().forEach((_, i) => {
@@ -306,25 +326,98 @@ const adminController = (function(aModelCtrl, aUICtrl) {
                 const newRole = (currRole==='User') ? "Admin":"User"; //toggle role
                 const rowIdx = i;
 
-                aModelCtrl.getActions().changeRole(email, newRole, rowIdx);
+                const promise = aModelCtrl.getActions().changeRole(email, newRole, rowIdx);
+                promise.then((result)=>{
+                    //Alert the result to the user.
+                    alert(result);
+
+                    //Update page by reloding
+                    window.location.reload();
+                }).catch((error)=>{
+                    alert(error);
+                });
             });
 
-            setEventListener(i, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
-            setEventListener(i, DOMstrings.checkbox, aModelCtrl.rowChecked);
+            //Remove User
+            document.getElementById(`${DOMstrings.removeUserBtn}${i}`).addEventListener('click', (event) => {
+                const email = event.target.closest("tr").getElementsByTagName("td")[emailColIdx].textContent;
+                const rowIdx = i;
+
+                aModelCtrl.getActions().removeUser(email, rowIdx);
+            });
+
+            //Checkbox
+            document.getElementById(`${DOMstrings.checkbox}${i}`).addEventListener("click", (event) => {
+                aModelCtrl.rowChecked(event.target);
+            });
         });
+    }
+
+    const setAllActions = (emailColIdx, roleColIdx) => {
+        const DOMstrings = aUICtrl.getDOMstrings(); 
 
         //Initialize Action LIst All //TODO: Change the listener for the All section.
         const id = "all";
         setEventListener(id, DOMstrings.resetPwdBtn, aModelCtrl.getActions().resetPwd);
         setEventListener(id, DOMstrings.removeUserBtn, aModelCtrl.getActions().removeUser);
-        setEventListener(id, DOMstrings.changeRoleBtn, aModelCtrl.getActions().changeRole);
+        
+        //Change Role
+        document.getElementById(`${DOMstrings.changeRoleBtn}${id}`).addEventListener('click', () => {
+            //Get the fields
+            const checkedRows = aModelCtrl.getCheckedRows();
 
+            //If there are any selected rows.
+            if(checkedRows.length > 0) {
+                const alertMsg = [];
+
+                (function loop(i, length){    
+
+                    if(i >= length) {
+                        return;
+                    }
+
+                    //Gather data for Posting //TODO: LOOP THROUGH INDEX
+                    const email = checkedRows[i].closest("tr").getElementsByTagName("td")[emailColIdx].textContent;
+                    const currRole = checkedRows[i].closest("tr").getElementsByTagName("td")[roleColIdx].textContent;
+                    const newRole = (currRole==='User') ? "Admin":"User"; //toggle role
+                    const rowIdx = parseInt(parseInt(checkedRows[i].id.replace("table-check-", "")));
+
+                    const promise = aModelCtrl.getActions().changeRole(email, newRole, rowIdx);
+                    promise.then((result) => {
+                        //Store the results
+                        alertMsg.push(result);
+
+                        //Increment to next checkbox
+                        loop(i+1, length); //loop recursively.
+        
+                        //RELOAD after sending the last element.
+                        if(i === length - 1) {
+                            //Alert all results at once
+                            alert(alertMsg.join('\n'));
+
+                            //Reload the new results
+                            window.location.reload();
+                        }
+                    }).catch((error) => {
+                        alert(error);
+                    });
+                })(0, checkedRows.length);
+            }
+        });
 
         //Create User
         document.getElementById(DOMstrings.createUserBtn).addEventListener("click", () => {
             //Show the UI
             aUICtrl.toggleModal();
         });
+    }
+
+    const setActionListeners = () => {
+        const emailColIdx = 2;
+        const roleColIdx = 3;    
+
+        setInlineActions(emailColIdx, roleColIdx);
+        setAllActions(emailColIdx, roleColIdx); 
     }
 
     const setModalListeners = () => {
@@ -387,7 +480,6 @@ const adminController = (function(aModelCtrl, aUICtrl) {
 
             //Close Form //May need to refresh page.
             aUICtrl.toggleModal();
-            
         }
     }
 
