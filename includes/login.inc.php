@@ -20,7 +20,7 @@ if(isset($_POST['login-submit']))
     }
     else 
     {
-        $sql = "SELECT * FROM employees WHERE employee_email=?;";
+        $sql = "SELECT * FROM employees WHERE employee_email=?";
         
         $conn = OpenCon();
         $stmt = mysqli_stmt_init($conn);
@@ -51,9 +51,74 @@ if(isset($_POST['login-submit']))
                     $_SESSION['employee_email'] = $row['employee_email'];
                     $_SESSION['employee_name'] = $row['employee_name'];
                     $_SESSION['employee_position'] = $row['employee_position'];
-                    $_SESSION['employee_phone_num'] = $row['employee_phone_num'];
-                    $_SESSION['employee_score'] = $row['employee_score'];
-                    
+                    $_SESSION['employee_role'] = $row["employee_role"];
+
+                    //REPORT 1 QUERY
+                    $sql = "SELECT * FROM report1responses WHERE employee_email=?;";
+        
+                    $conn = OpenCon();
+                    $stmt = mysqli_stmt_init($conn);
+
+                    if(!mysqli_stmt_prepare($stmt, $sql)){
+                        header("Location: ../LoginSystem/login.php?error=sqlerror");
+                        exit();
+                    }
+                    else 
+                    {
+                        //SQL Statement Successful
+                        mysqli_stmt_bind_param($stmt, "s", $mailuid);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+
+                        $report1Responses = [[]];
+                        $row = $col = 0;
+
+                        while($fetch = mysqli_fetch_assoc($result)){
+                            $report1Responses[$row][$col++] = $fetch['entry_id'];
+                            $report1Responses[$row][$col++] = $fetch['parked_within_lines'];
+                            $report1Responses[$row][$col++] = $fetch['customer_service'];
+                            $report1Responses[$row][$col++] = $fetch['on_time_attendance'];
+                            $report1Responses[$row][$col++] = $fetch['dressed_up_to_code'];
+                            $report1Responses[$row][$col++] = $fetch['submitter_name'];
+                            $report1Responses[$row][$col++] = $fetch['notes'];
+                            $report1Responses[$row][$col++] = $fetch['date_of_submission'];
+                            $row++;
+                            $col = 0;
+                        }
+
+                        $_SESSION["report_1_responses"] = $report1Responses;
+
+                    }
+
+                    //ADMIN QUERY, if this user is admin.
+                    if($_SESSION['employee_role'] === 'Admin') {
+                        $sql = "SELECT * FROM employees";
+
+                        $conn = OpenCon();
+                        $stmt = mysqli_stmt_init($conn);
+
+                        if(!mysqli_stmt_prepare($stmt, $sql)) {
+                            header("Location: ../LoginSystem/login.php?error=sqlerror");
+                        }
+                        else 
+                        {
+                            //SQL Statement Successful
+                            mysqli_stmt_execute($stmt);
+                            $result = mysqli_stmt_get_result($stmt);
+
+                            $allUsers = [];
+
+                            while($fetch = mysqli_fetch_assoc($result)){
+                                $allUsers[$fetch['employee_email']] = [
+                                    $fetch['employee_email'],
+                                    $fetch['employee_name'],
+                                    $fetch['employee_role']
+                                ];
+                            }
+    
+                            $_SESSION["allUsers"] = $allUsers;    
+                        }
+                    }
                     //Success, Go to Main Site.
                     header("Location: ../index.php?login=success");
                     exit();
@@ -70,13 +135,12 @@ if(isset($_POST['login-submit']))
                 header("Location: ../LoginSystem/login.php?error=nouser");
                 exit();
             }
-
         }
     }
 }
 else
 {
-    header("Location: ../LoginSystem/lookup.php");
+    header("Location: ../LoginSystem/login.php");
     exit();
 }
 

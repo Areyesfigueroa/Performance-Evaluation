@@ -6,7 +6,7 @@ session_destroy(); //Destroy the current session within the main site.
 
 
 //Redirect user to the lookup page. 
-header("Location: ../LoginSystem/lookup.php?logout=successful");
+header("Location: ../LoginSystem/login.php?logout=successful");
 exit();
 
 ?>

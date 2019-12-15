@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "url": "http://192.168.64.2/Github/Performance-Evaluation/",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Launch Program",

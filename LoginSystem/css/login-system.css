@@ -1,42 +1,98 @@
-
-.site {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 50px 1fr 50px;
-    grid-template-areas: 
-    ". . ."
-    " . login . "
-    ". . .";
-
-    font-size: 1rem;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.login {
-    grid-area: login;
-    justify-items: center;
-    text-align: center;
-    border: 1px solid black;
+*:focus {
+    outline: none;
+}
 
+:root {
+    /*Color Pallete*/
+    --primary-color: rgb(59, 59, 59);
+    --secondary-color: #BFBDBE;
+    --secondary-color-light: rgb(240, 240, 240);
+    --secondary-color-dark: #000000; 
+    --accent-color: #9B8228;
+    --button-color: rgb(90, 90, 90);
+}
+
+html, 
+body {
+    font-family: 'Open-sans', sans-serif;
+    font-size: 12px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.login-section {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+    row-gap: 20px;
+
+    justify-items: start;
+    margin-top: 25px;
 }
 
-input, button {
-    display: block;
-    margin: auto;
-    margin-bottom: 1em;
+.logo {
+    height: 50px;
+    width: auto;
 }
 
 h2 {
-    font-size: 15pt;
+    font-size: 150%;
+    font-weight: 400;
 }
 
-p {
-    font-size: 10pt;
+.center-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    row-gap: 20px;
 }
+
+form {
+    display: grid;
+    grid-template-columns: 236px;
+    row-gap: 20px;
+}
+
+input {
+    border: none;
+    border-bottom: solid #000000 1px;
+    padding: 6px 0;
+}
+
+button {
+    background-color: var(--accent-color); 
+    border: none;
+    box-shadow: 0 2px 2px #858585;
+    color: #fff;
+    justify-self: end;
+    padding: 6px 5%;
+    cursor: pointer;
+}
+
+button:hover {
+     background-color: rgb(134, 112, 31);
+}
+
+select {
+    height: 28.36px;
+}
+
+select:hover {
+     border-color: rgb(160, 136, 49);
+}
+
+
 
 .status-message {
     color: rgb(199, 61, 61);
 }
-

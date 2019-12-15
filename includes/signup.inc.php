@@ -8,29 +8,27 @@ if(isset($_POST['signup-submit']))
 {
     require 'db_connection.php';
 
-
     $mailuid = $_POST['mailuid'];
     $password = $_POST['pwd'];
     $confirmPassword = $_POST['confirmpwd'];
     $name = $_POST['name']; //Needs check
     $position = $_POST['position']; //Needs Check
-    $phonenum = $_POST['phonenum']; //Needs check
-    $score = $_POST['score']; //Needs Check
-
+    $role = $_POST['role']; //Needs Check
+    
     //Make sure to error check.
     if(empty($mailuid) || empty($password) || empty($confirmPassword))
     {
-        header("Location: ../LoginSystem/signup.php?error=emptyfields");
+        header("Location: ../admin.php?error=emptyfields");
         exit();
     }
     else if(!filter_var($mailuid, FILTER_VALIDATE_EMAIL))
     {
-        header("Location: ../LoginSystem/signup.php?error=invalidmail");
+        header("Location: ../admin.php?error=invalidmail");
         exit();
     }
     else if($password !== $confirmPassword) //validate password
     {
-        header("Location: ../LoginSystem/signup.php?error=passwordcheck&mailuid=".$mailuid);
+        header("Location: ../admin.php?error=passwordcheck&mailuid=".$mailuid);
         exit();
     } 
     else
@@ -43,7 +41,7 @@ if(isset($_POST['signup-submit']))
         //Verify the statement works with our query.
         if(!mysqli_stmt_prepare($stmt, $sql))
         {
-            header("Location: ../LoginSystem/signup.php?error=sqlerror");
+            header("Location: ../admin.php?error=sqlerror");
             exit();
         }
         else 
@@ -57,21 +55,21 @@ if(isset($_POST['signup-submit']))
             if($resultCheck > 0)
             {
                 //We have a match redirect
-                header("Location: ../LoginSystem/signup.php?error=usertaken&mailuid=".$mailuid);
+                header("Location: ../admin.php?error=usertaken&mailuid=".$mailuid);
                 exit();
             }
             else
             {
                 //User does not exist. Add to database.
-                $sql = "INSERT INTO employees(employee_name, employee_email, employee_password, employee_position, employee_phone_num, employee_score) 
-                VALUES(?, ?, ?, ?, ?, ?);";
+                $sql = "INSERT INTO employees(employee_email, employee_name, employee_password, employee_position, employee_role) 
+                VALUES(?, ?, ?, ?, ?);";
 
                 //Prepare statement
                 $stmt = mysqli_stmt_init($conn);
 
                 if(!mysqli_stmt_prepare($stmt, $sql))
                 {
-                    header("Location: ../LoginSystem/signup.php?error=sqlerror");
+                    header("Location: ../admin.php?error=sqlerror");
                     exit();
                 }
                 else
@@ -81,9 +79,14 @@ if(isset($_POST['signup-submit']))
 
                     //Bind and Execute.
                     //SQL Statement successful.
-                    mysqli_stmt_bind_param($stmt, 'sssssd', $name, $mailuid, $hashed_pwd, $position, $phonenum, $score); //bind
+                    mysqli_stmt_bind_param($stmt, 'sssss', $mailuid, $name, $hashed_pwd, $position, $role); //bind
                     mysqli_stmt_execute($stmt);//execute
-                    header("Location: ../LoginSystem/lookup.php?signup=success");
+
+                    //Update Session Data with new user.
+                    session_start();
+                    $_SESSION['allUsers'][$mailuid] = [$_POST['mailuid'], $_POST['name'], $_POST['role']];
+
+                    header("Location: ../admin.php?signup=success");
                     exit();
                 }
             }
@@ -95,7 +98,7 @@ if(isset($_POST['signup-submit']))
 }
 else
 {
-    header("Location: ../LoginSystem/signup.php");
+    header("Location: ../admin.php");
     exit();
 }
 

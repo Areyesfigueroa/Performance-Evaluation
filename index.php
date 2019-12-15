@@ -1,69 +1,121 @@
 <?php 
 require "includes/header.php";
 ?>
-    <link rel="stylesheet" href="css/mainStyle.css">
+        <main class="site-main">
 
-    <div id="container">
-            <main class="site-main">
+            <!--Check if someone has logged into our site-->
+            <?php
+                if(!isset($_SESSION['employee_email']))
+                {
+                    //You are not logged in. Redirect the user so that he mail log in.
+                    header("Location: LoginSystem/login.php");
+                    exit();
+                }
+            ?>
 
-                <!--Check if someone has logged into our site-->
-                <?php
-                    if(!isset($_SESSION['employee_email']))
-                    {
-                        //You are not logged in. Redirect the user so that he mail log in.
-                        header("Location: LoginSystem/lookup.php");
-                        exit();
-                    }
-                ?>
+            <!--Page Title LAYOUT-->
+            <h1 id="page-title" class="title">Page title</h1>
 
-                <!--Page Title LAYOUT-->
-                <h2 id="page-title" class="title">Page title</h2>
-
-                <!--FILTER LAYOUT-->
-                <div class="date-filter">
-                    Date: <select id="dateSelect">
-                        <option value="Show All" selected="true">Show All</option>
-                    </select>
+            <!-- Modal -->
+            <section class="modal--details-section">
+                <div class="modal--details-body">
+                    <a id="modal--close-btn" href="#">X</a>
+                    <div class="modal--details-content">
+                        <div>
+                            <h6>Report Details <span class="modal--details-index">1</span></h6>
+                        </div>
+                        <div>
+                            <!-- Questions Table -->
+                            <table class="modal--details-table">
+                                <thead>
+                                    <tr>
+                                        <th class="modal--details-date">Date: 08/20/2019</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Questions</th>
+                                        <th>Answers</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- DATA GOES HERE -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <!-- Notes Table -->
+                            <table class="modal--details-table">
+                                <thead>
+                                    <tr>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- DATA GOES HERE -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <!-- Submission & Overall Score Table -->
+                            <table class="modal--details-table">
+                                <thead>
+                                    <tr>
+                                        <th>Submitted By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- DATA GOES HERE -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <!--Performance Table LAYOUT-->
-                <div class="main-table">
-                    <table id="performance-table">
+
+            <!--Performance Table LAYOUT-->
+            <section class="main-table table-responsive-sm">
+                <table id="performance-table" class="table table-striped table-bordered table-sm" cellspacing="0">
+                    <thead>                
                         <tr>
-                            <th>Report Tier</th>
-                            <th>Submitted By</th>
-                            <th>Details</th>
-                            <th>Score</th>
-                            <th>Date of submission</th>
+                            <th class="th-sm">Report Tier</th>
+                            <th class="th-sm">Submitted By</th>
+                            <th class="th-sm">Details</th>
+                            <th class="th-sm">Date of submission</th>
                         </tr>
-                    </table>
-                </div>
+                    </thead>
+                    <tbody>
+                        <!--Data Insert Here-->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="th-sm">Report Tier</th>
+                            <th class="th-sm">Submitted By</th>
+                            <th class="th-sm">Details</th>
+                            <th class="th-sm">Date of submission</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+        </main>
 
-                <!--Overall Score Table LAYOUT-->
-                <div class="total-grid">
-                    Overall Score: <span id="total-score">10</span>
-                </div>
-
-                <!--TODO: DELETE WHEN COMPLETED-->
-                <button id=createTable-button>Create Table</button>
-                
-                <script src= "scripts/index.js"></script>
-                <!--PHP TO JS CALLS-->
-                <script type="text/javascript">
-                    
-                    loadUserInfo(<?= json_encode($_SESSION) ?>);
-                </script>
-            </main>
-        </div>
 <?php 
 require "includes/footer.php";
 ?>
 
-<!--
-TODO: Add functions to script one by one
-            testing(<?= json_encode($_SESSION) ?>); //Use this function to initiate the table creation.
+<!-- MDBootstrap Datatables  -->
+<script>
+    $(document).ready(function () {
+    $('#performance-table').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 
-//loadUserInfo(<?= json_encode($employeeDatas) ?>);
-            //createHTMLTable(<?= json_encode($reportDatas) ?>);
-            //initializeDateFilter(<?= json_encode($reportDatas) ?>);
-            //calculateOverallScore();-->
+<!---------------------->
+<!--- CUSTOM SCRIPTS --->
+<!---------------------->
+
+<!-- Load Index Script-->
+<script src= "resources/js/index.js"></script>
+<script type="text/javascript">
+    performanceController.init(<?= json_encode($_SESSION) ?>);
+</script>

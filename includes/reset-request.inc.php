@@ -1,6 +1,11 @@
 <?php
 
-//TODO: DELETE urltest value
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 
 if(isset($_POST['reset-request-submit']))
 {
@@ -38,12 +43,11 @@ if(isset($_POST['reset-request-submit']))
         6. Set the current page to the reset-password page. 
 
     */
-
     $selector = bin2hex(random_bytes(8)); //This token is the one we use to send our email with. Hence the token needs to be in the url which means convert to bytes to hex.
     $token = random_bytes(32); //This token is to authenticate the user. No conversion needed. 
 
     //Link sent to user via email.
-    $url = "localhost/authentication/LoginSystem/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "localhost/Performance-Evaluation/LoginSystem/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 1800;
 
@@ -90,28 +94,58 @@ if(isset($_POST['reset-request-submit']))
     mysqli_stmt_close($stmt);
     CloseCon($conn);
 
-    //Send EMAIL with our url.
-    $to = $userEmail;
-    $subject = 'Reset your password for performanceevaluation';
-    $message = '<p>We received a password request. The link to reset your password is below. 
-    If you did not make this request, you can ignore this email</p>';
-    $message .= '<p>Here is your password reset link: <br>';
-    $message .= '<a href="' . $url . '">' . $url . '</a></p>';
 
-    $headers = "From: Aliel Reyes <alielreyes@gmail.com>\r\n";
-    $headers .= "Reply-to: alielreyes@gmail.com\r\n";
-    $headers .= "Content-type: text/html\r\n";
+    
+    // Load Composer's autoloader
+    require '../vendor/autoload.php';
 
-   // mail($to, $subject, $message, $headers);
+    // Instantiation and passing `true` enables exceptions
+    $mail = new PHPMailer(true);
 
-    //Send user to the reset password page. 
-    //TODO: DELETE urltest value
-    header('Location: ../LoginSystem/reset-password.php?reset=success&useremail='.$userEmail.'&urltest='. $url);
+    try {
+        //Server settings
+        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+        $mail->SMTPSecure = 'ssl';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+        $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+        $mail->Port       = 465;                                    // TCP port to connect to
+        $mail->isHTML();
+        $mail->Username   = 'mailrobot27@gmail.com';                     // SMTP username
+        $mail->Password   = 'X4CCrN^9NuY7';                               // SMTP password
+    
+        //Recipients
+        $mail->setFrom('no-reply@mail.com', 'Mailer');
+        $mail->addAddress($userEmail);     // Add a recipient
+    
+        //Email Formatting
+        $subject = 'Reset your password for performanceevaluation';
+        $message = '<p>We received a password request. The link to reset your password is below. 
+        If you did not make this request, you can ignore this email</p>';
+        $message .= '<p>Here is your password reset link: <br>';
+        $message .= '<a href="' . $url . '">' . $url . '</a></p>';
+
+        // Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = $subject;
+        $mail->Body    = $message;
+        $mail->AltBody = 'We received a password request. The link to reset your password is below. 
+        If you did not make this request, you can ignore this email, Here is your password reset link.
+        ' . $url;
+    
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+    
+    //echo $url;
+    header('Location: ../LoginSystem/reset-password.php?reset=success&useremail='.$userEmail);
     exit();
 }
 else 
 {
-    header("Location: ../LoginSystem/lookup.php");
+    header("Location: ../LoginSystem/login.php");
     exit();
 }
 
