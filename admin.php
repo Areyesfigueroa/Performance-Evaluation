@@ -25,7 +25,6 @@ require "includes/header.php";
             <thead>                
                 <tr>
                     <th class="select-all th-sm">        
-                        <!-- Default unchecked -->
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="selectall-table-check-0">
                             <label class="custom-control-label" for="selectall-table-check-0">Select All</label>

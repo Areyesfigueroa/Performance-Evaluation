@@ -4,7 +4,6 @@ if(isset($_POST['remove-user-submit'])) {
     require "db_connection.php";
 
     $email = $_POST['email'];
-    $rowIndex = $_POST['rowIndex'];
 
     $sql = "DELETE FROM employees WHERE employee_email=?";
 
@@ -22,8 +21,8 @@ if(isset($_POST['remove-user-submit'])) {
         
         //Update session data
         session_start();
-        array_splice($_SESSION['allUsers'], $rowIndex, 1);
-        
+        unset($_SESSION['allUsers'][$email]);
+
         exit();
     }
 } 

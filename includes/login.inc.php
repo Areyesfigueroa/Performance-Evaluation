@@ -106,15 +106,14 @@ if(isset($_POST['login-submit']))
                             mysqli_stmt_execute($stmt);
                             $result = mysqli_stmt_get_result($stmt);
 
-                            $allUsers = [[]];
-                            $row = $col = 0;
+                            $allUsers = [];
 
                             while($fetch = mysqli_fetch_assoc($result)){
-                                $allUsers[$row][$col++] = $fetch['employee_name'];
-                                $allUsers[$row][$col++] = $fetch['employee_email'];
-                                $allUsers[$row][$col++] = $fetch['employee_role'];
-                                $row++;
-                                $col = 0;
+                                $allUsers[$fetch['employee_email']] = [
+                                    $fetch['employee_email'],
+                                    $fetch['employee_name'],
+                                    $fetch['employee_role']
+                                ];
                             }
     
                             $_SESSION["allUsers"] = $allUsers;    

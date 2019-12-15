@@ -6,7 +6,6 @@ if(isset($_POST['change-roles-submit'])) {
 
     $email = $_POST['email'];
     $newRole = $_POST['newRole'];
-    $rowIndex = $_POST['rowIndex'];
     $colIndex = 2;
     
     //Change Roles Query
@@ -26,7 +25,7 @@ if(isset($_POST['change-roles-submit'])) {
         
         //Update session data
         session_start();
-        $_SESSION['allUsers'][$rowIndex][$colIndex] = $newRole;
+        $_SESSION['allUsers'][$email][$colIndex] = $newRole;
         
         exit();
     }

@@ -84,7 +84,7 @@ if(isset($_POST['signup-submit']))
 
                     //Update Session Data with new user.
                     session_start();
-                    array_push($_SESSION['allUsers'], [$_POST['name'], $_POST['mailuid'], $_POST['role']]);
+                    $_SESSION['allUsers'][$mailuid] = [$_POST['mailuid'], $_POST['name'], $_POST['role']];
 
                     header("Location: ../admin.php?signup=success");
                     exit();
