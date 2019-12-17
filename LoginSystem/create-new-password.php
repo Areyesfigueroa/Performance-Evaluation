@@ -3,12 +3,15 @@
     <head>
         <title>Create new password page</title>
         <link rel="stylesheet" href="css/login-system.css">
+        <link rel="stylesheet" href="css/login-queries.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet">
     </head>
     <body>
-       <main class= "site">
-            <div class="login">
+       <main>
+            <div class="login-section">
                 <div>
-                    <img src="http://placehold.jp/75x75.png" alt="Company Logo">
+                    <img class="logo" src="../resources/img/AAP-logo.png" alt="Company Logo">
                 </div>
                 <div>
                     <h2>Create new password</h2>

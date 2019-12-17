@@ -1,8 +1,7 @@
 
-includes/db_connection.php
-
 #ignore files for php mailer
 phpmailer
 autoload.php
 composer
 mailexample.php
+includes/db_connection.php
