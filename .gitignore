@@ -6,3 +6,4 @@ phpmailer
 autoload.php
 composer
 mailexample.php
+includes/db_connection.php
