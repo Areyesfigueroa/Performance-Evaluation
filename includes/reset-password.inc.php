@@ -28,7 +28,7 @@
         //DB Connection
         require "db_connection.php";
 
-        $sql = "SELECT * FROM pwdReset WHERE pwdResetSelector=? AND pwdResetExpires>=?;";
+        $sql = "SELECT * FROM pwdreset WHERE pwdResetSelector=? AND pwdResetExpires>=?;";
 
         $conn = OpenCon();
         $stmt = mysqli_stmt_init($conn);
@@ -108,7 +108,7 @@
                                 mysqli_stmt_execute($stmt);
 
                                 //Delete the user's information within the ResetPassword once they have reset their password.
-                                $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?;";
+                                $sql = "DELETE FROM pwdreset WHERE pwdResetEmail=?;";
 
                                 $conn = OpenCon();
                                 $stmt = mysqli_stmt_init($conn);

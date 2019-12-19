@@ -47,7 +47,7 @@ if(isset($_POST['reset-request-submit']))
     $token = random_bytes(32); //This token is to authenticate the user. No conversion needed. 
 
     //Link sent to user via email.
-    $url = "localhost/Performance-Evaluation/LoginSystem/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "https://performance-eval.000webhostapp.com/LoginSystem/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 1800;
 
@@ -60,7 +60,7 @@ if(isset($_POST['reset-request-submit']))
     $conn = OpenCon();
 
     //QUERY #1 Delete previous token.
-    $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?"; 
+    $sql = "DELETE FROM pwdreset WHERE pwdResetEmail=?"; 
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql))
     {
@@ -74,7 +74,7 @@ if(isset($_POST['reset-request-submit']))
     }
 
     //QUERY #2 Insert new token. 
-    $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) VALUES (?,?,?,?);";
+    $sql = "INSERT INTO pwdreset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) VALUES (?,?,?,?);";
 
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql))
@@ -134,7 +134,7 @@ if(isset($_POST['reset-request-submit']))
         ' . $url;
     
         $mail->send();
-        echo 'Message has been sent';
+        //echo 'Message has been sent';
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
