@@ -26,7 +26,7 @@ if(isset($_POST['login-submit']))
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("Location: ../LoginSystem/login.php?error=sqlerror");
+            header("Location: ../LoginSystem/login.php?error=sqlerror1");
             exit();
         }
         else 
@@ -60,7 +60,7 @@ if(isset($_POST['login-submit']))
                     $stmt = mysqli_stmt_init($conn);
 
                     if(!mysqli_stmt_prepare($stmt, $sql)){
-                        header("Location: ../LoginSystem/login.php?error=sqlerror");
+                        header("Location: ../LoginSystem/login.php?error=sqlerror2");
                         exit();
                     }
                     else 
@@ -98,7 +98,7 @@ if(isset($_POST['login-submit']))
                         $stmt = mysqli_stmt_init($conn);
 
                         if(!mysqli_stmt_prepare($stmt, $sql)) {
-                            header("Location: ../LoginSystem/login.php?error=sqlerror");
+                            header("Location: ../LoginSystem/login.php?error=sqlerror3");
                         }
                         else 
                         {

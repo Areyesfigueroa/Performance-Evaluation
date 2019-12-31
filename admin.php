@@ -11,7 +11,7 @@ require "includes/header.php";
         <div class="action-list-all">
             <div class="dropdown">
                 <button class="btn btn-sm btn-light dropdown-toggle" type="button" id="dropdownMenuButton-global" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Action List All
+                    Bulk Actions
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-global">
                     <a class="dropdown-item font-weight-light action-link" id="reset-pwd-btn-all" href="#">Reset Password</a>
