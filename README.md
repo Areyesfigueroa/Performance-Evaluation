@@ -12,6 +12,4 @@ Install phpmailer using composer by referring to the composer.json file.
 Activate Hot Reloader with using the following code snippet. Must go after the body in your main page.
 require "../hotreloader.php";
 $reloader = new HotReloader();
-$reloader->init();
-
-If you have issues then remove hot reloader. I've noticed it can at times reload the page twice which causes my js code to not run the second time aruond. Not sure what is happening as of right now. 
+$reloader->init(); 

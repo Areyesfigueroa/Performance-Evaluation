@@ -14,13 +14,18 @@ session_start();
         <!-- Normalize -->
         <link rel="stylesheet" href="vendor/css/normalize.css">
 
-        <!-- MDBootstrap Datatables  -->
-        <link href="vendor/mdb/css/addons/datatables.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
         <!-- Bootstrap core CSS -->
-        <link href="vendor/mdb/css/bootstrap.min.css" rel="stylesheet"> 
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
-        <link href="vendor/mdb/css/mdb.min.css" rel="stylesheet">   
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.0/css/mdb.min.css" rel="stylesheet">
         
+        <!-- Material Design Bootstrap Datatables-->
+        <link href="myvendors/mdb/css/addons/datatables.min.css" rel="stylesheet">
+
         <!--Custom CSS-->
         <link rel="stylesheet" href="resources/css/headerStyle.css">
         <link rel="stylesheet" href="resources/css/mainStyle.css">
@@ -29,7 +34,6 @@ session_start();
 
         <!-- Fonts & Icons -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet">    
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     </head>
     <body>
     <div id="page-container">

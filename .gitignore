@@ -1,9 +1,11 @@
 
-includes/db_connection.php
-
 #ignore files for php mailer
 phpmailer
 autoload.php
 composer
 mailexample.php
 includes/db_connection.php
+<<<<<<< HEAD
+=======
+vendor
+>>>>>>> c3f50b5b9e67fb4a8755dceebf9511316853c041
