@@ -14,24 +14,28 @@ if(isset($_POST['signup-submit']))
     $name = $_POST['name']; //Needs check
     $position = $_POST['position']; //Needs Check
     $role = $_POST['role']; //Needs Check
+
+    //Check if user is logged in.
+    $isLoggedIn = isset($_SESSION);
+    $path = $isLoggedIn ? "Location: ../admin.php?":"Location: ../LoginSystem/signup.php?";
     
     //Make sure to error check.
     if(empty($mailuid) || empty($password) || empty($confirmPassword))
     {
-        header("Location: ../admin.php?error=emptyfields");
+        header($path . "error=emptyfields");
         exit();
     }
     else if(!filter_var($mailuid, FILTER_VALIDATE_EMAIL))
     {
-        header("Location: ../admin.php?error=invalidmail");
+        header($path . "error=invalidmail");
         exit();
     }
     else if($password !== $confirmPassword) //validate password
     {
-        header("Location: ../admin.php?error=passwordcheck&mailuid=".$mailuid);
+        header($path . "error=passwordcheck&mailuid=".$mailuid);
         exit();
     } 
-    else
+    else 
     {
         $sql = "SELECT employee_email FROM employees WHERE employee_email=?;";
         
@@ -41,7 +45,7 @@ if(isset($_POST['signup-submit']))
         //Verify the statement works with our query.
         if(!mysqli_stmt_prepare($stmt, $sql))
         {
-            header("Location: ../admin.php?error=sqlerror");
+            header($path . "error=sqlerror");
             exit();
         }
         else 
@@ -55,7 +59,7 @@ if(isset($_POST['signup-submit']))
             if($resultCheck > 0)
             {
                 //We have a match redirect
-                header("Location: ../admin.php?error=usertaken&mailuid=".$mailuid);
+                header($path . "error=usertaken&mailuid=".$mailuid);
                 exit();
             }
             else
@@ -69,7 +73,7 @@ if(isset($_POST['signup-submit']))
 
                 if(!mysqli_stmt_prepare($stmt, $sql))
                 {
-                    header("Location: ../admin.php?error=sqlerror");
+                    header($path . "error=sqlerror");
                     exit();
                 }
                 else
@@ -86,7 +90,9 @@ if(isset($_POST['signup-submit']))
                     session_start();
                     $_SESSION['allUsers'][$mailuid] = [$_POST['mailuid'], $_POST['name'], $_POST['role']];
 
-                    header("Location: ../admin.php?signup=success");
+                    //User successfully signs up. 
+                    $path = $isLoggedIn ? "Location: ../admin.php?":"Location: ../LoginSystem/login.php?";
+                    header($path . "signup=success");
                     exit();
                 }
             }
@@ -98,7 +104,7 @@ if(isset($_POST['signup-submit']))
 }
 else
 {
-    header("Location: ../admin.php");
+    header($path);
     exit();
 }
 

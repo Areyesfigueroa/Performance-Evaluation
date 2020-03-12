@@ -1,3 +1,6 @@
+<?php
+// include_once('db_connection.php');
+?>
 
 <!Doctype html>
 <html>
@@ -13,20 +16,46 @@
                     <img class="logo" src="../resources/img/AAP-logo.png" alt="Company Logo">
                 </div>
                 <div>
-                    <h2>Member Signup - Admin</h2>
+                    <?php
+                        if(!isset($_SESSION))
+                        {
+                            //You are a regular user. 
+                            echo "<h2> Member Signup </h2>";
+                        } else {
+
+                            //You are an admin user.
+                            echo "<h2> Member Signup - Admin </h2>";
+                        }
+                    ?>
                 </div>
                 <div>    
-                    <form action="../includes/signup.inc.php" method="POST">
+                    <form action="../includes/signup.inc.php?" method="POST">
                         <input type="email" name="mailuid" placeholder="Email...">
                         <input type="password" name="pwd" placeholder="Password...">
                         <input type="password" name="confirmpwd" placeholder="Confirm Password...">
                         <input type="text" name="name" placeholder="Name...">
                         <input type="text" name="position" placeholder="Position...">
                         <select name="role">
-                            <option value="Admin">Admin</option>
-                            <option value="User">User</option>
+                            <?php
+                                if(!isset($_SESSION))
+                                {
+                                    //You are a regular user. 
+                                    echo '<option value="User">User</option>';
+                                } else {
+
+                                    //You are an admin user.
+                                    echo '<option value="Admin">Admin</option>';
+                                    echo '<option value="User">User</option>';
+                                }
+                            ?>
                         </select>
                         <button type="submit" name="signup-submit">Signup User</button>
+                        <?php
+                            if(isset($_GET['error']))
+                            {
+                                echo "<p class='status-message'>Sign up failed: " . $_GET['error'] . "</p>";
+                            }
+                        ?>
                     </form>
                 </div>
             </section>
