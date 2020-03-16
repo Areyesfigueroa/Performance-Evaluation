@@ -47,7 +47,7 @@ if(isset($_POST['reset-request-submit']))
     $token = random_bytes(32); //This token is to authenticate the user. No conversion needed. 
 
     //Link sent to user via email.
-    $url = "https://performance-eval.000webhostapp.com/LoginSystem/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "https://performance-eval.herokuapp.com/LoginSystem/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 1800;
 
