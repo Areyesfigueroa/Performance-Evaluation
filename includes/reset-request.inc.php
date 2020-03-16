@@ -134,10 +134,6 @@ if(isset($_POST['reset-request-submit']))
         ' . $url;
     
         $mail->send();
-<<<<<<< HEAD
-        //echo 'Message has been sent';
-=======
->>>>>>> c3f50b5b9e67fb4a8755dceebf9511316853c041
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
