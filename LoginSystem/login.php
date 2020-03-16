@@ -22,7 +22,6 @@
                     <input type="text" name="mailuid" placeholder="Username/Email...">
                     <input type="password" name="pwd" placeholder="Password...">
                     <a href="reset-password.php">Forgot Password</a>
-                    <a href="signup.php">Create an account</a>
 
                     <button type="submit" name="login-submit">Login</button>
                 </form>
@@ -30,17 +29,13 @@
             <div>
 
                 <?php
-                    //Password success message.
+                //Password success message.
                     if(isset($_GET["newpwd"]))
                     {
                         if($_GET["newpwd"] == "passwordupdated") 
                         {
                             echo '<p>Your password has been reset</p>';
                         }
-                    }
-                    
-                    if (isset($_GET["error"])) {
-                        echo "<p class='status-message'>Sign up failed: " . $_GET['error'] . "</p>";
                     }
                 ?>
             </div>
